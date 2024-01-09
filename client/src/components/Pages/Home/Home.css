@@ -1,0 +1,31 @@
+
+/* 
+.App {
+    border-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+  } */
+
+  .carousel{
+    margin-bottom: 3rem;
+  }
+  .home_page{
+    min-height: 715px;
+    margin-top: 95px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .topContent {
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-size: 200%;
+    text-align: center;
+    color: steelblue;
+  }
