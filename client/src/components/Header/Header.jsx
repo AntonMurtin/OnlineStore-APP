@@ -48,14 +48,14 @@ const Header = () => {
 
                     </>
                 )}
-                {(
+                {/* {(
                     <>
                         <Link to="/favorit" className='a_Link favorit-icon'><i className="fa-solid fa-heart"><i className='non-empty'>{'favorits.length'}</i></i></Link>
                         <Link to="/buy" className='a_Link cart-icon'><i className="fa-solid fa-cart-shopping "><i className='non-empty'>{'products.length'}</i></i></Link>
 
                         <Link to="/logout" className='a_Link'><i className="fa-solid fa-person-walking-dashed-line-arrow-right"></i></Link>
                     </>
-                )}
+                )} */}
             </div>
         </div>
     );
