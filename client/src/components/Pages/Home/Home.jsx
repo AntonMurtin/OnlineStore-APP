@@ -1,7 +1,9 @@
-import React from 'react'
 import './Home.css'
+
+import React from 'react'
+
 import Carousel from './Carousel/Carousel'
-import data from '../../../config/constants'
+import homeData from '../../../config/data/home.js/homeData'
 
 const Home = () => {
     return (
@@ -12,7 +14,7 @@ const Home = () => {
             </div>
             <div className="carousel">
 
-        {<Carousel data={data}/>}
+        {<Carousel data={homeData}/>}
             </div>
        
         </div>
