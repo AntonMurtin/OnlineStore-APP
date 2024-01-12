@@ -4,6 +4,7 @@ import React from 'react'
 
 import Carousel from './Carousel/Carousel'
 import homeData from '../../../config/data/home.js/homeData'
+import { ProductCard } from '../../productCard/productCard'
 
 const Home = () => {
     return (
@@ -16,7 +17,10 @@ const Home = () => {
 
         {<Carousel data={homeData}/>}
             </div>
-       
+       <div className='productContent'>
+        <h2>Water Pomp</h2>
+        {<ProductCard/>}
+       </div>
         </div>
     )
 }

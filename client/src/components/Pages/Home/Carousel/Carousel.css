@@ -1,8 +1,9 @@
 .carousel {
     display: flex;
-    height: 600px;
+    height: 500px;
     width: 100%;
-    max-width: 1700px;
+    max-width: 1200px;
+    
   }
   
   .carousel_wrapper {
@@ -52,7 +53,7 @@
   
   .card_title {
     color: white;
-    font-size: 30px;
+    font-size: 90px;
   }
   
   .carousel_arrow_left,

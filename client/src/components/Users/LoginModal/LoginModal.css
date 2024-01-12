@@ -1,0 +1,98 @@
+.login__Modal {
+    position: fixed;
+    top: 20%;
+    left: 41%;
+    transform: translate(-50%, -50);
+    z-index: 1;
+    padding: 12px, 24px;
+
+
+
+}
+
+.closeLogin {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    color: red;
+    cursor: pointer;
+}
+
+.loginTop {
+    margin-bottom: 30px;
+    margin-top: 20px;
+    font-size: 300%;
+    text-align: center;
+    color: white;
+}
+
+.login_form {
+    width: 400px;
+    background-color: darkgray;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 50px 35px;
+
+}
+
+/* .loginDiv>lebal {
+    display: block;
+    margin-bottom: 0px;
+    font-size: 20px;
+    font-weight: 500;
+} */
+
+.loginDiv>input {
+    display: block;
+    height: 50px;
+    width: 100%;
+
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 300;
+
+
+    float: left;
+    font-size: large;
+
+    border: solid;
+    border-color: white;
+    border-radius: 15px;
+}
+
+.loginDiv>span {
+    display: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 3px;
+    color: rgb(245, 30, 30);
+}
+
+.btnLog {
+    margin-top: 20px;
+    width: 70%;
+    margin-left: 15%;
+    background-color: white;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.loginDiv>input:invalid[focused="true"]~span {
+    display: block;
+}
+
+
+.loginDiv>input:invalid[focused="true"] {
+    border: 1px solid red;
+}

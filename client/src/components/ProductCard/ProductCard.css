@@ -1,0 +1,84 @@
+.product__card{
+    display:inline-block;
+    position: relative;
+    width: 250px;
+    max-width: 300px;
+    padding: 30px;
+    margin-top: 50px;
+    margin-left: 50px;
+    border-radius: 8px;
+    background-color: white;
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 30px 25px -20px rgba(0, 0, 0, 0.5);
+}
+.product__card:hover{
+    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.5);
+    transform: scale(1.10, 1.10);
+}
+
+.product__price {
+position: absolute;
+display: flex;
+align-items: center;
+justify-content: center;
+top: -10px;
+left: -20px;
+width: 50px;
+height: 50px;
+background-color:  rgba(0,0 , 0, 0.95);
+color:white;
+border-radius: 50%;
+}
+.size{
+    z-index: 100;
+    position:static;
+    justify-content: center;
+    align-items: center;
+    max-width: 200px;
+   height: 150px;
+    overflow-y: hidden;
+  }
+
+.product__image{
+    /* z-index: 1000; */
+    width: 100%;
+    overflow: auto;
+}
+
+.product__title{
+   
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0,0 , 0, 0.95);
+    margin: 0 0 0.5em 0;
+    line-height: 1.1;
+}
+.btn1 {
+
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    padding: 0.75em 1.5em;
+    white-space: nowrap;
+    border-radius: 5px;
+  }
+
+.buy__btn{
+    position:absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color:rgba(207, 9, 44, 0.95);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 30px 25px -20px rgba(0, 0, 0, 0.15);
+}
+
+.details__btn{
+    position: absolute;
+    bottom:0;
+    left:  0px;
+    background-color: rgba(7, 7, 7, 0.95);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 30px 25px -20px rgba(0, 0, 0, 0.15);
+  }
