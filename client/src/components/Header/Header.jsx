@@ -51,8 +51,8 @@ const onClose=()=>{
                     <Link to="/shop" className='a_Link'><i className="fa-solid fa-shop "></i></Link>
                     {(
                         <>
-                            <Link onClick={() => { setOpenLogin(true) }} className='a_Link login__a'>Login</Link>
-                            <Link to="/register" className='a_Link register__a'>Register</Link>
+                            <Link onClick={() => { setOpenLogin(true) }} className='a_Link login__a'><i className="fa-solid fa-user"></i></Link>
+                            {/* <Link to="/register" className='a_Link register__a'>Register</Link> */}
                         </>
                     )}
                     {(

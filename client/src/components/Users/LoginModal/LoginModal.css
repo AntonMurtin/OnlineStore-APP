@@ -4,10 +4,6 @@
     left: 41%;
     transform: translate(-50%, -50);
     z-index: 1;
-    padding: 12px, 24px;
-
-
-
 }
 
 .closeLogin {
@@ -36,32 +32,21 @@
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     padding: 50px 35px;
-
 }
 
-/* .loginDiv>lebal {
-    display: block;
-    margin-bottom: 0px;
-    font-size: 20px;
-    font-weight: 500;
-} */
 
 .loginDiv>input {
     display: block;
     height: 50px;
     width: 100%;
-
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 5px;
     margin-bottom: 20px;
     font-size: 14px;
     font-weight: 300;
-
-
     float: left;
     font-size: large;
-
     border: solid;
     border-color: white;
     border-radius: 15px;

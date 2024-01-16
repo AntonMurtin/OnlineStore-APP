@@ -34,7 +34,6 @@ export const LoginModal = ({
                 <h2 className='loginTop'> Welcome</h2>
 
                 <div className='loginDiv'>
-                    <label htmlFor="email"></label>
                     <input className='loginDiv'
                         required
                         onBlur={changeFocus}
@@ -45,14 +44,10 @@ export const LoginModal = ({
                         value={values.email}
                         onChange={changeHandler}
                     />
-
-
                     <span >{errorMessage.username}</span>
-
                 </div >
 
                 <div className='loginDiv'>
-                    <label htmlFor="password"></label>
                     <input className='loginDiv'
                         required
                         onBlur={changeFocus}
@@ -64,9 +59,9 @@ export const LoginModal = ({
                         value={values.password}
                         onChange={changeHandler}
                     />
-
                     <span >{errorMessage.password}</span>
                 </div>
+                
                 <p onClick={onClose} className="message">
                     Not registered? <Link to="/register">Create an account.</Link>
                 </p>
