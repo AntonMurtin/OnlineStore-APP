@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export default useLocalestorage = (key, initialValue) => {
+export const useLocalStorage = (key, initialValue) => {
     const [state, setState] = useState(() => {
         const auth = localStorage.getItem(key);
 

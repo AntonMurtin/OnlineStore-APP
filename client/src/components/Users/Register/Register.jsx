@@ -1,15 +1,26 @@
 import React from 'react'
 import './Register.css';
 import { useForm } from '../../../hooks/useForm'
+import { errorMessageInput, initialFocusregister, initialValuesRegister, inputValidtion } from '../../../config/constants';
+import { useAuthContext } from '../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
+    const navigate = useNavigate()
+    const initialValues = initialValuesRegister;
+    const initialFocs = initialFocusregister;
+    const errorMessage = errorMessageInput;
+    const { onRegister } = useAuthContext()
+
     const onRegisterSubmit = (values) => {
-        console.log(values);
+        onRegister(values);
+        // navigate('/')
     }
-    const { values, changeHandler, onSubmit } = useForm({
-        email: '',
-        password: ''
-    }, onRegisterSubmit)
+
+    const { values, focus, changeHandler, onSubmit, changeFocus } = useForm(
+        initialValues,
+        initialFocs,
+        onRegisterSubmit)
 
     return (
         <div className='registerPage'>
@@ -22,116 +33,126 @@ export const Register = () => {
 
                 <div className='registerDiv'>
                     <input
-                        type="text"
-                        name='username'
-                        placeholder="Uername"
-                        value={values.email}
-                        onChange={changeHandler}
-                    />
-                    <p> "Username shoud be 6-15 characters and  include at least 1 letter, 1 number and 1 special characters!"</p>
-                </div>
-
-                <div className='registerDiv'>
-                    <input
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.name.toString()}
+                        pattern={inputValidtion.name}
                         type="text"
                         name='name'
-                        placeholder="Name"
-                        value={values.email}
+                        placeholder="First Name"
+                        value={values.name}
                         onChange={changeHandler}
                     />
-                    <p>dshfoisdhfoijds</p>
+                    <span>{errorMessage.name}</span>
                 </div>
 
                 <div className='registerDiv'>
                     <input
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.lastname.toString()}
+                        pattern={inputValidtion.name}
+                        type="text"
+                        name='lastname'
+                        placeholder="Last Name"
+                        value={values.lastname}
+                        onChange={changeHandler}
+                    />
+                    <span>{errorMessage.lastname}</span>
+                </div>
+
+                <div className='registerDiv'>
+                    <input
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.email.toString()}
                         type="email"
                         name='email'
                         placeholder="Email"
                         value={values.email}
                         onChange={changeHandler}
                     />
-                    <p>dshfoisdhfoijds</p>
+                    <span>{errorMessage.email}</span>
                 </div>
 
                 <div className='registerDiv'>
                     <input
-                        type="text"
-                        name='lastname'
-                        placeholder="Last Name"
-                        value={values.email}
-                        onChange={changeHandler}
-                    />
-                    <p>dshfoisdhfoijds</p>
-                </div>
-
-                <div className='registerDiv'>
-                    <input
-                        type="password"
-                        name='password'
-                        placeholder="Password"
-                        value={values.email}
-                        onChange={changeHandler}
-                    />
-                    <p>dshfoisdhfoijds</p>
-                </div>
-
-                <div className='registerDiv'>
-                    <input
-                        type="text"
-                        name='area'
-                        placeholder="Area"
-                        value={values.email}
-                        onChange={changeHandler}
-                    />
-                    <p>dshfoisdhfoijds</p>
-                </div>
-
-                <div className='registerDiv'>
-                    <input
-                        type="password"
-                        name='confirmPassword'
-                        placeholder="Confirm Password"
-                        value={values.email}
-                        onChange={changeHandler}
-                    />
-                    <p>dshfoisdhfoijds</p>
-                </div>
-
-                <div className='registerDiv'>
-                    <input
-                        type="text"
-                        name='town'
-                        placeholder="Town"
-                        value={values.email}
-                        onChange={changeHandler}
-                    />
-                    <p>dshfoisdhfoijds</p>
-                </div>
-
-                <div className='registerDiv'>
-                    <input
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.phone.toString()}
+                        pattern={inputValidtion.phone}
                         type="text"
                         name='phone'
                         placeholder="Phone"
-                        value={values.email}
+                        value={values.phone}
                         onChange={changeHandler}
                     />
-                    <p>dshfoisdhfoijds</p>
+                    <span>{errorMessage.phone}</span>
+                </div>
+
+
+
+                <div className='registerDiv'>
+                    <input
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.town.toString()}
+                        type="text"
+                        name='town'
+                        placeholder="Town"
+                        value={values.town}
+                        onChange={changeHandler}
+                    />
+                    <span>{errorMessage.town}</span>
+                </div>
+
+
+
+                <div className='registerDiv'>
+                    <input
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.street.toString()}
+                        type="text"
+                        name='street'
+                        placeholder="Street"
+                        value={values.street}
+                        onChange={changeHandler}
+                    />
+                    <span>{errorMessage.street}</span>
                 </div>
 
                 <div className='registerDiv'>
                     <input
-                        type="text"
-                        name='address'
-                        placeholder="Address"
-                        value={values.email}
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.password.toString()}
+                        pattern={inputValidtion.password}
+                        type="password"
+                        name='password'
+                        placeholder="Password"
+                        value={values.password}
                         onChange={changeHandler}
                     />
-                    <p>dshfoisdhfoijds</p>
+                    <span>{errorMessage.password}</span>
                 </div>
-               
-                
-                
+
+
+                <div className='registerDiv'>
+                    <input
+                        required
+                        onBlur={changeFocus}
+                        focused={focus.confirmPassword.toString()}
+                        pattern={values.password}
+                        type="password"
+                        name='confirmPassword'
+                        placeholder="Confirm Password"
+                        value={values.confirmPassword}
+                        onChange={changeHandler}
+                    />
+                    <span>{errorMessage.confirmPassword}</span>
+                </div>
+
                 <button className='btn-log-reg'>Create</button>
 
 

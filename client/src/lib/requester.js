@@ -2,33 +2,39 @@
 const requester = async (method, url, data) => {
     const options = {};
 
-    if (method !== 'Get') {
-        options.headers = {
-            'content-type': 'application/json',
-        };
-        options.body = JSON.stringify(data);
-    }
+    if (method !== 'GET') {
+        options.method = method;
 
-    const auth = localStorage.getItem('auth');
+        if (data) {
+            options.headers = {
+                'content-type': 'application/json',
+            };
 
-    if (auth) {
-        auth = JSON.parse(auth);
+            options.body = JSON.stringify(data);
+        }
     }
-    if (auth.accessToken) {
-        options.headers = {
-            ...options.headers,
-            'X-Authorization': auth.accessToken,
-        };
+    const serializedAuth = localStorage.getItem('auth');
+    if (serializedAuth) {
+        const auth = JSON.parse(serializedAuth);
+        
+        if (auth.accessToken) {
+            options.headers = {
+                ...options.headers,
+                'X-Authorization': auth.accessToken,
+            };
+        }
     }
+    const response = await fetch(url, options);
 
-    const response = await fetch(url, data);
     if (response.status === 204) {
-        return {}
+        return {};
     }
+
     const result = await response.json();
     if (!response.ok) {
         throw result;
     }
+
     return result;
 };
 
