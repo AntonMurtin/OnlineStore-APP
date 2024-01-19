@@ -13,8 +13,10 @@ const Header = () => {
     const [openLogin, setOpenLogin] = useState(false);
 
     const { onLogout, isAuthenticated, isAdmin } = useAuthContext();
-    
 
+//     if (error) {
+// setOpenLogin(true)
+//     }
     const onClose = () => {
         setOpenLogin(false)
     }
@@ -50,7 +52,7 @@ const Header = () => {
                     {/* <Link to="/search" className="search" type="submit" value="Submit" ><i className="fa-solid fa-magnifying-glass"></i></Link> */}
 
                     <Link to="/shop" className='a_Link'><i className="fa-solid fa-shop "></i></Link>
-                    {!isAuthenticated &&(
+                    {!isAuthenticated && (
                         <>
                             <Link onClick={() => { setOpenLogin(true) }} className='a_Link login__a'><i className="fa-solid fa-user"></i></Link>
                             {/* <Link to="/register" className='a_Link register__a'>Register</Link> */}
@@ -64,13 +66,13 @@ const Header = () => {
                         </>
                     )}
                     {isAuthenticated && !isAdmin && (
-                    <>
-                        <Link to="/favorit" className='a_Link favorit-icon'><i className="fa-solid fa-heart "><i className='non-empty'>0</i></i></Link>
-                        <Link to="/buy" className='a_Link cart-icon'><i className="fa-solid fa-cart-shopping "><i className='non-empty'>0</i></i></Link>
+                        <>
+                            <Link to="/favorit" className='a_Link favorit-icon'><i className="fa-solid fa-heart "><i className='non-empty'>0</i></i></Link>
+                            <Link to="/buy" className='a_Link cart-icon'><i className="fa-solid fa-cart-shopping "><i className='non-empty'>0</i></i></Link>
 
-                        <Link to="/" onClick={onLogout} className='a_Link'><i className="fa-solid fa-person-walking-dashed-line-arrow-right"></i></Link>
-                    </>
-                )}
+                            <Link to="/" onClick={onLogout} className='a_Link'><i className="fa-solid fa-person-walking-dashed-line-arrow-right"></i></Link>
+                        </>
+                    )}
                 </div>
             </div>
 

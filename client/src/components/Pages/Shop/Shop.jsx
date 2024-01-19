@@ -1,10 +1,11 @@
-import React from 'react'
 import './Shop.css'
+
+import React from 'react'
 import { Link } from 'react-router-dom'
-import shopData from '../../../config/data/shop.js/shopData'
+
 
 export const Shop = () => {
-    const data = shopData
+    
     return (
         <div className='shop_page'>
 

@@ -3,7 +3,7 @@ import './Home.css'
 import React from 'react'
 
 import Carousel from './Carousel/Carousel'
-import homeData from '../../../config/data/home.js/homeData'
+import homeData from '../../../config/data/homeData'
 import { ProductCard } from '../../productCard/productCard'
 
 const Home = () => {

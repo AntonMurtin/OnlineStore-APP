@@ -1,9 +1,10 @@
-import { createContext, useContext } from "react"
+import { createContext, useContext, useState } from "react"
 
 import { authServiceFactoty } from "../sevices/authService";
 import { useNavigate } from "react-router-dom";
 import { admin } from "../config/constants";
 import {useLocalStorage} from '../hooks/useLocalStorage'
+import { useNotification } from "./NotificationContext";
 
 
 export const AuthContext = createContext();
@@ -11,38 +12,49 @@ export const AuthContext = createContext();
  export const AuthProvider = ({
     children
 }) => {
+    const [error,setEroor]=useState(false)
  const [auth, setAuth] = useLocalStorage('auth', {});
 
     const authService = authServiceFactoty(auth.accessToken);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch=useNotification();
 
     const onLogin = async (data) => {
 
         try {
+            
             const user = await authService.login(data);
             setAuth(user);
+            setEroor(false)
             
         } catch (error) {
-            console.log(error.message);
+            setEroor(true)
+            error.message.map(x => {
+                dispatch({
+                    type: 'ERROR',
+                    message: x,
+                })
+            })
         }
     };
 
     const onRegister=async(data)=>{
-        console.log(data);
         try {
             const user=await authService.register(data);
             setAuth(user);
             navigate('/');
             
         } catch (error) {
-            console.log(error.message);
+            error.message.map(x => {
+                dispatch({
+                    type: 'ERROR',
+                    message: x,
+                })
+            })
+            navigate('/register');
         }
     }
     const onLogout = async () => {
-        // dispatch({
-        //     type: 'SUCCESS',
-        //     message: 'You have successfully signed out.',
-        // })
 
         setAuth({});
         navigate('/');
@@ -59,6 +71,7 @@ export const AuthContext = createContext();
         userEmail: auth.email,
         isAuthenticated: !!auth.accessToken,
         isAdmin: admin === auth.email,
+        error,
     }
 
     return(

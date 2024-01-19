@@ -24,32 +24,32 @@
 .card--1 .card__img,
 .card--1 .card__img--hover {
    
-    background-image: url('../../public/shop_img/grudfosPomp.jpg');
+    background-image: url('../../shop_img/grudfosPomp.jpg');
 }
 
 .card--2 .card__img,
 .card--2 .card__img--hover {
-    background-image: url('../../public/shop_img/RAZ.jpeg');
+    background-image: url('../../shop_img/RAZ.jpeg');
 }
 
 .card--3 .card__img,
 .card--3 .card__img--hover {
-    background-image: url('../../public/shop_img/220210082925warer.jpg');
+    background-image: url('../../shop_img/220210082925warer.jpg');
 }
 
 .card--4 .card__img,
 .card--4 .card__img--hover {
-    background-image: url('../../public/shop_img/mashins.jpg');
+    background-image: url('../../shop_img/mashins.jpg');
 }
 
 .card--5 .card__img,
 .card--5 .card__img--hover {
-    background-image: url('../../public/shop_img/trubi.jpg');
+    background-image: url('../../shop_img/trubi.jpg');
 }
 
 .card--6 .card__img,
 .card--6 .card__img--hover {
-    background-image: url('../../public/shop_img/tools.jpg');
+    background-image: url('../../shop_img/tools.jpg');
 }
 
 

@@ -16,7 +16,7 @@ const homeDataData=[
     },
     {
         title:'polivni sistemi',
-        image:'../..home_img/polivni sistemi.jpg'
+        image:'../../home_img/polivni sistemi.jpg'
 
     },
     {
