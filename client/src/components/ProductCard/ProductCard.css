@@ -1,11 +1,15 @@
 .product__card{
-    display:inline-block;
+    display:inline-flexbox;
+    
     position: relative;
-    width: 250px;
+   width: 250px;
+    height: 380px;
     max-width: 300px;
     padding: 30px;
-    margin-top: 50px;
-    margin-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
     border-radius: 8px;
     background-color: white;
     transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -29,25 +33,46 @@ background-color:  rgba(0,0 , 0, 0.95);
 color:white;
 border-radius: 50%;
 }
+.cardImages{
+  width: 100%;
+    margin: 0 auto;
+    /* position:relative; */
+    z-index: 5;
+}
 .size{
-    z-index: 100;
-    position:static;
-    justify-content: center;
-    align-items: center;
-    max-width: 200px;
-   height: 150px;
-    overflow-y: hidden;
+  /* width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+    overflow: hidden; 
+    /* padding: 1.5rem 2rem; */
+    /* border-radius: 1rem; */
+    /* text-align:center;
+    position: relative;
+    z-index: 10;
+    margin: auto;  */
+    position: absolute;
+display: flex;
+align-items: center;
+justify-content: center;
+top:55%;
+left: 10%;
+width: 200px;
+height: 150px;
+
   }
 
 .product__image{
-    /* z-index: 1000; */
+  
     width: 100%;
+    object-fit: cover;
     overflow: auto;
 }
 
 .product__title{
    
-    font-size: 30px;
+    font-size: 22px;
     text-align: center;
     justify-content: center;
     align-items: center;
