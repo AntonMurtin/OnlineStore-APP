@@ -2,6 +2,7 @@
     min-height: 715px;
     margin-top: 120px;
     margin-bottom: 30px;
+    
 
 
 }
@@ -11,5 +12,15 @@
     justify-content: center;
     align-items: center;
   }
-
+.noProduct{
+   
+    color: #837979;
+	font-family: 'Lobster', cursive;
+	font-size: 55px;
+	font-weight: normal;
+	text-align: center;
+	margin:0 0 0px;
+	margin-top: 6rem;
+	text-shadow: 1px 0 0 #181717;
+}
 

@@ -1,12 +1,12 @@
-import './Home.css'
+import './Home.css';
 
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom' ;
 
-import Carousel from './Carousel/Carousel'
-import homeData from '../../../config/data/homeData'
+import Carousel from './Carousel/Carousel';
+import homeData from '../../../config/data/homeData';
 
-import { useProductContext } from '../../../context/ProductContext'
-import { Slider } from './Slider/Slider'
+import { useProductContext } from '../../../context/ProductContext';
+import { Slider } from './Slider/Slider';
 
 
 
@@ -39,7 +39,7 @@ const Home = () => {
             <div className='productContent'>
             <h2>Irrigation Systems</h2>
             {<Slider data={systems}  />}
-            <Link className='goTo' to="/register">See all</Link>
+            <Link className='goTo' to="/shop/irigationSystems">See all</Link>
             </div>
 
             <div className='productContent'>
@@ -75,4 +75,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;

@@ -12,6 +12,7 @@ import { AuthProvider } from './context/AuthContext'
 import { NotificationProvider } from './context/NotificationContext'
 import { ProductProvider } from './context/ProductContext'
 import Waterpomp from './components/Pages/Shop/Waterpomp/Waterpomp'
+import IrrigationSystems from './components/Pages/Shop/IrrigationSystems/IrrigationSystems'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/shop' element={<Shop />} />
               <Route path='/shop/waterpomps' element={<Waterpomp />} />
+              <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />
               <Route path='/register' element={<Register />} />
 
             </Routes>

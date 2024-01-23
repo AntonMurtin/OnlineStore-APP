@@ -28,7 +28,7 @@ export const Shop = () => {
                 <div className="card card--2">
 
                     <div className="card__img"></div>
-                    <Link to="/shop/systems" className="card_link">
+                    <Link to="/shop/irigationSystems" className="card_link">
                         <div className="card__img--hover"></div>
                     </Link>
                     <div className="card__info">
