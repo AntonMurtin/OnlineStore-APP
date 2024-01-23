@@ -15,6 +15,8 @@ import Waterpomp from './components/Pages/Shop/Waterpomp/Waterpomp'
 import IrrigationSystems from './components/Pages/Shop/IrrigationSystems/IrrigationSystems'
 import Parts from './components/Pages/Shop/Parts/Parts'
 import PowerMachines from './components/Pages/Shop/PowerMachines/PowerMachines'
+import Pipes from './components/Pages/Shop/Pipes/Pipes'
+import Tools from './components/Pages/Shop/Tools/Tools'
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
               <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />
               <Route path='/shop/parts' element={<Parts />} />
               <Route path='/shop/powerMachines' element={<PowerMachines />} />
+              <Route path='/shop/pipes' element={<Pipes />} />
+              <Route path='/shop/tools' element={<Tools />} />
               <Route path='/register' element={<Register />} />
 
             </Routes>
