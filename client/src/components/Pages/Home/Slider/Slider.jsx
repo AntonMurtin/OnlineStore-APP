@@ -21,13 +21,15 @@ export const Slider = ({ data }) => {
                 970: { slidesPerView: 3 },
                 1350: { slidesPerView: 4 },
                 1600: { slidesPerView: 5 },
-               
+                1900: { slidesPerView: 6 },
+                2200: { slidesPerView: 7 },
+                2500: { slidesPerView: 8 },
+                2800: { slidesPerView: 9 },
+                3100: { slidesPerView: 10 },
+                3300: { slidesPerView: 11 },
             }}
-
             navigation 
             pagination={{ clickable: true }}
-            // onSwiper={(swiper) => console.log(swiper)}
-            // onSlideChange={() => console.log('slide change')}
         >
             {data.map(x => (
                 <SwiperSlide className='swiper'

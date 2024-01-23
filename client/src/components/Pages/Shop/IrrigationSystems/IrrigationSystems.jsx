@@ -1,10 +1,18 @@
-import '../Product.css'
-import React from 'react'
-import { useProductContext } from '../../../../context/ProductContext'
-import { ProductCard } from '../../../productCard/productCard'
+import '../Product.css';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import { useProductContext } from '../../../../context/ProductContext';
+import { ProductCard } from '../../../productCard/productCard';
 
 const IrrigationSystems = () => {
-    const { systems } = useProductContext()
+    const { systems } = useProductContext();
+
+    const {pathname}=useLocation()
+
+     useEffect(()=>{
+        window.scrollTo(0,0);
+     },[pathname]);
 
     return (
         <div className="waterpompPage">
@@ -19,7 +27,7 @@ const IrrigationSystems = () => {
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default IrrigationSystems
+export default IrrigationSystems;

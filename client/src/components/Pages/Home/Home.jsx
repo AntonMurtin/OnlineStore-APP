@@ -1,6 +1,7 @@
 import './Home.css';
 
-import { Link } from 'react-router-dom' ;
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom' ;
 
 import Carousel from './Carousel/Carousel';
 import homeData from '../../../config/data/homeData';
@@ -21,6 +22,11 @@ const Home = () => {
         product, 
     } = useProductContext();
 
+    const {pathname}=useLocation()
+
+     useEffect(()=>{
+        window.scrollTo(0,0);
+     },[pathname]);
 
     return (
         <div className="home_page">
@@ -45,31 +51,31 @@ const Home = () => {
             <div className='productContent'>
             <h2>Parts</h2>
             {<Slider data={parts}  />}
-            <Link className='goTo' to="/register">See all</Link>
+            <Link className='goTo' to="/shop/parts">See all</Link>
             </div>
 
             <div className='productContent'>
             <h2>Power Mashines</h2>
             {<Slider data={machines}  />}
-            <Link className='goTo' to="/register">See all</Link>
+            <Link className='goTo' to="/shop/machines">See all</Link>
             </div>
 
             <div className='productContent'>
             <h2>Pipes</h2>
             {<Slider data={pipes}  />}
-            <Link className='goTo' to="/register">See all</Link>
+            <Link className='goTo' to="/shop/pipes">See all</Link>
             </div>
 
             <div className='productContent'>
             <h2>Tools</h2>
             {<Slider data={tools}  />}
-            <Link className='goTo' to="/register">See all</Link>
+            <Link className='goTo' to="/shop/tools">See all</Link>
             </div>
 
             <div className='productContent'>
             <h2>Your Research</h2>
             {<Slider data={product}  />}
-            <Link className='goTo' to="/register">See all</Link>
+            <Link className='goTo' to="/">See all</Link>
             </div>
         </div>
     )
