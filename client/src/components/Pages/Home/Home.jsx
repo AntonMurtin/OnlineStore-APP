@@ -57,7 +57,7 @@ const Home = () => {
             <div className='productContent'>
             <h2>Power Mashines</h2>
             {<Slider data={machines}  />}
-            <Link className='goTo' to="/shop/machines">See all</Link>
+            <Link className='goTo' to="/shop/powerMachines">See all</Link>
             </div>
 
             <div className='productContent'>
@@ -73,7 +73,7 @@ const Home = () => {
             </div>
 
             <div className='productContent'>
-            <h2>Your Research</h2>
+            <h2>Last Seen</h2>
             {<Slider data={product}  />}
             <Link className='goTo' to="/">See all</Link>
             </div>

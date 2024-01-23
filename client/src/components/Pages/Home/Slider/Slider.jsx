@@ -18,15 +18,15 @@ export const Slider = ({ data }) => {
             slidesPerView={1}
             breakpoints={{
                 680: { slidesPerView: 2 },
-                970: { slidesPerView: 3 },
-                1350: { slidesPerView: 4 },
-                1600: { slidesPerView: 5 },
-                1900: { slidesPerView: 6 },
-                2200: { slidesPerView: 7 },
-                2500: { slidesPerView: 8 },
-                2800: { slidesPerView: 9 },
-                3100: { slidesPerView: 10 },
-                3300: { slidesPerView: 11 },
+                1050: { slidesPerView: 3 },
+                1380: { slidesPerView: 4 },
+                1680: { slidesPerView: 5 },
+                1950: { slidesPerView: 6 },
+                2250: { slidesPerView: 7 },
+                2550: { slidesPerView: 8 },
+                2850: { slidesPerView: 9 },
+                3150: { slidesPerView: 10 },
+                3450: { slidesPerView: 11 },
             }}
             navigation 
             pagination={{ clickable: true }}

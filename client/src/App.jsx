@@ -14,6 +14,7 @@ import { ProductProvider } from './context/ProductContext'
 import Waterpomp from './components/Pages/Shop/Waterpomp/Waterpomp'
 import IrrigationSystems from './components/Pages/Shop/IrrigationSystems/IrrigationSystems'
 import Parts from './components/Pages/Shop/Parts/Parts'
+import PowerMachines from './components/Pages/Shop/PowerMachines/PowerMachines'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path='/shop/waterpomps' element={<Waterpomp />} />
               <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />
               <Route path='/shop/parts' element={<Parts />} />
+              <Route path='/shop/powerMachines' element={<PowerMachines />} />
               <Route path='/register' element={<Register />} />
 
             </Routes>
