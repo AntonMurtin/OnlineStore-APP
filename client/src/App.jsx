@@ -11,6 +11,7 @@ import { Register } from './components/Users/Register/Register'
 import { AuthProvider } from './context/AuthContext'
 import { NotificationProvider } from './context/NotificationContext'
 import { ProductProvider } from './context/ProductContext'
+import Waterpomp from './components/Pages/Shop/Waterpomp/Waterpomp'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/shop' element={<Shop />} />
+              <Route path='/shop/waterpomps' element={<Waterpomp />} />
               <Route path='/register' element={<Register />} />
 
             </Routes>

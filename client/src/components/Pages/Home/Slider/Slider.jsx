@@ -17,11 +17,11 @@ export const Slider = ({ data }) => {
             spaceBetween={2}
             slidesPerView={1}
             breakpoints={{
-                660: { slidesPerView: 2 },
-                950: { slidesPerView: 3 },
-                1295: { slidesPerView: 4 },
-                1585: { slidesPerView: 5 },
-                1800: { slidesPerView: 6 },
+                680: { slidesPerView: 2 },
+                970: { slidesPerView: 3 },
+                1350: { slidesPerView: 4 },
+                1600: { slidesPerView: 5 },
+               
             }}
 
             navigation 

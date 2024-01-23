@@ -2,7 +2,7 @@ import './ProductCard.css'
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-const img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ6e4SH44lHQDEQ-qqSftYapwdtTNYIOi4AA&usqp=CAU'
+
 
 export const ProductCard = (data) => {
   return (
