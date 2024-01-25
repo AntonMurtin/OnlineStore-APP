@@ -105,18 +105,10 @@
       width: 25%;
     }
     .card__img {
-   
-      
         height: 120px;
-      
-     
     }
     .card__img--hover {
-  
-   
         height: 130px;
-     
-      
     }
 }
 

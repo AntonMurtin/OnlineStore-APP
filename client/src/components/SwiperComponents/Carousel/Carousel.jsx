@@ -3,7 +3,7 @@ import './Carousel.css'
 import React, { useEffect, useState } from 'react';
 
 
-function Carousel({ data }) {
+export const Carousel=({ data })=> {
     const [current, setCurrent] = useState(0);
     const [autoPlay, setAutoPlay] = useState(true);
     let timeOut = null;
@@ -79,5 +79,3 @@ function Carousel({ data }) {
         </div>
     );
 }
-
-export default Carousel

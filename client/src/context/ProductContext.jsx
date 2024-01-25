@@ -22,34 +22,34 @@ const productsService=productServiceFactory()
     useEffect(() => {
         Promise.all([
             productsService.getAll('waterpomps'),
-            productsService.getAll('systems'),
+            productsService.getAll('irigationSystems'),
             productsService.getAll('parts'),
-            productsService.getAll('machines'),
+            productsService.getAll('powerMachines'),
             productsService.getAll('pipes'),
             productsService.getAll('tools'),
 
         ]).then(([
             waterpompsData,
-            systemsData,
+            irigationSystemsData,
             partsData,
-            machinesData,
+            powerMachinesData,
             pipesData,
             toolsData,
         ]) => {
             setWaterpomps(waterpompsData);
-            setSystems(systemsData);
+            setSystems(irigationSystemsData);
             setParts(partsData);
-            setMachines(machinesData);
+            setMachines(powerMachinesData);
             setPipes(pipesData);
             setTools(toolsData);
-            setProduct([
-                waterpompsData[0],
-                systemsData[0],
-                partsData[0],
-                machinesData[0],
-                pipesData[0],
-                toolsData[0],
-            ])
+            // setProduct([
+            //     waterpompsData[0],
+            //     systemsData[0],
+            //     partsData[0],
+            //     machinesData[0],
+            //     pipesData[0],
+            //     toolsData[0],
+            // ])
         })
     }, []);
 

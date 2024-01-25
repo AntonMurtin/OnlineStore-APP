@@ -1,9 +1,9 @@
 import '../Product.css';
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
+import { useLocation } from 'react-router-dom';
 import { useProductContext } from '../../../../context/ProductContext';
-import { ProductCard } from '../../../productCard/productCard';
+import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
 
 const Tools = () => {
     const { tools } = useProductContext();
@@ -17,7 +17,7 @@ const Tools = () => {
     }, [pathname]);
 
     return (
-        <div className="waterpompPage">
+        <div className="page">
 
             <div className="productPage">
 

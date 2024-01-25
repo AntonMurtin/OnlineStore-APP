@@ -16,7 +16,7 @@ const requester = async (method, url, data) => {
     const serializedAuth = localStorage.getItem('auth');
     if (serializedAuth) {
         const auth = JSON.parse(serializedAuth);
-        
+
         if (auth.accessToken) {
             options.headers = {
                 ...options.headers,
@@ -24,18 +24,23 @@ const requester = async (method, url, data) => {
             };
         }
     }
-    const response = await fetch(url, options);
+    try {
+        const response = await fetch(url, options);
 
-    if (response.status === 204) {
-        return {};
+        if (response.status === 204) {
+            return {};
+        }
+
+        const result = await response.json();
+        if (!response.ok) {
+            throw result;
+        }
+
+        return result;
+
+    } catch (error) {
+       throw error.message
     }
-
-    const result = await response.json();
-    if (!response.ok) {
-        throw result;
-    }
-
-    return result;
 };
 
 export const requestFactory = () => {

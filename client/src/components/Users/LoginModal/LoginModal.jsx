@@ -1,6 +1,6 @@
 import './LoginModal.css'
 
-import { Link } from 'react-router-dom'
+import { Link, } from 'react-router-dom'
 import { errorMessageInput, initialFocusLogin, initialValuesLogin, inputValidtion } from '../../../config/constants'
 import { useForm } from '../../../hooks/useForm'
 import { useAuthContext } from '../../../context/AuthContext'
@@ -15,6 +15,7 @@ export const LoginModal = ({
         onClose();
         onLogin(values);
     }
+
     const initialValues = initialValuesLogin;
     const initialFocs = initialFocusLogin;
     const errorMessage = errorMessageInput;
@@ -23,6 +24,7 @@ export const LoginModal = ({
         initialFocs,
         onLoginSubmit)
 
+ 
     return (
         <div className='login__Modal'>
 
@@ -65,7 +67,7 @@ export const LoginModal = ({
                 <p onClick={onClose} className="message">
                     Not registered? <Link to="/register">Create an account.</Link>
                 </p>
-                <button className='btnLog'>Log In</button>
+                <button  className='btnLog'>Log In</button>
 
             </form>
         </div>

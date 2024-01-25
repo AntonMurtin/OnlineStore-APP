@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {v4} from 'uuid'
 import { Navigation, Pagination, A11y } from 'swiper/modules';
-import { ProductCard } from "../../../productCard/productCard";
+import {ProductCard} from '../../CardComponents/ProductCard/ProductCard'
 
 
 import 'swiper/css';

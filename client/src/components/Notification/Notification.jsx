@@ -32,7 +32,7 @@ export const Notification = (props) => {
                 type: 'REMOVE_NOTIFICATION',
                 id: props.id
             })
-        }, 300);
+        }, 300000000);
     }
 
     useEffect(()=>{
@@ -50,16 +50,17 @@ export const Notification = (props) => {
         onMouseEnter={pauseTimer}
         onMouseLeave={starTtimer}
         className={
-            `notification-item 
+            `notificationItem 
             ${props.type === 'SUCCESS'
             ? 'success'
             : 'error'
         } ${exit ? 'exit' : ''}`
     }>
-            <p className="notification-btn"
+            <p className="notificationBtn"
                 onClick={() => setExit(true)}>x</p>
-
-            <p>{props.message}</p>
+                
+            <p className='notificationMesage'>{props.message}</p>
+                
 
             <div className="bar"
                 style={{ width: `${width}%` }} ></div>

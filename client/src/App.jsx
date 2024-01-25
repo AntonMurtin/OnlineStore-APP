@@ -17,6 +17,7 @@ import Parts from './components/Pages/Shop/Parts/Parts'
 import PowerMachines from './components/Pages/Shop/PowerMachines/PowerMachines'
 import Pipes from './components/Pages/Shop/Pipes/Pipes'
 import Tools from './components/Pages/Shop/Tools/Tools'
+import Details from './components/Pages/Details/Details'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <div className="App">
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/register' element={<Register />} />
               <Route path='/shop' element={<Shop />} />
               <Route path='/shop/waterpomps' element={<Waterpomp />} />
               <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />
@@ -37,7 +39,7 @@ function App() {
               <Route path='/shop/powerMachines' element={<PowerMachines />} />
               <Route path='/shop/pipes' element={<Pipes />} />
               <Route path='/shop/tools' element={<Tools />} />
-              <Route path='/register' element={<Register />} />
+              <Route path='/shop/:productType/:productId/details' element={<Details />} />
 
             </Routes>
 

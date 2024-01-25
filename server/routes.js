@@ -12,8 +12,8 @@ router.use('/users', userController);
 router.use('/products/waterpomps', waterpompController);
 router.use('/products/parts', partsController);
 router.use('/products/tools', toolsController);
-router.use('/products/systems', systemsControler);
-router.use('/products/machines', machinesControler);
+router.use('/products/irigationSystems', systemsControler);
+router.use('/products/powerMachines', machinesControler);
 router.use('/products/pipes', pipesControler);
 
 

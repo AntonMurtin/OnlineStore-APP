@@ -1,8 +1,11 @@
 import '../Product.css';
 import React, { useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
 import { useProductContext } from '../../../../context/ProductContext';
-import { ProductCard } from '../../../productCard/productCard';
+import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
+
+
 
 const Waterpomp = () => {
      const { waterpomps } = useProductContext();
@@ -14,7 +17,7 @@ const Waterpomp = () => {
      },[pathname]);
    
     return (
-       <div className="waterpompPage">
+       <div className="page">
 
             <div className="productPage">
 

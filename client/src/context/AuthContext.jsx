@@ -12,7 +12,7 @@ export const AuthContext = createContext();
  export const AuthProvider = ({
     children
 }) => {
-    const [error,setEroor]=useState(false)
+    // const [error,setEroor]=useState(false)
  const [auth, setAuth] = useLocalStorage('auth', {});
 
     const authService = authServiceFactoty(auth.accessToken);
@@ -25,16 +25,15 @@ export const AuthContext = createContext();
             
             const user = await authService.login(data);
             setAuth(user);
-            setEroor(false)
+            // setEroor(false)
             
         } catch (error) {
-            setEroor(true)
-            error.message.map(x => {
-                dispatch({
-                    type: 'ERROR',
-                    message: x,
-                })
+            dispatch({
+                type: 'ERROR',
+                message: error
+
             })
+            
         }
     };
 
@@ -51,6 +50,8 @@ export const AuthContext = createContext();
                     message: x,
                 })
             })
+               
+            
             navigate('/register');
         }
     }
@@ -58,6 +59,10 @@ export const AuthContext = createContext();
 
         setAuth({});
         navigate('/');
+        dispatch({
+            type:'SUCCSESSFUL',
+            message:'You succsessful leve'
+        })
     };
 
 
@@ -71,7 +76,7 @@ export const AuthContext = createContext();
         userEmail: auth.email,
         isAuthenticated: !!auth.accessToken,
         isAdmin: admin === auth.email,
-        error,
+        
     }
 
     return(

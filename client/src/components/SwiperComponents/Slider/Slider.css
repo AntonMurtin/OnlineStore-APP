@@ -2,9 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 0;
 }
 .swiper-button-prev,
 .swiper-button-next{
 color: black;
-
 }

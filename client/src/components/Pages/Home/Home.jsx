@@ -3,11 +3,11 @@ import './Home.css';
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom' ;
 
-import Carousel from './Carousel/Carousel';
+import { Carousel } from '../../SwiperComponents/Carousel/Carousel';
+import { Slider } from '../../SwiperComponents/Slider/Slider';
 import homeData from '../../../config/data/homeData';
 
 import { useProductContext } from '../../../context/ProductContext';
-import { Slider } from './Slider/Slider';
 
 
 
