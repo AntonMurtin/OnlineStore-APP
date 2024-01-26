@@ -5,18 +5,20 @@ import { productServiceFactory } from '../../../sevices/productService'
 import { useAuthContext } from '../../../context/AuthContext'
 import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
 import { Slider } from '../../SwiperComponents/Slider/Slider'
+import { productName } from '../../../config/constants'
+import { useProductContext } from '../../../context/ProductContext'
 
 const Details = () => {
-    const productService = productServiceFactory();
-
-    const { isAuthenticated, isAdmin } = useAuthContext()
     const { productType, productId } = useParams()
-
-    const { pathname } = useLocation();
-
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
-
+    
+    const { isAuthenticated, isAdmin } = useAuthContext()
+   const{ onDeleteProduct}=useProductContext() 
+    const { pathname } = useLocation();
+    
+    
+    const productService = productServiceFactory();
     const allProducts=products.filter(x=>x._id!==productId);
     
       useEffect(() => {
@@ -42,13 +44,14 @@ const Details = () => {
     return (
         <section className='page'>
 
-            <DetailsCard key={product.id}
+            <DetailsCard key={product._id}
                 product={product}
                 isAuthenticated={isAuthenticated}
-                isAdmin={isAdmin} />
+                isAdmin={isAdmin} 
+                onDelete={onDeleteProduct}/>
 
             <div className='productContent'>
-                <h2></h2>
+                <h2>{productName[productType]}</h2>
                 {<Slider data={allProducts} />}
                 <Link className='goTo' to={`/shop/${product.type}`}>See all</Link>
             </div>

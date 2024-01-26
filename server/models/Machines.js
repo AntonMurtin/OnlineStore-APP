@@ -39,7 +39,7 @@ const MachineShema = new mongoose.Schema({
             ref: 'User'
         },
     }],
-    wish: [{
+    favorite: [{
         user: {
             type: mongoose.Types.ObjectId,
             ref: 'User'

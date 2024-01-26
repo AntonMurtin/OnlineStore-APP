@@ -39,7 +39,7 @@ function App() {
               <Route path='/shop/powerMachines' element={<PowerMachines />} />
               <Route path='/shop/pipes' element={<Pipes />} />
               <Route path='/shop/tools' element={<Tools />} />
-              <Route path='/shop/:productType/:productId/details' element={<Details />} />
+              <Route path='/shop/:productType/:productId' element={<Details />} />
 
             </Routes>
 

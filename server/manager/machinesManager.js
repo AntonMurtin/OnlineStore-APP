@@ -12,6 +12,6 @@ exports.delete = (cardId) => Machines.findByIdAndDelete(cardId);
 
 exports.searchName = (searchName) => Machines.find({title:{$regex: searchName, $options: 'i'}});
 
-exports.searchWish = (userId) => Machines.find({wish:{$elemMatch:{_id:userId}}});
+exports.searchFavorite = (userId) => Machines.find({favorite:{$elemMatch:{_id:userId}}});
 
 exports.searchBuy = (userId) => Machines.find({buy:{$elemMatch:{_id:userId}}});

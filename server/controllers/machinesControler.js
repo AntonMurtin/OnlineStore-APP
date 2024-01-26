@@ -92,19 +92,19 @@ router.delete('/:cardId/delete', async (req, res) => {
 
 });
 
-router.put('/:cardId/wish', async (req, res) => {
+router.put('/:cardId/favorite', async (req, res) => {
     const cardId = req.params.cardId;
     const userId = req.body.userId;
 
     try {
         const card = await machinesManager.getById(cardId);
-        const isWish = card.wish.filter(x => x._id == userId);
+        const isFavorite = card.favorite.filter(x => x._id == userId);
 
-        if (isWish.length > 0) {
+        if (isFavorite.length > 0) {
             throw new Error(error.favorite)
         }
 
-        card.wish.push(userId);
+        card.favorite.push(userId);
         card.save();
         res.json(card);
     } catch (error) {
@@ -115,7 +115,7 @@ router.put('/:cardId/wish', async (req, res) => {
 
 });
 
-router.get('/:userId/wish', async (req, res) => {
+router.get('/:userId/favorite', async (req, res) => {
     const userId = req.params.userId;
 
     try {

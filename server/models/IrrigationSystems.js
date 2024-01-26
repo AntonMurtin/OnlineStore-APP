@@ -40,7 +40,7 @@ const IrrigationSystemsShema = new mongoose.Schema({
         },
 
     }],
-    wish: [{
+    favorite: [{
         user: {
             type: mongoose.Types.ObjectId,
             ref: 'User'

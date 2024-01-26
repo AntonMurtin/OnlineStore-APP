@@ -1,38 +1,59 @@
+.home_page {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  margin-left: 35px;
+  margin-right: 35px;
 
 
-  .home_page{
-    margin-top: 100px;
+}
+
+.topContent {
+  margin-bottom: 40px;
+  margin-top: 20px;
+  font-size: 200%;
+  text-align: center;
+
+}
+
+.productContent>h2 {
+  margin-top: 120px;
+  margin-left: 25px;
+  margin-bottom: 50px;
+  font-size: 50px;
+  text-align: left;
+
+  @media (max-width:950px) {
+    font-size: 40px;
+    margin-top: 90px;
     margin-bottom: 30px;
-    margin-left: 35px;
-    margin-right: 35px;
-
-   
-  }
-  .topContent {
-    margin-bottom: 40px;
-    margin-top: 20px;
-    font-size: 200%;
-    text-align: center;
-   
-  }
- 
-  .productContent>h2{
-    margin-top: 100px;
-    margin-bottom: 50px;
-    font-size: 250%;
-    text-align: left;
-  
   }
 
-  .goTo{
+  @media (max-width:550px) {
     font-size: 30px;
- margin-left: 48%;
- color: #192bd1;
-  
- 
-
+    margin-top: 60px;
+    margin-bottom: 20px;
   }
-  
- 
- 
-  
+
+}
+
+.goTo {
+  display: flex;
+  font-size: 30px;
+  position: relative;
+  left: 48%;
+  color: #192bd1;
+
+  @media (max-width:1550px) {
+    left: 47%;
+  }
+
+  @media (max-width:1000px) {
+    left: 45%;
+    font-size: 25px;
+  }
+
+  @media (max-width:550px) {
+    left: 42%;
+    font-size: 20px;
+  }
+}

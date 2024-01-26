@@ -32,7 +32,7 @@ export const Notification = (props) => {
                 type: 'REMOVE_NOTIFICATION',
                 id: props.id
             })
-        }, 300000000);
+        }, 300);
     }
 
     useEffect(()=>{
@@ -59,7 +59,7 @@ export const Notification = (props) => {
             <p className="notificationBtn"
                 onClick={() => setExit(true)}>x</p>
                 
-            <p className='notificationMesage'>{props.message}</p>
+            <h3 className='notificationMesage'>{props.message}</h3>
                 
 
             <div className="bar"

@@ -1,4 +1,13 @@
-export const admin='antonmurtin@gmail.com'
+export const admin='antonmurtin@gmail.com';
+
+export const productName = {
+   waterpomps:'Water Pomp',
+    irigationSystems:'Irigation Systems',
+    parts:'Parts',
+   powerMachines:'Power Mashines',
+    pipes:'Pipes',
+    tools:'Tools',
+}
 
 export const errorMessageInput={
     name:"Name shoud be 3-16 characters and shouldn't include any special characters!",

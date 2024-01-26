@@ -12,6 +12,6 @@ exports.delete = (cardId) => Pipes.findByIdAndDelete(cardId);
 
 exports.searchName = (searchName) => Pipes.find({title:{$regex: searchName, $options: 'i'}});
 
-exports.searchWish = (userId) => Pipes.find({wish:{$elemMatch:{_id:userId}}});
+exports.searchFavorite = (userId) => Pipes.find({favorite:{$elemMatch:{_id:userId}}});
 
 exports.searchBuy = (userId) => Pipes.find({buy:{$elemMatch:{_id:userId}}});

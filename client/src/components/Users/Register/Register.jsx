@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Register.css';
 import { useForm } from '../../../hooks/useForm'
 import { errorMessageInput, initialFocusregister, initialValuesRegister, inputValidtion } from '../../../config/constants';
 import { useAuthContext } from '../../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export const Register = () => {
-    const navigate = useNavigate()
+    
     const initialValues = initialValuesRegister;
     const initialFocs = initialFocusregister;
     const errorMessage = errorMessageInput;
-    const { onRegister } = useAuthContext()
 
-    const onRegisterSubmit = (values) => {
-        onRegister(values);
-        // navigate('/')
-    }
+    const { onRegister } = useAuthContext();
+    const { pathname } = useLocation();
+    
+  useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [pathname]);
+
 
     const { values, focus, changeHandler, onSubmit, changeFocus } = useForm(
         initialValues,
         initialFocs,
-        onRegisterSubmit)
+        onRegister)
 
     return (
         <div className='registerPage'>

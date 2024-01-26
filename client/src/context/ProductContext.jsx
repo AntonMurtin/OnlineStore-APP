@@ -1,15 +1,19 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { productServiceFactory } from "../sevices/productService";
+import { useNotification } from "./NotificationContext";
+import { useNavigate } from "react-router-dom";
 
 
-const ProductContext=createContext();
+const ProductContext = createContext();
 
 
-export const ProductProvider=({
+export const ProductProvider = ({
     children
-})=>{
-const productsService=productServiceFactory()
-    
+}) => {
+    const navigate=useNavigate()
+    const productsService = productServiceFactory();
+    const dispatch = useNotification();
+
     const [waterpomps, setWaterpomps] = useState([]);
     const [systems, setSystems] = useState([]);
     const [parts, setParts] = useState([]);
@@ -18,6 +22,16 @@ const productsService=productServiceFactory()
     const [tools, setTools] = useState([]);
     const [product, setProduct] = useState([]);
     // const [search, setSearch] = useState(null);
+
+    const setValue = {
+        waterpomps: setWaterpomps,
+        systems: setSystems,
+        parts: setParts,
+        machines: setMachines,
+        pipes: setPipes,
+        tools: setTools
+    }
+
 
     useEffect(() => {
         Promise.all([
@@ -53,7 +67,23 @@ const productsService=productServiceFactory()
         })
     }, []);
 
-    const value={
+    const onDeleteProduct = async (type, id) => {
+        console.log(setValue[type]);
+        try {
+            await productsService.del(type, id);
+            setValue[type](state => state.filter(x => x._id !== id))
+            navigate(`/shop/${type}`)
+
+        } catch (error) {
+            console.log(error);
+            dispatch({
+                type: 'ERROR',
+                message: error.message,
+            });
+        }
+    }
+
+    const value = {
         waterpomps,
         systems,
         parts,
@@ -62,6 +92,7 @@ const productsService=productServiceFactory()
         tools,
         product,
         // search,
+        onDeleteProduct
     }
     return (
         <ProductContext.Provider value={value}>
@@ -70,8 +101,8 @@ const productsService=productServiceFactory()
     )
 }
 
-export const useProductContext=()=>{
-    const context=useContext(ProductContext);
+export const useProductContext = () => {
+    const context = useContext(ProductContext);
 
     return context;
 }

@@ -4,15 +4,24 @@ import './DetailsCard.css';
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 
+
 export const DetailsCard = ({
     product,
     isAuthenticated,
-    isAdmin
+    isAdmin,
+    onDelete
 }) => {
-    const [imgClass, setImgClass] = useState('slideImg')
+    const [imgClass, setImgClass] = useState('slideImg');
+    const [deleteProduct, setDeleteProduct] = useState(false);
+
+
+    const onClose = () => {
+        setDeleteProduct(false)
+    }
+
 
     return (
-        <div className="details detailsFlex">
+        <div className="details detailsFlex ">
 
             <div className="detailsLeft">
                 <div className="detailsImage">
@@ -33,7 +42,7 @@ export const DetailsCard = ({
                 <h4 className='detailsH4' >{`Price: ${product.price} $`}</h4>
                 <p className='detailsP' >{product.description}</p>
 
-                <div className="detailsBtn">
+                <div className="detailsBtnDiv">
 
                     {isAuthenticated && !isAdmin && (
                         <>
@@ -49,13 +58,33 @@ export const DetailsCard = ({
                     )}
                     {isAdmin && (
                         <>
-                            <Link to={`/shop/${product.type}/${product._id}/edit`} className="detailsBtn editBtn"> Edit </Link>
-                            <Link to={`/shop/${product.type}/${product._id}/delete`} className="detailsBtn  deleteBtn" >Delete</Link>
+                            <Link to={`/shop/${product.type}/${product._id}/edit`} 
+                            className={`detailsBtn detailsEdit ${deleteProduct ? 'disabledBtn' : ''}`}>
+                                <i className="fa-regular fa-pen-to-square"></i>
+                            </Link>
+                            <Link 
+                                onClick={() => setDeleteProduct(true)}
+                                className={`detailsBtn  detailsDelete ${deleteProduct ? 'disabledBtn' : ''}`} >
+                                <i className="fa-regular fa-trash-can"></i></Link>
                         </>
                     )}
                 </div>
-                
+
             </div>
+           
+             <div className={`removeWrapper ${deleteProduct? '': 'removeNone'}`}>
+            <div className='removeDiv'>
+                <h3>You want to delete it!</h3>
+                <div >
+                    <span onClick={()=>onDelete(product.type,product._id)}
+                    className="removeBtn"><i className="fa-solid fa-check fa-lg "></i></span>
+                    <span 
+                    onClick={onClose} 
+                    className="closeRemove"><i className="fa-solid fa-xmark fa-lg "></i></span>
+                </div>
+
+            </div>
+        </div>
         </div>
     );
 };

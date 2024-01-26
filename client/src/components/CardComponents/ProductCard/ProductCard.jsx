@@ -32,7 +32,7 @@ const onFavorit=()=>{
       <Link className='productBtn productBuy '>
         <i className="fas fa-shopping-cart"></i>
       </Link>
-      <Link to={`/shop/${data.type}/${data._id}/details`}
+      <Link to={`/shop/${data.type}/${data._id}`}
         className='productBtn productDetails '>
         <i className="fas fa-info-circle"></i>
       </Link>

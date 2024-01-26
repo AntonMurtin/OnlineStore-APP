@@ -12,6 +12,6 @@ exports.delete = (cardId) => Tools.findByIdAndDelete(cardId);
 
 exports.searchName = (searchName) => Tools.find({title:{$regex: searchName, $options: 'i'}});
 
-exports.searchWish = (userId) => Tools.find({wish:{$elemMatch:{_id:userId}}});
+exports.searchFavorite = (userId) => Tools.find({favorite:{$elemMatch:{_id:userId}}});
 
 exports.searchBuy = (userId) => Tools.find({buy:{$elemMatch:{_id:userId}}});

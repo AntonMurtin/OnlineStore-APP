@@ -65,7 +65,7 @@ export const LoginModal = ({
                 </div>
 
                 <p onClick={onClose} className="message">
-                    Not registered? <Link to="/register">Create an account.</Link>
+                    Not registered? <Link to="/register">Create here.</Link>
                 </p>
                 <button  className='btnLog'>Log In</button>
 

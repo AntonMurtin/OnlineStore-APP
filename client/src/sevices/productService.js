@@ -32,8 +32,13 @@ export const productServiceFactory = () => {
            })
         }
     }
+
+    const del = (type, id) => request.delete(`${url}/${type}/${id}/delete`);
+
+    
     return {
         getAll,
         getById,
+        del,
     }
 }
