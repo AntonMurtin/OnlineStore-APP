@@ -18,6 +18,7 @@ import PowerMachines from './components/Pages/Shop/PowerMachines/PowerMachines'
 import Pipes from './components/Pages/Shop/Pipes/Pipes'
 import Tools from './components/Pages/Shop/Tools/Tools'
 import Details from './components/Pages/Details/Details'
+import { Create } from './components/Pages/CreateProduct/Create'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/register' element={<Register />} />
+              <Route path='/create' element={<Create />} />
               <Route path='/shop' element={<Shop />} />
               <Route path='/shop/waterpomps' element={<Waterpomp />} />
               <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />

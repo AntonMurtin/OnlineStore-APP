@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react"
 
 import { authServiceFactoty } from "../sevices/authService";
 import { useNavigate } from "react-router-dom";
-import { admin } from "../config/constants";
+import { admin } from "../config/constants/constants";
 import {useLocalStorage} from '../hooks/useLocalStorage'
 import { useNotification } from "./NotificationContext";
 

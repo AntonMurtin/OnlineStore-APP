@@ -23,14 +23,7 @@ export const ProductProvider = ({
     const [product, setProduct] = useState([]);
     // const [search, setSearch] = useState(null);
 
-    const setValue = {
-        waterpomps: setWaterpomps,
-        systems: setSystems,
-        parts: setParts,
-        machines: setMachines,
-        pipes: setPipes,
-        tools: setTools
-    }
+    
 
 
     useEffect(() => {
@@ -66,23 +59,44 @@ export const ProductProvider = ({
             // ])
         })
     }, []);
+    const setValue = {
+        waterpomps: setWaterpomps,
+        systems: setSystems,
+        parts: setParts,
+        machines: setMachines,
+        pipes: setPipes,
+        tools: setTools
+    }
 
     const onDeleteProduct = async (type, id) => {
-        console.log(setValue[type]);
+
         try {
             await productsService.del(type, id);
             setValue[type](state => state.filter(x => x._id !== id))
             navigate(`/shop/${type}`)
 
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: 'ERROR',
+                message: error.message,
+            });
+        }
+    };
+
+    const onCreateProduct= async(data)=>{
+        const type=data.type
+        try {
+            const newProduct=await productsService.create(type,data);
+            setValue[type](state => [...state, newProduct]);
+            navigate(`/shop/${type}`)
+            
+        } catch (error) {
             dispatch({
                 type: 'ERROR',
                 message: error.message,
             });
         }
     }
-
     const value = {
         waterpomps,
         systems,
@@ -92,7 +106,8 @@ export const ProductProvider = ({
         tools,
         product,
         // search,
-        onDeleteProduct
+        onDeleteProduct,
+        onCreateProduct,
     }
     return (
         <ProductContext.Provider value={value}>

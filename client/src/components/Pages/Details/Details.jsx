@@ -5,8 +5,8 @@ import { productServiceFactory } from '../../../sevices/productService'
 import { useAuthContext } from '../../../context/AuthContext'
 import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
 import { Slider } from '../../SwiperComponents/Slider/Slider'
-import { productName } from '../../../config/constants'
 import { useProductContext } from '../../../context/ProductContext'
+import { productName } from '../../../config/constants/constants'
 
 const Details = () => {
     const { productType, productId } = useParams()

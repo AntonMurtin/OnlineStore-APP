@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react'
 import './Register.css';
+import React, { useEffect } from 'react'
+
 import { useForm } from '../../../hooks/useForm'
-import { errorMessageInput, initialFocusregister, initialValuesRegister, inputValidtion } from '../../../config/constants';
 import { useAuthContext } from '../../../context/AuthContext';
 import { useLocation } from 'react-router-dom';
+import { errorMessage, inputValidtion } from '../../../config/constants/constants';
+import {initialFocusregister,initialValuesRegister,} from '../../../config/constants/register'
 
 export const Register = () => {
-    
+
     const initialValues = initialValuesRegister;
     const initialFocs = initialFocusregister;
-    const errorMessage = errorMessageInput;
-
+    
     const { onRegister } = useAuthContext();
     const { pathname } = useLocation();
-    
-  useEffect(() => {
+
+    useEffect(() => {
         window.scrollTo(0, 0);
-      }, [pathname]);
+    }, [pathname]);
 
 
     const { values, focus, changeHandler, onSubmit, changeFocus } = useForm(
@@ -26,14 +27,10 @@ export const Register = () => {
 
     return (
         <div className='registerPage'>
-
-
-
             <form method='POST' className="registerForm" onSubmit={onSubmit}>
-
                 <h3 className='registerTop'> Create an Account</h3>
 
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
@@ -48,7 +45,7 @@ export const Register = () => {
                     <span>{errorMessage.name}</span>
                 </div>
 
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
@@ -63,7 +60,7 @@ export const Register = () => {
                     <span>{errorMessage.lastname}</span>
                 </div>
 
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
@@ -77,7 +74,7 @@ export const Register = () => {
                     <span>{errorMessage.email}</span>
                 </div>
 
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
@@ -92,13 +89,12 @@ export const Register = () => {
                     <span>{errorMessage.phone}</span>
                 </div>
 
-
-
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
                         focused={focus.town.toString()}
+                        pattern={inputValidtion.town}
                         type="text"
                         name='town'
                         placeholder="Town"
@@ -108,13 +104,12 @@ export const Register = () => {
                     <span>{errorMessage.town}</span>
                 </div>
 
-
-
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
                         focused={focus.street.toString()}
+                        pattern={inputValidtion.street}
                         type="text"
                         name='street'
                         placeholder="Street"
@@ -124,7 +119,7 @@ export const Register = () => {
                     <span>{errorMessage.street}</span>
                 </div>
 
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
@@ -139,8 +134,7 @@ export const Register = () => {
                     <span>{errorMessage.password}</span>
                 </div>
 
-
-                <div className='registerDiv'>
+                <div className='formDiv'>
                     <input
                         required
                         onBlur={changeFocus}
@@ -154,13 +148,8 @@ export const Register = () => {
                     />
                     <span>{errorMessage.confirmPassword}</span>
                 </div>
-
                 <button className='btn-log-reg'>Create</button>
-
-
             </form>
-
-
         </div>
     )
 }

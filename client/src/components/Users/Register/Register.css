@@ -1,5 +1,5 @@
+.createPage,
 .registerPage{
-  
   display: flex;
   justify-content: center; 
   align-items: center; 
@@ -9,7 +9,7 @@
   margin-bottom: 30px;
 }
 
-
+.createForm,
 .registerForm{
     width: 1000px;
     height: 100%;
@@ -22,7 +22,7 @@
     border-radius: 2%;
 }
 
-
+.createTop,
 .registerTop{
   margin-top: 50px;
   margin-bottom: 70px;
@@ -32,7 +32,7 @@
     text-align: center;
 }
 
-.registerDiv{
+.formDiv{
   display: inline-block;
 
   margin-right: 25px;
@@ -40,29 +40,32 @@
   width: 44%
    
 } 
-.registerDiv>input {
- 
- 
+.formDiv>input, 
+.formDiv>select,
+.formDiv>textarea{
   height: 40px;
- 
   width: 100%;
-
   border-radius: 3px;
   padding: 0 10px;
   margin-top: 5px;
   margin-bottom: 20px;
   font-size: 14px;
   font-weight: 300;
-
-
   float: left;
   font-size: large;
-
   border: solid;
   border-color: white;
   border-radius: 15px;
+  color: #000;
 }
-.registerDiv>span{
+
+select>option:nth-child(1){
+  color: #999;
+}
+.formDiv>textarea{
+  height: 100px;
+}
+.formDiv>span{
   display: none;
   width:  100%;
   font-size: 16px;
@@ -84,13 +87,19 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.registerDiv>input:invalid[focused="true"]~span {
+.formDiv>input:invalid[focused="true"]~span ,
+.formDiv>select:invalid[focused="true"]~span {
   display: block;
 }
 
 
-.registerDiv>input:invalid[focused="true"] {
+.formDiv>input:invalid[focused="true"] ,
+.formDiv>select:invalid[focused="true"] {
   border: 1px solid red;
+}
+
+.description{
+  overflow: visible;
 }
 
 @media screen and (max-width: 1000px) {
@@ -98,14 +107,14 @@
     margin-top: 120px;
 
   }
-  .registerDiv>input {
+  .formDiv>input {
    align-items: center;
     width: 100%;
     margin-left: 0px;
   margin-right: 0px;
   
   }
-  .registerDiv{
+  .formDiv{
     display: inline;
     margin-right: 0px;
     margin-left: 0px;

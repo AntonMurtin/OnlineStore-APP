@@ -1,16 +1,16 @@
 import './LoginModal.css'
 
-import { Link, } from 'react-router-dom'
-import { errorMessageInput, initialFocusLogin, initialValuesLogin, inputValidtion } from '../../../config/constants'
-import { useForm } from '../../../hooks/useForm'
-import { useAuthContext } from '../../../context/AuthContext'
-
+import { Link, } from 'react-router-dom';
+import { useForm } from '../../../hooks/useForm';
+import { useAuthContext } from '../../../context/AuthContext';
+import { errorMessage, inputValidtion } from '../../../config/constants/constants';
+import {initialFocusLogin,initialValuesLogin,} from '../../../config/constants/login'
 export const LoginModal = ({
     onOpen,
     onClose,
 }) => {
     if (!onOpen) return null;
-    const {onLogin}=useAuthContext()
+    const { onLogin } = useAuthContext()
     const onLoginSubmit = (values) => {
         onClose();
         onLogin(values);
@@ -18,13 +18,13 @@ export const LoginModal = ({
 
     const initialValues = initialValuesLogin;
     const initialFocs = initialFocusLogin;
-    const errorMessage = errorMessageInput;
+ 
     const { values, focus, onSubmit, changeHandler, changeFocus } = useForm(
         initialValues,
         initialFocs,
         onLoginSubmit)
 
- 
+
     return (
         <div className='login__Modal'>
 
@@ -67,7 +67,7 @@ export const LoginModal = ({
                 <p onClick={onClose} className="message">
                     Not registered? <Link to="/register">Create here.</Link>
                 </p>
-                <button  className='btnLog'>Log In</button>
+                <button className='btnLog'>Log In</button>
 
             </form>
         </div>
