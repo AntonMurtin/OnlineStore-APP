@@ -10,7 +10,7 @@ const ProductContext = createContext();
 export const ProductProvider = ({
     children
 }) => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const productsService = productServiceFactory();
     const dispatch = useNotification();
 
@@ -23,7 +23,7 @@ export const ProductProvider = ({
     const [product, setProduct] = useState([]);
     // const [search, setSearch] = useState(null);
 
-    
+
 
 
     useEffect(() => {
@@ -83,13 +83,29 @@ export const ProductProvider = ({
         }
     };
 
-    const onCreateProduct= async(data)=>{
-        const type=data.type
+    const onCreateProduct = async (data) => {
+        const type = data.type
         try {
-            const newProduct=await productsService.create(type,data);
+            const newProduct = await productsService.create(type, data);
             setValue[type](state => [...state, newProduct]);
             navigate(`/shop/${type}`)
-            
+
+        } catch (error) {
+            dispatch({
+                type: 'ERROR',
+                message: error.message,
+            });
+        };
+    };
+
+    const oneditProduct = async (data) => {
+        const type = data.type;
+        const id = data._id;
+
+        try {
+            const result = await productsService.edit(type, id, data);
+            setValue[type](state => state.map(x => x._id === data._id ? result : x))
+            navigate(`/shop/${type}/${id}`)
         } catch (error) {
             dispatch({
                 type: 'ERROR',
@@ -97,6 +113,8 @@ export const ProductProvider = ({
             });
         }
     }
+
+
     const value = {
         waterpomps,
         systems,
@@ -108,6 +126,7 @@ export const ProductProvider = ({
         // search,
         onDeleteProduct,
         onCreateProduct,
+        oneditProduct,
     }
     return (
         <ProductContext.Provider value={value}>

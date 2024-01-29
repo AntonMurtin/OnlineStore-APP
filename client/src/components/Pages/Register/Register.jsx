@@ -1,4 +1,4 @@
-import './Register.css';
+import './Forms.css';
 import React, { useEffect } from 'react'
 
 import { useForm } from '../../../hooks/useForm'

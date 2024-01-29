@@ -1,30 +1,44 @@
 import '../Register/Forms.css';
-import React from 'react'
-import { useForm } from '../../../hooks/useForm'
-import { useProductContext } from '../../../context/ProductContext'
+
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom';
+
+import { useForm } from '../../../hooks/useForm';
+
+import { useProductContext } from '../../../context/ProductContext';
+import { productServiceFactory } from '../../../sevices/productService';
+
 import { initialValuesCreate, initialFocusCreate } from '../../../config/constants/create'
 import { inputValidtion, errorMessage } from '../../../config/constants/constants'
 
-export const Create = () => {
-    const { onCreateProduct } = useProductContext()
+const EditProduct = () => {
+const {productType,productId}=useParams();
+const {oneditProduct}=useProductContext();
 
+const productService=productServiceFactory();
     const {
         values,
         focus,
         changeHandler,
         onSubmit,
-        changeFocus
-    } = useForm(
+        changeFocus,
+        changeValues
+    }=useForm(
         initialValuesCreate,
         initialFocusCreate,
-        onCreateProduct)
+        oneditProduct
+    );
 
-    return (
-
-
-        <div className='createPage'>
+    useEffect(() => {
+        productService.getById(productType, productId)
+            .then(result => {
+                changeValues(result)
+            })
+    }, [productId])
+  return (
+    <div className='createPage'>
             <form method='POST' className="createForm" onSubmit={onSubmit}>
-                <h3 className='createTop'> Create an Product</h3>
+                <h3 className='createTop'> Edit Product</h3>
 
                 <div className='formDiv'>
 
@@ -56,7 +70,6 @@ export const Create = () => {
                         required
                         onBlur={changeFocus}
                         focused={focus.title.toString()}
-                        // pattern={inputValidtion.name}
                         type="text"
                         name='title'
                         placeholder="Title"
@@ -121,6 +134,7 @@ export const Create = () => {
                 <button className='btn-log-reg'>Create</button>
             </form>
         </div>
+  );
+};
 
-    )
-}
+export default EditProduct;

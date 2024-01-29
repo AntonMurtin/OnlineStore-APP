@@ -18,7 +18,7 @@ export const useForm=(initialValues, initialFocus, onSubmitHandler)=>{
         // setValues(initialValues);
     }
 
-    const changeValue=(newValue)=>{
+    const changeValues=(newValue)=>{
         setValues(newValue);
     }
 
@@ -26,7 +26,7 @@ export const useForm=(initialValues, initialFocus, onSubmitHandler)=>{
         values,
         focus,
         changeHandler,
-        changeValue,
+        changeValues,
         onSubmit,
         changeFocus
     }

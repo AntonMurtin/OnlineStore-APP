@@ -60,7 +60,7 @@ export const AuthContext = createContext();
         setAuth({});
         navigate('/');
         dispatch({
-            type:'SUCCSESSFUL',
+            type:'SUCCESS',
             message:'You succsessful leve'
         })
     };

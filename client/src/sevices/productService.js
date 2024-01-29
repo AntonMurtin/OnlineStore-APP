@@ -22,6 +22,13 @@ export const productServiceFactory = () => {
         return product;
     };
     
+
+    const edit = async (type, id, data) => {
+        const result = await request.put(`${url}/${type}/${id}/edit`, data)
+
+        return result;
+    };
+
     const del = (type, id) => request.delete(`${url}/${type}/${id}/delete`);
     
     
@@ -30,6 +37,7 @@ export const productServiceFactory = () => {
         getAll,
         getById,
         create,
+        edit,
         del,
     }
 }

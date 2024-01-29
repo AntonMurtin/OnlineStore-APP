@@ -6,7 +6,7 @@ import Header from './components/Header/Header'
 import Home from './components/Pages/Home/Home'
 
 import { Shop } from './components/Pages/Shop/Shop'
-import { Register } from './components/Users/Register/Register'
+
 
 import { AuthProvider } from './context/AuthContext'
 import { NotificationProvider } from './context/NotificationContext'
@@ -19,6 +19,8 @@ import Pipes from './components/Pages/Shop/Pipes/Pipes'
 import Tools from './components/Pages/Shop/Tools/Tools'
 import Details from './components/Pages/Details/Details'
 import { Create } from './components/Pages/CreateProduct/Create'
+import { Register } from './components/Pages/Register/Register'
+import EditProduct from './components/Pages/EditProduct/EditProduct'
 
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
               <Route path='/shop/pipes' element={<Pipes />} />
               <Route path='/shop/tools' element={<Tools />} />
               <Route path='/shop/:productType/:productId' element={<Details />} />
+              <Route path='/shop/:productType/:productId/edit' element={<EditProduct />} />
 
             </Routes>
 

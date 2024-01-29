@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 import { useState } from 'react';
-import { LoginModal } from '../Users/LoginModal/LoginModal';
+import { LoginModal } from '../Pages/LoginModal/LoginModal';
 import { useAuthContext } from '../../context/AuthContext';
 
 
