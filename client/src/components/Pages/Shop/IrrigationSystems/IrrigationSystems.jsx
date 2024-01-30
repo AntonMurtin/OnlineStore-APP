@@ -6,7 +6,7 @@ import { useProductContext } from '../../../../context/ProductContext';
 import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
 
 const IrrigationSystems = () => {
-    const { systems } = useProductContext();
+    const { irigationSystems} = useProductContext();
 
     const {pathname}=useLocation()
 
@@ -19,10 +19,10 @@ const IrrigationSystems = () => {
 
             <div className="productPage">
 
-                {systems && systems.map(x =>
+                {irigationSystems && irigationSystems.map(x =>
                     <ProductCard key={x._id} {...x} />
                 )}
-                {systems.length === 0 && (
+                {irigationSystems.length === 0 && (
                     <p className="noProduct">There are no Products yet!</p>
                 )}
             </div>

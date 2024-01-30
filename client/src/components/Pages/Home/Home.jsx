@@ -10,17 +10,18 @@ import homeData from '../../../config/data/homeData';
 import { useProductContext } from '../../../context/ProductContext';
 
 
-
 const Home = () => {
     const { 
         waterpomps, 
-        systems, 
+        irigationSystems, 
         parts,
-        machines,
+        powerMachines,
         pipes,
         tools,
         product, 
     } = useProductContext();
+
+   
 
     const {pathname}=useLocation()
 
@@ -44,7 +45,7 @@ const Home = () => {
 
             <div className='productContent'>
             <h2>Irrigation Systems</h2>
-            {<Slider data={systems}  />}
+            {<Slider data={irigationSystems}  />}
             <Link className='goTo' to="/shop/irigationSystems">See all</Link>
             </div>
 
@@ -56,7 +57,7 @@ const Home = () => {
 
             <div className='productContent'>
             <h2>Power Mashines</h2>
-            {<Slider data={machines}  />}
+            {<Slider data={powerMachines}  />}
             <Link className='goTo' to="/shop/powerMachines">See all</Link>
             </div>
 

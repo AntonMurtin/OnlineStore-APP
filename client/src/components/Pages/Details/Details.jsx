@@ -2,28 +2,29 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
 import { productServiceFactory } from '../../../sevices/productService'
-import { useAuthContext } from '../../../context/AuthContext'
 import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
 import { Slider } from '../../SwiperComponents/Slider/Slider'
 import { useProductContext } from '../../../context/ProductContext'
 import { productName } from '../../../config/constants/constants'
 
 const Details = () => {
+    const { pathname } = useLocation();
+    
     const { productType, productId } = useParams()
+   
+    const productService = productServiceFactory();
+
+    const { onDeleteProduct } = useProductContext()
+
+
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
     
-    const { isAuthenticated, isAdmin } = useAuthContext()
-   const{ onDeleteProduct}=useProductContext() 
-    const { pathname } = useLocation();
-    
-    
-    const productService = productServiceFactory();
-    const allProducts=products.filter(x=>x._id!==productId);
-    
-      useEffect(() => {
+    const allProducts = products.filter(x => x._id !== productId);
+
+    useEffect(() => {
         window.scrollTo(0, 0);
-      }, [pathname]);
+    }, [pathname]);
 
 
 
@@ -46,9 +47,7 @@ const Details = () => {
 
             <DetailsCard key={product._id}
                 product={product}
-                isAuthenticated={isAuthenticated}
-                isAdmin={isAdmin} 
-                onDelete={onDeleteProduct}/>
+                onDelete={onDeleteProduct} />
 
             <div className='productContent'>
                 <h2>{productName[productType]}</h2>

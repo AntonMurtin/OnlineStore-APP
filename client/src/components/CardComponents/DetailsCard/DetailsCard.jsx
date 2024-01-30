@@ -1,23 +1,66 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './DetailsCard.css';
 
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
+import { useAuthContext } from '../../../context/AuthContext';
+// import { useFavoriteContext } from '../../../context/FavoriteContext';
+import { useNotification } from '../../../context/NotificationContext';
+import { useProductContext } from '../../../context/ProductContext';
 
 
 export const DetailsCard = ({
     product,
-    isAuthenticated,
-    isAdmin,
     onDelete
 }) => {
+    
+    const { userId , isAuthenticated, isAdmin } = useAuthContext();
+    const { onAddFavorite, onRemoveFavorite } = useProductContext();
+    const dispatch =useNotification();
+    
     const [imgClass, setImgClass] = useState('slideImg');
     const [deleteProduct, setDeleteProduct] = useState(false);
+    const [isFavorit, setIsFavorit] = useState(false);
+    const [addclass, setAddClass] = useState('fa-regular')
+  
+  
+    useEffect(() => {
+      if (userId) {
+        if (product.favorite) {
+          
+          const result = product.favorite.filter(x => x._id === userId);
+          if (result.length > 0) {
+            setIsFavorit(true);
+            setAddClass('fa-solid')
+          }
+        }
+      }
+    }, [product])
+  
+    const onChange = () => {
+      if (userId) {
+        if (isFavorit) {
+          onRemoveFavorite(product.type, product._id, userId);
+          setIsFavorit(false);
+          setAddClass('fa-regular')
+        } else if (!isFavorit) {
+          onAddFavorite(product.type, product._id, userId);
+          setIsFavorit(true);
+          setAddClass('fa-solid')
+        }
+      }else{
+        dispatch({
+          type: 'ERROR',
+          message:'You must first login!',
+      });
+      }
+    }
 
 
     const onClose = () => {
         setDeleteProduct(false)
     }
+
 
 
     return (
@@ -51,8 +94,8 @@ export const DetailsCard = ({
                                 <i className="fas fa-shopping-cart"></i>
                             </Link>
                             <Link className="detailsBtn detailsFavBtn"
-                                onClick={() => { onWish(product.type, product._id, userId) }} >
-                                <i className="fa-solid fa-heart "></i>
+                                onClick={onChange} >
+                                <i className={`fa-heart fa-2x ${addclass} `}></i>
                             </Link >
                         </>
                     )}

@@ -2,7 +2,7 @@ const jwt = require('../lib/jwt');
 const { Secret } = require('../config/constants');
 
 exports.generateToken = async (user) => {
- console.log(user);
+
     const payload = {
         _id: user._id,
         username: `${user.name} ${user.lastname}`,

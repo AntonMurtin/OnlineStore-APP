@@ -119,7 +119,7 @@ router.get('/:userId/favorite', async (req, res) => {
     const userId = req.params.userId;
 
     try {
-        const card = await machinesManager.searchWish(userId);
+        const card = await machinesManager.searchFavorite(userId);
 
         res.json(card);
     } catch (error) {
@@ -129,13 +129,13 @@ router.get('/:userId/favorite', async (req, res) => {
     }
 });
 
-router.put('/:cardId/removeWish', async (req, res) => {
+router.put('/:cardId/removeFavorite', async (req, res) => {
     const cardId = req.params.cardId;
     const userId = req.body.userId;
     try {
         const card = await machinesManager.getById(cardId);
 
-        card.wish = card.wish.filter(x => x._id != userId);
+        card.favorite = card.favorite.filter(x => x._id != userId);
         card.save();
         res.json(card);
     } catch (error) {

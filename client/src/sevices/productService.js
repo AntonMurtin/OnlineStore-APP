@@ -31,7 +31,16 @@ export const productServiceFactory = () => {
 
     const del = (type, id) => request.delete(`${url}/${type}/${id}/delete`);
     
+    const addFavorite = (type, id, userId) => request.put(`${url}/${type}/${id}/favorite`, userId)
     
+    const getFavorite= async (type, userId) => {
+        const result = await request.get(`${url}/${type}/${userId}/favorite`);
+        const products = Object.values(result);
+        
+        return products;
+    };
+
+    const removeFavorite = (type, id, userId) => request.put(`${url}/${type}/${id}/removeFavorite`, userId)
     
     return {
         getAll,
@@ -39,5 +48,8 @@ export const productServiceFactory = () => {
         create,
         edit,
         del,
+        addFavorite,
+        getFavorite,
+        removeFavorite,
     }
 }

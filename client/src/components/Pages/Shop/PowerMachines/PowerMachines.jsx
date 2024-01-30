@@ -6,7 +6,7 @@ import { useProductContext } from '../../../../context/ProductContext';
 import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
 
 const PowerMachines = () => {
-     const { machines } = useProductContext();
+     const { powerMachines } = useProductContext();
 
      const {pathname}=useLocation()
 
@@ -21,10 +21,10 @@ const PowerMachines = () => {
 
             <div className="productPage">
 
-                {machines && machines.map(x =>
+                {powerMachines && powerMachines.map(x =>
                     <ProductCard key={x._id} {...x} />
                 )}
-                {machines.length === 0 && (
+                {powerMachines.length === 0 && (
                     <p className="noProduct">There are no Products yet!</p>
                 )}
             </div>

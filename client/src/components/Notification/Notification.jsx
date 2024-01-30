@@ -51,10 +51,11 @@ export const Notification = (props) => {
         onMouseLeave={starTtimer}
         className={
             `notificationItem 
-            ${props.type === 'SUCCESS'
-            ? 'success'
-            : 'error'
-        } ${exit ? 'exit' : ''}`
+            ${props.type === 'SUCCESS'? 'success':'' } 
+            ${props.type === 'REMOVE'? 'remove':'' } 
+            ${props.type === 'ERROR'? 'error':'' } 
+
+            ${exit ? 'exit' : ''}`
     }>
             <p className="notificationBtn"
                 onClick={() => setExit(true)}>x</p>

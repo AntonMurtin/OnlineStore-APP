@@ -32,7 +32,7 @@
   color: white;
   border-radius: 50%;
 }
-.productFavorit{
+.productFavorite{
   position: absolute;
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@
   right:  5px;
 color: #cac8c8;
   cursor: pointer;
-  z-index: 1;
+ 
 }
 
 
@@ -104,4 +104,11 @@ color: #cac8c8;
   background-color: rgba(7, 7, 7, 0.95);
   transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 30px 25px -20px rgba(0, 0, 0, 0.15);
+}
+.productFavorite .fa-regular{
+  color: black;
+  
+}
+.productFavorite .fa-solid{
+  color: red;
 }

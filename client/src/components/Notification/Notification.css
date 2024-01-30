@@ -77,6 +77,10 @@
    
     background-color: red;
 }
+.notificationItem.remove .bar {
+   
+    background-color: rgb(173, 216, 245);
+}
 
 .notificationItem.exit{
     animation: SlideRight 0.4s;

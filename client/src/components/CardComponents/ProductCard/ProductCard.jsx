@@ -1,25 +1,64 @@
 import './ProductCard.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
+import { useAuthContext } from '../../../context/AuthContext'
+// import { useFavoriteContext } from '../../../context/FavoriteContext'
+import { useNotification } from '../../../context/NotificationContext'
+import { useProductContext } from '../../../context/ProductContext'
 
 
 export const ProductCard = (data) => {
-const [isFavorit,setIsFavorit]=useState("fa-solid")
+  const { userId } = useAuthContext();
+  const { onAddFavorite, onRemoveFavorite } = useProductContext();
+  const dispatch =useNotification();
 
-const onFavorit=()=>{
-  if(isFavorit==='fa-regular'){
-    setIsFavorit('fa-solid')
-  }else{
-    setIsFavorit('fa-regular')
+  const [isFavorit, setIsFavorit] = useState(false);
+  const [addclass, setAddClass] = useState('fa-regular')
+
+
+  useEffect(() => {
+    if (userId) {
+      if (data.favorite.length > 0) {
+        
+        const result = data.favorite.filter(x => x._id === userId);
+        if (result.length > 0) {
+          setIsFavorit(true);
+          setAddClass('fa-solid')
+        }
+      }
+    }
+  }, [userId])
+
+  const onChange = () => {
+    if (userId) {
+      if (isFavorit) {
+        onRemoveFavorite(data.type, data._id, userId);
+        setIsFavorit(false);
+        setAddClass('fa-regular')
+      } else if (!isFavorit) {
+        onAddFavorite(data.type, data._id, userId);
+        setIsFavorit(true);
+        setAddClass('fa-solid')
+      }
+    }else{
+      dispatch({
+        type: 'ERROR',
+        message:'You must first login!',
+    });
+    }
   }
-}
+
 
   return (
     <div className="productCard">
       <span className="productPrice">{data.price} $</span>
-      <span onAuxClick={onFavorit} className="productFavorit"><i className={`fa-heart fa-2x
-      ${isFavorit } `}></i></span>
+      <span
+        onClick={onChange}
+        className="productFavorite">
+        <i
+          className={`fa-heart fa-2x
+      ${addclass} `}></i></span>
 
       <div className="cardImages">
 

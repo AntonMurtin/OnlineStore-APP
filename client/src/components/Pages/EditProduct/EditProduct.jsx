@@ -13,7 +13,7 @@ import { inputValidtion, errorMessage } from '../../../config/constants/constant
 
 const EditProduct = () => {
 const {productType,productId}=useParams();
-const {oneditProduct}=useProductContext();
+const {onEditProduct}=useProductContext();
 
 const productService=productServiceFactory();
     const {
@@ -26,7 +26,7 @@ const productService=productServiceFactory();
     }=useForm(
         initialValuesCreate,
         initialFocusCreate,
-        oneditProduct
+        onEditProduct
     );
 
     useEffect(() => {

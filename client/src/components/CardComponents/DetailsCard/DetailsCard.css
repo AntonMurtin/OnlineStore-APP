@@ -116,11 +116,17 @@
 }
 
 .detailsFavBtn{
-    left:  0;
-    background-color: #cac8c8;
-    /* color: red; */
-    
+    position: absolute;
+    left: 0;
+    bottom: -50px;
+    color: black;  
+   
 }
+
+.detailsFavBtn .fa-solid{
+    color: red;
+}
+
 .detailsEdit{
     left:  0;
     background-color: #008CBA;
@@ -231,6 +237,15 @@
         padding: 0.3em 1em;
         bottom: -20px;
     }
+
+    .detailsFavBtn{
+        position: absolute;
+    left: -10px;
+    top:0px
+       
+    }
+    
+   
    
 }
 
