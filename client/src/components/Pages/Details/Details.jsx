@@ -4,7 +4,6 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import { productServiceFactory } from '../../../sevices/productService'
 import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
 import { Slider } from '../../SwiperComponents/Slider/Slider'
-import { useProductContext } from '../../../context/ProductContext'
 import { productName } from '../../../config/constants/constants'
 
 const Details = () => {
@@ -14,8 +13,7 @@ const Details = () => {
    
     const productService = productServiceFactory();
 
-    const { onDeleteProduct } = useProductContext()
-
+   
 
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
@@ -46,8 +44,8 @@ const Details = () => {
         <section className='page'>
 
             <DetailsCard key={product._id}
-                product={product}
-                onDelete={onDeleteProduct} />
+               {...product}
+                 />
 
             <div className='productContent'>
                 <h2>{productName[productType]}</h2>

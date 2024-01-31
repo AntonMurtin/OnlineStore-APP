@@ -14,7 +14,7 @@
     width: 1000px;
     height: 100%;
     max-height: 1250px;
-    background-color: rgb(204, 200, 200);
+    background-color:rgba(255,255,255,0.13);
     border-radius: 5px;
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 20px rgba(8,7,16,0.6);

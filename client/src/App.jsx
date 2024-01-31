@@ -20,6 +20,8 @@ import Details from './components/Pages/Details/Details'
 import { Create } from './components/Pages/CreateProduct/Create'
 import { Register } from './components/Pages/Register/Register'
 import EditProduct from './components/Pages/EditProduct/EditProduct'
+import Favorite from './components/Pages/FavoritePage/Favorite'
+import BuyProducts from './components/Pages/BuyProducts/BuyProducts'
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/create' element={<Create />} />
+                <Route path='/favorite' element={<Favorite />} />
+                <Route path='/buy' element={<BuyProducts />} />
                 <Route path='/shop' element={<Shop />} />
                 <Route path='/shop/waterpomps' element={<Waterpomp />} />
                 <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />

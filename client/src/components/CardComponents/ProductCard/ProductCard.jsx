@@ -10,17 +10,18 @@ import { useProductContext } from '../../../context/ProductContext'
 
 export const ProductCard = (data) => {
   const { userId } = useAuthContext();
-  const { onAddFavorite, onRemoveFavorite } = useProductContext();
-  const dispatch =useNotification();
+  const { onBuyProduct, onAddFavorite, onRemoveFavorite } = useProductContext();
+  const dispatch = useNotification();
 
   const [isFavorit, setIsFavorit] = useState(false);
-  const [addclass, setAddClass] = useState('fa-regular')
+  const [isBuy, setIsBuy] = useState('productBuy');
+  const [addclass, setAddClass] = useState('fa-regular');
+
 
 
   useEffect(() => {
     if (userId) {
       if (data.favorite.length > 0) {
-        
         const result = data.favorite.filter(x => x._id === userId);
         if (result.length > 0) {
           setIsFavorit(true);
@@ -28,7 +29,7 @@ export const ProductCard = (data) => {
         }
       }
     }
-  }, [userId])
+  }, [userId]);
 
   const onChange = () => {
     if (userId) {
@@ -41,14 +42,25 @@ export const ProductCard = (data) => {
         setIsFavorit(true);
         setAddClass('fa-solid')
       }
-    }else{
+    } else {
       dispatch({
         type: 'ERROR',
-        message:'You must first login!',
-    });
+        message: 'You must first login!',
+      });
     }
   }
+  const onBuy = () => {
+    if(userId){
 
+      setIsBuy('disabledBuyBtn')
+      onBuyProduct(data.type, data._id, userId);
+    }else {
+      dispatch({
+        type: 'ERROR',
+        message: 'You must first login!',
+      });
+    }
+  }
 
   return (
     <div className="productCard">
@@ -68,8 +80,9 @@ export const ProductCard = (data) => {
       <div className="size">
         <h1 className="productTitle">{data.title}</h1>
       </div>
-      <Link className='productBtn productBuy '>
-        <i className="fas fa-shopping-cart"></i>
+      <Link onClick={onBuy}
+        className={`productBtn ${isBuy}`} >
+        <i className={`fas fa-shopping-cart `}></i>
       </Link>
       <Link to={`/shop/${data.type}/${data._id}`}
         className='productBtn productDetails '>

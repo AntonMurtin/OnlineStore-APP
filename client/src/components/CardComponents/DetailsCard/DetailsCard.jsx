@@ -9,54 +9,70 @@ import { useNotification } from '../../../context/NotificationContext';
 import { useProductContext } from '../../../context/ProductContext';
 
 
-export const DetailsCard = ({
-    product,
-    onDelete
-}) => {
-    
-    const { userId , isAuthenticated, isAdmin } = useAuthContext();
-    const { onAddFavorite, onRemoveFavorite } = useProductContext();
-    const dispatch =useNotification();
-    
+export const DetailsCard = (product) => {
+  
+    const dispatch = useNotification();
+
+    const { userId, isAdmin } = useAuthContext();
+    const {
+        onDeleteProduct,
+        onBuyProduct,
+        onAddFavorite,
+        onRemoveFavorite
+    } = useProductContext();
+
     const [imgClass, setImgClass] = useState('slideImg');
     const [deleteProduct, setDeleteProduct] = useState(false);
+    const [isBuy, setIsBuy] = useState(false);
     const [isFavorit, setIsFavorit] = useState(false);
     const [addclass, setAddClass] = useState('fa-regular')
-  
-  
+
+
     useEffect(() => {
-      if (userId) {
-        if (product.favorite) {
-          
-          const result = product.favorite.filter(x => x._id === userId);
-          if (result.length > 0) {
-            setIsFavorit(true);
-            setAddClass('fa-solid')
-          }
+        if (userId) {
+            if (product.favorite) {
+
+                const result = product.favorite.filter(x => x._id === userId);
+                if (result.length > 0) {
+                    setIsFavorit(true);
+                    setAddClass('fa-solid')
+                }
+            }
         }
-      }
-    }, [product])
-  
+    }, [userId])
+
     const onChange = () => {
-      if (userId) {
-        if (isFavorit) {
-          onRemoveFavorite(product.type, product._id, userId);
-          setIsFavorit(false);
-          setAddClass('fa-regular')
-        } else if (!isFavorit) {
-          onAddFavorite(product.type, product._id, userId);
-          setIsFavorit(true);
-          setAddClass('fa-solid')
+        if (userId) {
+            if (isFavorit) {
+                console.log(isFavorit);
+                onRemoveFavorite(product.type, product._id, userId);
+                setIsFavorit(false);
+                setAddClass('fa-regular')
+            } else if (!isFavorit) {
+                console.log(isFavorit);
+                onAddFavorite(product.type, product._id, userId);
+                setIsFavorit(true);
+                setAddClass('fa-solid')
+            }
+        } else {
+            dispatch({
+                type: 'ERROR',
+                message: 'You must first login!',
+            });
         }
-      }else{
-        dispatch({
-          type: 'ERROR',
-          message:'You must first login!',
-      });
-      }
     }
 
-
+    const onBuy = () => {
+        if (userId) {
+            setIsBuy(true)
+            onBuyProduct(product.type, product._id, userId);
+        } else {
+            dispatch({
+                type: 'ERROR',
+                message: 'You must first login!',
+            });
+        }
+    }
     const onClose = () => {
         setDeleteProduct(false)
     }
@@ -86,26 +102,26 @@ export const DetailsCard = ({
                 <p className='detailsP' >{product.description}</p>
 
                 <div className="detailsBtnDiv">
-
-                    {isAuthenticated && !isAdmin && (
+                {!isAdmin && (
                         <>
-                            <Link className="detailsBtn detailsBuybtn "
-                                onClick={() => { onBuy(product.type, product._id, userId) }}>
-                                <i className="fas fa-shopping-cart"></i>
-                            </Link>
-                            <Link className="detailsBtn detailsFavBtn"
-                                onClick={onChange} >
-                                <i className={`fa-heart fa-2x ${addclass} `}></i>
-                            </Link >
-                        </>
+                    <Link className={`detailsBtn detailsBuybtn ${isBuy ? 'disabledBtn' : ''}`}
+                        onClick={onBuy}>
+                        <i className="fas fa-shopping-cart"></i>
+                    </Link>
+                    <Link className="detailsBtn detailsFavBtn"
+                        onClick={onChange} >
+                        <i className={`fa-heart fa-2x ${addclass} `}></i>
+                    </Link >
+                    </>
                     )}
+
                     {isAdmin && (
                         <>
-                            <Link to={`/shop/${product.type}/${product._id}/edit`} 
-                            className={`detailsBtn detailsEdit ${deleteProduct ? 'disabledBtn' : ''}`}>
+                            <Link to={`/shop/${product.type}/${product._id}/edit`}
+                                className={`detailsBtn detailsEdit ${deleteProduct ? 'disabledBtn' : ''}`}>
                                 <i className="fa-regular fa-pen-to-square"></i>
                             </Link>
-                            <Link 
+                            <Link
                                 onClick={() => setDeleteProduct(true)}
                                 className={`detailsBtn  detailsDelete ${deleteProduct ? 'disabledBtn' : ''}`} >
                                 <i className="fa-regular fa-trash-can"></i></Link>
@@ -114,20 +130,20 @@ export const DetailsCard = ({
                 </div>
 
             </div>
-           
-             <div className={`removeWrapper ${deleteProduct? '': 'removeNone'}`}>
-            <div className='removeDiv'>
-                <h3>You want to delete it!</h3>
-                <div >
-                    <span onClick={()=>onDelete(product.type,product._id)}
-                    className="removeBtn"><i className="fa-solid fa-check fa-lg "></i></span>
-                    <span 
-                    onClick={onClose} 
-                    className="closeRemove"><i className="fa-solid fa-xmark fa-lg "></i></span>
-                </div>
 
+            <div className={`removeWrapper ${deleteProduct ? '' : 'removeNone'}`}>
+                <div className='removeDiv'>
+                    <h3>You want to delete it!</h3>
+                    <div >
+                        <span onClick={() => onDeleteProduct(product.type, product._id)}
+                            className="removeBtn"><i className="fa-solid fa-check fa-lg "></i></span>
+                        <span
+                            onClick={onClose}
+                            className="closeRemove"><i className="fa-solid fa-xmark fa-lg "></i></span>
+                    </div>
+
+                </div>
             </div>
-        </div>
         </div>
     );
 };

@@ -22,7 +22,6 @@ export const productServiceFactory = () => {
         return product;
     };
     
-
     const edit = async (type, id, data) => {
         const result = await request.put(`${url}/${type}/${id}/edit`, data)
 
@@ -31,7 +30,21 @@ export const productServiceFactory = () => {
 
     const del = (type, id) => request.delete(`${url}/${type}/${id}/delete`);
     
+    
+
+    
+    const search = async (type, data) => {
+        const result = await request.put(`${url}/${type}/search`, data);
+        const products = Object.values(result);
+
+        return products;
+    }
+
+    
+
     const addFavorite = (type, id, userId) => request.put(`${url}/${type}/${id}/favorite`, userId)
+   
+    const removeFavorite = (type, id, userId) => request.put(`${url}/${type}/${id}/removeFavorite`, userId)
     
     const getFavorite= async (type, userId) => {
         const result = await request.get(`${url}/${type}/${userId}/favorite`);
@@ -40,16 +53,32 @@ export const productServiceFactory = () => {
         return products;
     };
 
-    const removeFavorite = (type, id, userId) => request.put(`${url}/${type}/${id}/removeFavorite`, userId)
     
+
+    const addBuy = (type, id, data) => request.put(`${url}/${type}/${id}/buyProduct`, data)
+   
+    const removeBuy = (type, id, userId) => request.put(`${url}/${type}/${id}/removeBuy`, userId);
+
+    const getBuy=async (type, userId) => {
+        const result = await request.get(`${url}/${type}/${userId}/buyProduct`);
+        const products = Object.values(result);
+
+        return products;
+    };
+
+
     return {
         getAll,
         getById,
         create,
         edit,
         del,
+        search,
         addFavorite,
         getFavorite,
         removeFavorite,
+        addBuy,
+        getBuy,
+        removeBuy
     }
 }

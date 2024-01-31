@@ -7,9 +7,7 @@ import { useAuthContext } from "./AuthContext";
 import { productServiceFactory } from "../sevices/productService";
 import { productType } from "../config/constants/constants";
 
-
 const ProductContext = createContext();
-
 
 export const ProductProvider = ({
     children
@@ -17,7 +15,7 @@ export const ProductProvider = ({
     const navigate = useNavigate()
     const productsService = productServiceFactory();
     const dispatch = useNotification();
-    const {userId} =useAuthContext();
+    const { userId } = useAuthContext();
 
     const [waterpomps, setWaterpomps] = useState([]);
     const [irigationSystems, setIrigationSystems] = useState([]);
@@ -28,8 +26,17 @@ export const ProductProvider = ({
     const [product, setProduct] = useState([]);
     // const [search, setSearch] = useState(null);
     const [favoriteProducts, setFavoriteProducts] = useState([]);
-   
+    const [buysProducts, setBuysProducts] = useState([]);
 
+
+    const setValue = {
+        waterpomps: setWaterpomps,
+        irigationSystems: setIrigationSystems,
+        parts: setParts,
+        powerMachines: setPowerMachines,
+        pipes: setPipes,
+        tools: setTools
+    }
 
 
 
@@ -44,26 +51,26 @@ export const ProductProvider = ({
             productsService.getAll(productType.tools),
 
         ]).then(([
-            waterpompsData,
-            irigationSystemsData,
-            partsData,
-            powerMachinesData,
-            pipesData,
-            toolsData,
+            waterpompsProducts,
+            irigationSystemsProducts,
+            partsProducts,
+            powerMachinesProducts,
+            pipesProducts,
+            toolsProducts,
         ]) => {
-            setWaterpomps(waterpompsData);
-            setIrigationSystems(irigationSystemsData);
-            setParts(partsData);
-            setPowerMachines(powerMachinesData);
-            setPipes(pipesData);
-            setTools(toolsData);
+            setWaterpomps(waterpompsProducts);
+            setIrigationSystems(irigationSystemsProducts);
+            setParts(partsProducts);
+            setPowerMachines(powerMachinesProducts);
+            setPipes(pipesProducts);
+            setTools(toolsProducts);
             setProduct([
-                waterpompsData[0],
-                irigationSystemsData[0],
-                partsData[0],
-                powerMachinesData[0],
-                pipesData[0],
-                toolsData[0],
+                waterpompsProducts[0],
+                irigationSystemsProducts[0],
+                partsProducts[0],
+                powerMachinesProducts[0],
+                pipesProducts[0],
+                toolsProducts[0],
             ])
         })
     }, []);
@@ -78,45 +85,63 @@ export const ProductProvider = ({
                 productsService.getFavorite(productType.pipes, userId),
                 productsService.getFavorite(productType.tools, userId),
             ]).then(([
-                waterpompsData,
-                irigationSystemsData,
-                partsData,
-                powerMachinesData,
-                pipesData,
-                toolsData,
+                waterpompsFavorite,
+                irigationSystemsFavorite,
+                partsFavorite,
+                powerMachinesFavorite,
+                pipesFavorite,
+                toolsFavorite,
             ]) => {
                 setFavoriteProducts([
-                    ...waterpompsData,
-                    ...irigationSystemsData,
-                    ...partsData,
-                    ...powerMachinesData,
-                    ...pipesData,
-                    ...toolsData,
+                    ...waterpompsFavorite,
+                    ...irigationSystemsFavorite,
+                    ...partsFavorite,
+                    ...powerMachinesFavorite,
+                    ...pipesFavorite,
+                    ...toolsFavorite,
                 ])
             })
         }
-    }, [userId])
+    }, [userId]);
 
-    const setValue = {
-        waterpomps: setWaterpomps,
-        irigationSystems: setIrigationSystems,
-        parts: setParts,
-        powerMachines: setPowerMachines,
-        pipes: setPipes,
-        tools: setTools
-    }
+    useEffect(() => {
+        if (userId) {
+            Promise.all([
+                productsService.getBuy(productType.waterpomps, userId),
+                productsService.getBuy(productType.irigationSystems, userId),
+                productsService.getBuy(productType.parts, userId),
+                productsService.getBuy(productType.powerMachines, userId),
+                productsService.getBuy(productType.pipes, userId),
+                productsService.getBuy(productType.tools, userId),
+            ]).then(([
+                waterpompsgetBuy,
+                irigationSystemsgetBuy,
+                partsgetBuy,
+                powerMachinesgetBuy,
+                pipesgetBuy,
+                toolsgetBuy,
+            ]) => {
+                setBuysProducts([
+                    ...waterpompsgetBuy,
+                    ...irigationSystemsgetBuy,
+                    ...partsgetBuy,
+                    ...powerMachinesgetBuy,
+                    ...pipesgetBuy,
+                    ...toolsgetBuy,
+                ])
+            })
+        }
+    }, [userId]);
 
     const onDeleteProduct = async (type, id) => {
-
         try {
             await productsService.del(type, id);
             setValue[type](state => state.filter(x => x._id !== id))
             navigate(`/shop/${type}`)
-
         } catch (error) {
             dispatch({
                 type: 'ERROR',
-                message: error.message,
+                message: error,
             });
         }
     };
@@ -127,43 +152,7 @@ export const ProductProvider = ({
             const newProduct = await productsService.create(type, data);
             setValue[type](state => [...state, newProduct]);
             navigate(`/shop/${type}`)
-
         } catch (error) {
-            dispatch({
-                type: 'ERROR',
-                message: error.message,
-            });
-        };
-    };
-
-    const onEditProduct = async (data) => {
-        const type = data.type;
-        const id = data._id;
-
-        try {
-            const result = await productsService.edit(type, id, data);
-            setValue[type](state => state.map(x => x._id === data._id ? result : x))
-            navigate(`/shop/${type}/${id}`)
-        } catch (error) {
-            dispatch({
-                type: 'ERROR',
-                message: error.message,
-            });
-        }
-    };
-
-    const onAddFavorite = async (type, id, userId) => {
-        try {
-            const result = await productsService.addFavorite(type, id, { userId });
-            setFavoriteProducts(state => [...state, result]);
-            setValue[type](state => state.map(x => x._id === id ? result : x));
-            
-            dispatch({
-                type: 'SUCCESS',
-                message: `You successfully add ${result.title} to Favorites.`,
-            });
-        } catch (error) {
-            console.log(error);
             dispatch({
                 type: 'ERROR',
                 message: error,
@@ -171,7 +160,40 @@ export const ProductProvider = ({
         };
     };
 
-    const onRemoveFavorite = async (type,id, userId) => {
+    const onEditProduct = async (data) => {
+        const type = data.type;
+        const id = data._id;
+        try {
+            const result = await productsService.edit(type, id, data);
+            setValue[type](state => state.map(x => x._id === data._id ? result : x))
+            navigate(`/shop/${type}/${id}`)
+        } catch (error) {
+            dispatch({
+                type: 'ERROR',
+                message: error,
+            });
+        }
+    };
+
+
+    const onAddFavorite = async (type, id, userId) => {
+        try {
+            const result = await productsService.addFavorite(type, id, { userId });
+            setFavoriteProducts(state => [...state, result]);
+            setValue[type](state => state.map(x => x._id === id ? result : x));
+            dispatch({
+                type: 'SUCCESS',
+                message: `You successfully add ${result.title} to Favorites.`,
+            });
+        } catch (error) {
+            dispatch({
+                type: 'ERROR',
+                message: error,
+            });
+        };
+    };
+
+    const onRemoveFavorite = async (type, id, userId) => {
         try {
             const result = await productsService.removeFavorite(type, id, { userId });
             setFavoriteProducts(state => state.filter(x => x._id !== id));
@@ -181,7 +203,6 @@ export const ProductProvider = ({
                 message: `You successfully remove ${result.title}.`,
             });
         } catch (error) {
-            console.log(error);
             dispatch({
                 type: 'ERROR',
                 message: error,
@@ -189,6 +210,40 @@ export const ProductProvider = ({
         };
     };
 
+
+    const onBuyProduct = async (type, id, userId) => {
+        try {
+            const result = await productsService.addBuy(type, id, { userId });
+            setBuysProducts(state => [...state, result]);
+            setValue[type](state => state.map(x => x._id === id ? result : x));
+            dispatch({
+                type: 'SUCCESS',
+                message: `You successfully add ${result.title} to Yours Buys.`,
+            });
+        } catch (error) {
+            dispatch({
+                type: 'ERROR',
+                message: error,
+            });
+        };
+    };
+
+    const onRemoveBuy = async (type, id, userId) => {
+        try {
+            const result = await productsService.removeBuy(type, id, { userId });
+            setBuysProducts(state => state.filter(x => x._id !== id));
+            setValue[type](state => state.map(x => x._id === id ? result : x));
+            dispatch({
+                type: 'REMOVE',
+                message: `You successfully remove ${result.title}.`,
+            });
+        } catch (error) {
+            dispatch({
+                type: 'ERROR',
+                message: error,
+            });
+        };
+    };
 
     const value = {
         waterpomps,
@@ -200,21 +255,24 @@ export const ProductProvider = ({
         product,
         // search,
         favoriteProducts,
+        buysProducts,
         onDeleteProduct,
         onCreateProduct,
         onEditProduct,
         onAddFavorite,
-        onRemoveFavorite
+        onRemoveFavorite,
+        onBuyProduct,
+        onRemoveBuy
     }
     return (
         <ProductContext.Provider value={value}>
             {children}
         </ProductContext.Provider>
-    )
-}
+    );
+};
 
 export const useProductContext = () => {
     const context = useContext(ProductContext);
 
     return context;
-}
+};

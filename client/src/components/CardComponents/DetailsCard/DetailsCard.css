@@ -6,6 +6,7 @@
     margin: auto;
     height: 60vh;
     margin-top: 5%;
+    margin-bottom: 5%;
     box-shadow: 0 15px 30px 1px grey;
     background: white;
     text-align: center;
@@ -181,7 +182,7 @@
 @media (max-width:1250px) {
     .details {
         max-width: 60%;
-        margin: auto;
+      
         height: auto;
     }
     
@@ -199,7 +200,7 @@
 @media (max-width:900px) {
     .details {
         max-width: 100%;
-        margin: auto;
+     
         height: auto;
     }
     

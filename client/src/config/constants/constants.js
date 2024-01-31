@@ -44,5 +44,5 @@ export const inputValidtion = {
     town: '^([0-9]*[a-zA-Z]){3,}[0-9]*$',
     street: '^([0-9]*[a-zA-Z]){3,}[0-9]*$',
     description: '^([0-9]*[a-zA-Z]){3,}[0-9]*$',
-    image: 'https?:\/\/.*\.(?:png|jpg)'
+    image: 'https?:\/\/.*\.(?:png|jpg|jpeg)'
 }
