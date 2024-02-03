@@ -1,6 +1,6 @@
 
 import { createContext, useContext, useReducer } from "react";
-import {v4} from 'uuid'
+import {v4} from 'uuid';
 import { notificationReduser } from "../lib/notificationReduser";
 import { Notification } from "../components/Notification/Notification";
 

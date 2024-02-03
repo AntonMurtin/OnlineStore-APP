@@ -1,4 +1,4 @@
-.shop_page {
+.shopPage {
     min-height: 715px;
     margin-top: 95px;
     margin-top: 5%;
@@ -9,7 +9,7 @@
 }
 
 
-.shop_cards {
+.shopDiv {
     display:flex;
     width: auto;
   padding-right: 15px;
@@ -21,39 +21,39 @@
   text-align: center;
 }
 
-.card--1 .card__img,
-.card--1 .card__img--hover {
+.shopCard--1 .shopCardImg,
+.shopCard--1 .shopCardImg--hover {
    
     background-image: url('../../shop_img/grudfosPomp.jpg');
 }
 
-.card--2 .card__img,
-.card--2 .card__img--hover {
+.shopCard--2 .shopCardImg,
+.shopCard--2 .shopCardImg--hover {
     background-image: url('../../shop_img/RAZ.jpeg');
 }
 
-.card--3 .card__img,
-.card--3 .card__img--hover {
+.shopCard--3 .shopCardImg,
+.shopCard--3 .shopCardImg--hover {
     background-image: url('../../shop_img/220210082925warer.jpg');
 }
 
-.card--4 .card__img,
-.card--4 .card__img--hover {
+.shopCard--4 .shopCardImg,
+.shopCard--4 .shopCardImg--hover {
     background-image: url('../../shop_img/mashins.jpg');
 }
 
-.card--5 .card__img,
-.card--5 .card__img--hover {
+.shopCard--5 .shopCardImg,
+.shopCard--5 .shopCardImg--hover {
     background-image: url('../../shop_img/trubi.jpg');
 }
 
-.card--6 .card__img,
-.card--6 .card__img--hover {
+.shopCard--6 .shopCardImg,
+.shopCard--6 .shopCardImg--hover {
     background-image: url('../../shop_img/tools.jpg');
 }
 
 
-.card__img {
+.shopCardImg {
    
     visibility:hidden; 
     background-color: transparent;
@@ -68,7 +68,7 @@
    
   }
 
-  .card__img--hover {
+  .shopCardImg--hover {
     object-fit: cover;
     transition: 0.2s all ease-out;
       background-size: cover;
@@ -83,7 +83,7 @@
   top: 0;
     
   }
-  .card {
+  .shopCard {
     
     margin-bottom: 1%;
     margin-left: 7%;
@@ -98,29 +98,29 @@
    
   }
   @media screen and (max-width:1300px) {
-    .card {
+    .shopCard {
       margin-bottom: 1%;
       margin-left: 3%;
       margin-right: 3%;
       width: 25%;
     }
-    .card__img {
+    .shopCardImg {
         height: 120px;
     }
-    .card__img--hover {
+    .shopCardImg--hover {
         height: 130px;
     }
 }
 
 
   
-   .card:hover {
+   .shopCard:hover {
     
     box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
       transform: scale(1.10, 1.10);
   }
    
-  .card__info {
+  .shopCardInfo {
   z-index: 2555;
     background-color: #fff;
     border-bottom-left-radius: 12px;
@@ -129,7 +129,7 @@
   }
   
   
-   .card__title {
+   .shopCardTitle {
       
   
       font-family: 'Roboto Slab', serif;
@@ -140,17 +140,17 @@
   
   
   
-  .card:hover .card__img--hover {
+  .shopCard:hover .shopCardImg--hover {
       height: 100%;
       opacity: 0.3;
       background-color: transparent;
   } */
   
-   .card:hover .card__info {
+   .shopCard:hover .shopCardInfo {
       background-color: transparent;
       position: relative;
   }
   
-  .card:hover .card__info-hover {
+  .shopCard:hover .shopCardInfo-hover {
       opacity: 0.5;
   } 

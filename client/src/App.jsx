@@ -2,14 +2,14 @@ import './App.css'
 
 import { Route, Routes } from 'react-router-dom'
 
-import { AuthProvider } from './context/AuthContext'
 import { NotificationProvider } from './context/NotificationContext'
+import { AuthProvider } from './context/AuthContext'
 import { ProductProvider } from './context/ProductContext'
-import { FavoriteProvider } from './context/FavoriteContext'
+
 
 import Header from './components/Header/Header'
 import Home from './components/Pages/Home/Home'
-import { Shop } from './components/Pages/Shop/Shop'
+import Shop  from './components/Pages/Shop/Shop'
 import Waterpomp from './components/Pages/Shop/Waterpomp/Waterpomp'
 import IrrigationSystems from './components/Pages/Shop/IrrigationSystems/IrrigationSystems'
 import Parts from './components/Pages/Shop/Parts/Parts'
@@ -17,8 +17,8 @@ import PowerMachines from './components/Pages/Shop/PowerMachines/PowerMachines'
 import Pipes from './components/Pages/Shop/Pipes/Pipes'
 import Tools from './components/Pages/Shop/Tools/Tools'
 import Details from './components/Pages/Details/Details'
-import { Create } from './components/Pages/CreateProduct/Create'
-import { Register } from './components/Pages/Register/Register'
+import  Create  from './components/Pages/CreateProduct/Create'
+import  Register  from './components/Pages/Register/Register'
 import EditProduct from './components/Pages/EditProduct/EditProduct'
 import Favorite from './components/Pages/FavoritePage/Favorite'
 import BuyProducts from './components/Pages/BuyProducts/BuyProducts'
@@ -31,7 +31,6 @@ function App() {
     <NotificationProvider>
       <AuthProvider>
         <ProductProvider>
-          <FavoriteProvider>
             <Header />
             <div className="App">
               <Routes>
@@ -51,7 +50,6 @@ function App() {
                 <Route path='/shop/:productType/:productId/edit' element={<EditProduct />} />
               </Routes>
             </div>
-          </FavoriteProvider>
         </ProductProvider>
       </AuthProvider>
     </NotificationProvider>

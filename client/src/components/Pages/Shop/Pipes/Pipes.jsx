@@ -1,20 +1,25 @@
 import '../Product.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
-import { useProductContext } from '../../../../context/ProductContext';
-import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
+import { productServiceFactory } from '../../../../sevices/productService';
+import { productType } from '../../../../config/constants/constants';
+import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
 
 const Pipes = () => {
-    const { pipes } = useProductContext();
+    const productservice = productServiceFactory()
+    const [pipes, setPipes] = useState([]);
 
     const { pathname } = useLocation()
-
-
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
+
+    useEffect(() => {
+        productservice.getAll(productType.pipes)
+            .then(data => setPipes(data))
+    }, [pathname])
 
     return (
         <div className="page">

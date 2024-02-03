@@ -6,9 +6,11 @@ import { useLocation } from 'react-router-dom';
 const Favorite = () => {
     const { favoriteProducts } = useProductContext();
     const { pathname } = useLocation();
-useEffect(() => {
+
+    useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
+    
     return (
         <section className='page'>
 
@@ -18,7 +20,7 @@ useEffect(() => {
             {favoriteProducts.length === 0 && (
                 <p className="noProduct">There are no Favorite yet!</p>
             )}
-           
+
         </section>
     )
 }

@@ -8,12 +8,8 @@ import { productName } from '../../../config/constants/constants'
 
 const Details = () => {
     const { pathname } = useLocation();
-    
     const { productType, productId } = useParams()
-   
     const productService = productServiceFactory();
-
-   
 
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
@@ -23,8 +19,6 @@ const Details = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
-
-
 
     useEffect(() => {
         Promise.all([
@@ -38,7 +32,6 @@ const Details = () => {
             setProducts(productsData)
         })
     }, [productId])
-
 
     return (
         <section className='page'>
@@ -54,73 +47,7 @@ const Details = () => {
             </div>
         </section>
 
-
-
-
-
-
-
-
-
-
-
-
-        // <section className='page'>
-        //   <div className="detailsPage">
-
-        //     <div className="productDetails">
-        //     <span className="detailsPrice">{product.price} $</span>
-
-        //       <h1 className="detailsTitle">{product.title}</h1>
-
-        //       <div className='detailsDescription'>
-        //         <p> {product.description}</p>
-        //       </div>
-        //       <div className='quantuty'>
-        //         <label htmlFor="price">Quantity</label>
-        //                 <input className="search-input searchbar-input"
-        //                     type="number"
-        //                     name='quantity'
-        //                     placeholder="1"
-        //                     id="quantity"
-        //                     onChange={handleChange}
-        //                     value={quantity}
-
-        //                 />
-        //       </div>
-        //       {isAuthenticated && !isAdmin && (
-        //         <>
-
-        //           <Link className="buy_details btn1 " onClick={() => { onBuy(type, productId, userId) }}>Buy Now</Link>
-        //           <Link className="wish_details btn1" onClick={() => { onWish(type, productId, userId) }} >Favorit</Link >
-        //         </>
-        //       )}
-        //       {isAdmin && (
-        //         <>
-        //           <Link to={`/shop/${type}/${productId}/edit`} className="buy_details btn1"> Edit </Link>
-        //           <Link to={`/shop/${type}/${productId}/delete`} className="wish_details btn1" >Delete</Link>
-        //         </>
-        //       )}
-
-        //     </div>
-
-        //     <div className="detailsImage">
-
-
-        //       <img src={product.image} alt={product.type} />
-
-
-        //     </div>
-
-        //   </div>
-        //   <div className='details-card'>
-
-        //     {products.map(x =>
-        //       <ProductCard key={x._id} {...x} />)}
-        //   </div >
-        // </section>
-
-    )
-}
+    );
+};
 
 export default Details

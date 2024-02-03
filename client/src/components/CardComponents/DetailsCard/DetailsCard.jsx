@@ -10,7 +10,7 @@ import { useProductContext } from '../../../context/ProductContext';
 
 
 export const DetailsCard = (product) => {
-  
+
     const dispatch = useNotification();
 
     const { userId, isAdmin } = useAuthContext();
@@ -102,17 +102,17 @@ export const DetailsCard = (product) => {
                 <p className='detailsP' >{product.description}</p>
 
                 <div className="detailsBtnDiv">
-                {!isAdmin && (
+                    {!isAdmin && (
                         <>
-                    <Link className={`detailsBtn detailsBuybtn ${isBuy ? 'disabledBtn' : ''}`}
-                        onClick={onBuy}>
-                        <i className="fas fa-shopping-cart"></i>
-                    </Link>
-                    <Link className="detailsBtn detailsFavBtn"
-                        onClick={onChange} >
-                        <i className={`fa-heart fa-2x ${addclass} `}></i>
-                    </Link >
-                    </>
+                            <Link className={`detailsBtn detailsBuybtn ${isBuy ? 'disabledBtn' : ''}`}
+                                onClick={onBuy}>
+                                <i className="fas fa-shopping-cart"></i>
+                            </Link>
+                            <Link className="detailsBtn detailsFavBtn"
+                                onClick={onChange} >
+                                <i className={`fa-heart fa-2x ${addclass} `}></i>
+                            </Link >
+                        </>
                     )}
 
                     {isAdmin && (
@@ -128,7 +128,6 @@ export const DetailsCard = (product) => {
                         </>
                     )}
                 </div>
-
             </div>
 
             <div className={`removeWrapper ${deleteProduct ? '' : 'removeNone'}`}>

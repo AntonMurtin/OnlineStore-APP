@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { errorMessage, inputValidtion } from '../../../config/constants/constants';
 import {initialFocusregister,initialValuesRegister,} from '../../../config/constants/register'
 
-export const Register = () => {
+const Register = () => {
 
     const initialValues = initialValuesRegister;
     const initialFocs = initialFocusregister;
@@ -153,3 +153,5 @@ export const Register = () => {
         </div>
     )
 }
+
+export default Register;

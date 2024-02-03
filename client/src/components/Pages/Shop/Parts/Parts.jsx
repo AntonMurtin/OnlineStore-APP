@@ -1,19 +1,23 @@
 import '../Product.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
-import { useProductContext } from '../../../../context/ProductContext';
+import { productType } from '../../../../config/constants/constants';
 import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
+import { productServiceFactory } from '../../../../sevices/productService';
 
 const Parts = () => {
-     const { parts } = useProductContext();
-
+    const productservice=productServiceFactory()
+     const [parts,setParts]=useState([])
      const {pathname}=useLocation()
-
-
 
      useEffect(()=>{
         window.scrollTo(0,0);
+     },[pathname]);
+
+     useEffect(()=>{
+        productservice.getAll(productType.parts)
+        .then(data=>setParts(data))
      },[pathname]);
    
     return (

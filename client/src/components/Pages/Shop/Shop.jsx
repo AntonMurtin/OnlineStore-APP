@@ -4,92 +4,87 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-export const Shop = () => {
+const Shop = () => {
     
     return (
-        <div className='shop_page'>
-
-            <div className="shop_cards">
-
-                <div className="card card--1">
-
-                    <div className="card__img"></div>
-                    <Link to="/shop/waterpomps" className="card_link">
-                        <div className="card__img--hover"></div>
+        <div className='shopPage'>
+            <div className="shopDiv">
+                <div className="shopCard shopCard--1">
+                    <div className="shopCardImg"></div>
+                    <Link to="/shop/waterpomps" >
+                        <div className="shopCardImg--hover"></div>
                     </Link>
-                    <div className="card__info">
+                    <div className="shopCardInfo">
+                        <h3 className="shopCardTitle">WATERPOMP</h3>
+                    </div>
+                </div>
 
-                        <h3 className="card__title">WATERPOMP</h3>
+
+                <div className="shopCard shopCard--2">
+
+                    <div className="shopCardImg"></div>
+                    <Link to="/shop/irigationSystems" >
+                        <div className="shopCardImg--hover"></div>
+                    </Link>
+                    <div className="shopCardInfo">
+
+                        <h3 className="shopCardTitle">IRRIGATION SYSTEMS</h3>
 
                     </div>
                 </div>
 
 
-                <div className="card card--2">
+                <div className="shopCard shopCard--3">
 
-                    <div className="card__img"></div>
-                    <Link to="/shop/irigationSystems" className="card_link">
-                        <div className="card__img--hover"></div>
+                    <div className="shopCardImg"></div>
+                    <Link to="/shop/parts" >
+                        <div className="shopCardImg--hover"></div>
                     </Link>
-                    <div className="card__info">
+                    <div className="shopCardInfo">
 
-                        <h3 className="card__title">IRRIGATION SYSTEMS</h3>
-
-                    </div>
-                </div>
-
-
-                <div className="card card--3">
-
-                    <div className="card__img"></div>
-                    <Link to="/shop/parts" className="card_link">
-                        <div className="card__img--hover"></div>
-                    </Link>
-                    <div className="card__info">
-
-                        <h3 className="card__title">PARTS</h3>
+                        <h3 className="shopCardTitle">PARTS</h3>
 
                     </div>
                 </div>
 
             </div>
-            <div className="shop_cards">
+            <div className="shopDiv">
 
-                <div className="card card--4">
+                <div className="shopCard shopCard--4">
 
-                    <div className="card__img"></div>
-                    <Link to="/shop/powerMachines" className="card_link">
-                        <div className="card__img--hover"></div>
+                    <div className="shopCardImg"></div>
+                    <Link to="/shop/powerMachines" >
+                        <div className="shopCardImg--hover"></div>
                     </Link>
-                    <div className="card__info">
+                    <div className="shopCardInfo">
 
-                        <h3 className="card__title">POWER MACHINES</h3>
+                        <h3 className="shopCardTitle">POWER MACHINES</h3>
 
                     </div>
                 </div>
 
 
-                <div className="card card--5">
+                <div className="shopCard shopCard--5">
 
-                    <div className="card__img"></div>
-                    <Link to="/shop/pipes" className="card_link">
-                        <div className="card__img--hover"></div>
+                    <div className="shopCardImg"></div>
+                    <Link to="/shop/pipes" >
+                        <div className="shopCardImg--hover"></div>
                     </Link>
-                    <div className="card__info">
+                    <div className="shopCardInfo">
 
-                        <h3 className="card__title">PIPES</h3>
+                        <h3 className="shopCardTitle">PIPES</h3>
 
                     </div>
                 </div>
-                <div className="card card--6">
+                <div className="shopCard shopCard--6">
 
-                    <div className="card__img"></div>
-                    <Link to="/shop/tools" className="card_link">
-                        <div className="card__img--hover"></div>
+                    <div className="shopCardImg"></div>
+                    <Link to="/shop/tools" >
+                        <div className="shopCardImg--hover"></div>
                     </Link>
-                    <div className="card__info">
+                    <div className="shopCardInfo">
 
-                        <h3 className="card__title">TOOLS</h3>
+                        <h3 className="shopCardTitle">TOOLS</h3>
 
                     </div>
                 </div>
@@ -100,3 +95,4 @@ export const Shop = () => {
 
     )
 }
+export default Shop;

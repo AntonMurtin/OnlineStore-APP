@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 import { useAuthContext } from '../../../context/AuthContext'
-// import { useFavoriteContext } from '../../../context/FavoriteContext'
 import { useNotification } from '../../../context/NotificationContext'
 import { useProductContext } from '../../../context/ProductContext'
 
@@ -15,7 +14,7 @@ export const ProductCard = (data) => {
 
   const [isFavorit, setIsFavorit] = useState(false);
   const [isBuy, setIsBuy] = useState('productBuy');
-  const [addclass, setAddClass] = useState('fa-regular');
+  const [addClass, setAddClass] = useState('fa-regular');
 
 
 
@@ -28,19 +27,26 @@ export const ProductCard = (data) => {
           setAddClass('fa-solid')
         }
       }
+      // if (data.buy.length > 0) {
+      //   const result = data.buy.filter(x => x._id === userId);
+      //   if (result.length > 0) {
+      //     setIsBuy('disabledBuyBtn');
+         
+      //   }
+      // }
     }
   }, [userId]);
 
   const onChange = () => {
     if (userId) {
       if (isFavorit) {
-        onRemoveFavorite(data.type, data._id, userId);
         setIsFavorit(false);
         setAddClass('fa-regular')
+        onRemoveFavorite(data.type, data._id, userId);
       } else if (!isFavorit) {
-        onAddFavorite(data.type, data._id, userId);
         setIsFavorit(true);
         setAddClass('fa-solid')
+        onAddFavorite(data.type, data._id, userId);
       }
     } else {
       dispatch({
@@ -52,8 +58,8 @@ export const ProductCard = (data) => {
   const onBuy = () => {
     if(userId){
 
-      setIsBuy('disabledBuyBtn')
       onBuyProduct(data.type, data._id, userId);
+      setIsBuy('disabledBuyBtn')
     }else {
       dispatch({
         type: 'ERROR',
@@ -70,7 +76,7 @@ export const ProductCard = (data) => {
         className="productFavorite">
         <i
           className={`fa-heart fa-2x
-      ${addclass} `}></i></span>
+      ${addClass} `}></i></span>
 
       <div className="cardImages">
 
@@ -80,10 +86,10 @@ export const ProductCard = (data) => {
       <div className="size">
         <h1 className="productTitle">{data.title}</h1>
       </div>
-      <Link onClick={onBuy}
+      <span onClick={onBuy}
         className={`productBtn ${isBuy}`} >
         <i className={`fas fa-shopping-cart `}></i>
-      </Link>
+      </span>
       <Link to={`/shop/${data.type}/${data._id}`}
         className='productBtn productDetails '>
         <i className="fas fa-info-circle"></i>

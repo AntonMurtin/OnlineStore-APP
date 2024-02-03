@@ -1,18 +1,26 @@
 import '../Product.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
-import { useProductContext } from '../../../../context/ProductContext';
 import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
 
+import { productType } from '../../../../config/constants/constants';
+import { productServiceFactory } from '../../../../sevices/productService';
+
 const IrrigationSystems = () => {
-    const { irigationSystems} = useProductContext();
+    const productservice=productServiceFactory()
+    const [irigationSystems,setIrigationSystems]=useState([]);
 
     const {pathname}=useLocation()
 
      useEffect(()=>{
         window.scrollTo(0,0);
      },[pathname]);
+
+     useEffect(()=>{
+        productservice.getAll(productType.irigationSystems)
+        .then(data=>setIrigationSystems(data));
+     },[pathname])
 
     return (
         <div className="page">

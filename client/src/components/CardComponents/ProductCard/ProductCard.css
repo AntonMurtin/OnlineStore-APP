@@ -95,6 +95,7 @@ color: #cac8c8;
   background-color: rgba(207, 9, 44, 0.95);
   transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 30px 25px -20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 .productDetails {

@@ -1,20 +1,26 @@
 import '../Product.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
-import { useProductContext } from '../../../../context/ProductContext';
+import { productType } from '../../../../config/constants/constants';
 import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
+import { productServiceFactory } from '../../../../sevices/productService';
 
 const PowerMachines = () => {
-     const { powerMachines } = useProductContext();
+    const productservice=productServiceFactory();
+
+     const  [powerMachines, setPowerMachines ]=useState([])
 
      const {pathname}=useLocation()
-
-
 
      useEffect(()=>{
         window.scrollTo(0,0);
      },[pathname]);
+
+     useEffect(()=>{
+        productservice.getAll(productType.powerMachines)
+        .then(data=> setPowerMachines(data))
+     },[pathname])
    
     return (
        <div className="page">

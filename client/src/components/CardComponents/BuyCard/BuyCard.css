@@ -20,14 +20,12 @@
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    box-shadow: 0 0 15px rgba(8, 7, 16, 0.6);
 }
 
 .optionDiv>img {
     width: 100px;
     height: 100px;
-    
-
 }
 
 .buyCard>img {
@@ -40,9 +38,15 @@
     display: flex;
     text-align: center; 
     flex-direction: column;
-    font-size: 19px;
+    font-size: 1px;
     font-weight: 550;
     
+}
+.buyDetails{
+    font-size: 1.2rem;
+}
+.buyPriceSpan{
+    font-size: 1.1rem;
 }
 
 
@@ -90,7 +94,7 @@
 .qty .qty-value {
     padding: 0;
     margin: 0 10px;
-    line-height: 30px;
+    line-height: 0px;
     font-size: 20px;
     font-weight: 500;
     display: inline-block;
@@ -145,30 +149,104 @@ fieldset[disabled] .btn {
 
 }
 
-.cancel {
+.removeBuy{
     text-align: right;
     cursor: pointer;
+    color: #eb0d0d;
 }
 
-@media (max-width:1200px) {
+@media (max-width:1505px) {
+    .qty {
+        position: absolute;
+        left: 30%;
+    }
+}
 
+
+@media (max-width:1350px) {
+    
     .buyDiv {
         display: flex;
-        width: 90%
+        margin-right: 0px;
+        margin-left: 0px;
+        width: 80%
+    }
+    .qty {
+        position: absolute;
+        left: 25%;
+    }
+}
+@media (max-width:900px){
+    .qty {
+        position: absolute;
+        left: 30%;
     }
 }
 
 @media (max-width:600px) {
-
     .buyDiv {
         display: flex;
-        width: 90%
+        width: 80%
     }
-
-    .optionDiv>img {
-        width: 60px;
-        height: 60px;
-        padding: 5px;
-
+    .buyCardDetails {
+        font-size: 17px;
+        font-weight: 550;
+        
+    }
+    .buyCard .price {
+        font-size: 17px;
+    
     }
 }
+
+@media (max-width:550px) {
+    .qty {
+        position: absolute;
+        left: 35%;
+    }
+    .buyCardDetails {
+        font-size: 14px;
+        font-weight: 550;
+        
+    }
+    .buyCard .price {
+        font-size: 14px;
+    
+    }
+}
+
+@media (max-width:510px) {
+    .optionDiv>img {
+        width: 70px;
+        height: 70px;
+    }
+    .buyCardDetails {
+        font-size: 17px;
+        font-weight: 550;
+        
+    }
+    .buyCard .price {
+        font-size: 17px;
+    
+    }
+    .qty {
+        position: absolute;
+        bottom: 7%;
+        left: 1%;
+    
+    }
+}
+@media (max-width:510px) {
+
+    }
+    .buyCardDetails {
+        font-size: 12px;
+        font-weight: 550;
+        
+    }
+    .buyCard .price {
+        font-size: 12px;
+    
+    }
+    
+

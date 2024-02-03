@@ -1,21 +1,24 @@
 import '../Product.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
-import { useProductContext } from '../../../../context/ProductContext';
-import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
-
+import { productType } from '../../../../config/constants/constants';
+import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
+import { productServiceFactory } from '../../../../sevices/productService';
 const Tools = () => {
-    const { tools } = useProductContext();
+    const productservice = productServiceFactory()
+    const [tools, setTools] = useState([])
 
     const { pathname } = useLocation()
-
-
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
+    useEffect(() => {
+        productservice.getAll(productType.tools)
+            .then(data => setTools(data))
+    }, [pathname]);
     return (
         <div className="page">
 

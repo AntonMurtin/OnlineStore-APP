@@ -12,68 +12,16 @@ const ProductContext = createContext();
 export const ProductProvider = ({
     children
 }) => {
-    const navigate = useNavigate()
-    const productsService = productServiceFactory();
+    const navigate = useNavigate();
     const dispatch = useNotification();
+
+    const productsService = productServiceFactory();
     const { userId } = useAuthContext();
 
-    const [waterpomps, setWaterpomps] = useState([]);
-    const [irigationSystems, setIrigationSystems] = useState([]);
-    const [parts, setParts] = useState([]);
-    const [powerMachines, setPowerMachines] = useState([]);
-    const [pipes, setPipes] = useState([]);
-    const [tools, setTools] = useState([]);
-    const [product, setProduct] = useState([]);
-    // const [search, setSearch] = useState(null);
     const [favoriteProducts, setFavoriteProducts] = useState([]);
     const [buysProducts, setBuysProducts] = useState([]);
+    const [totalPrice, setTotalprice] = useState(0.0);
 
-
-    const setValue = {
-        waterpomps: setWaterpomps,
-        irigationSystems: setIrigationSystems,
-        parts: setParts,
-        powerMachines: setPowerMachines,
-        pipes: setPipes,
-        tools: setTools
-    }
-
-
-
-
-    useEffect(() => {
-        Promise.all([
-            productsService.getAll(productType.waterpomps),
-            productsService.getAll(productType.irigationSystems),
-            productsService.getAll(productType.parts),
-            productsService.getAll(productType.powerMachines),
-            productsService.getAll(productType.pipes),
-            productsService.getAll(productType.tools),
-
-        ]).then(([
-            waterpompsProducts,
-            irigationSystemsProducts,
-            partsProducts,
-            powerMachinesProducts,
-            pipesProducts,
-            toolsProducts,
-        ]) => {
-            setWaterpomps(waterpompsProducts);
-            setIrigationSystems(irigationSystemsProducts);
-            setParts(partsProducts);
-            setPowerMachines(powerMachinesProducts);
-            setPipes(pipesProducts);
-            setTools(toolsProducts);
-            setProduct([
-                waterpompsProducts[0],
-                irigationSystemsProducts[0],
-                partsProducts[0],
-                powerMachinesProducts[0],
-                pipesProducts[0],
-                toolsProducts[0],
-            ])
-        })
-    }, []);
 
     useEffect(() => {
         if (userId) {
@@ -99,9 +47,9 @@ export const ProductProvider = ({
                     ...powerMachinesFavorite,
                     ...pipesFavorite,
                     ...toolsFavorite,
-                ])
-            })
-        }
+                ]);
+            });
+        };
     }, [userId]);
 
     useEffect(() => {
@@ -128,30 +76,38 @@ export const ProductProvider = ({
                     ...powerMachinesgetBuy,
                     ...pipesgetBuy,
                     ...toolsgetBuy,
-                ])
-            })
-        }
+                ]);
+            });
+        };
     }, [userId]);
+    
+    useEffect(()=>{
+        if(buysProducts.length>0){
+           let total=0
+           buysProducts.forEach(x=>{
+            total+=Number(x.quantity)*Number(x.price)
+           })
+            setTotalprice(total)
+        }
+    },[buysProducts])
 
     const onDeleteProduct = async (type, id) => {
         try {
             await productsService.del(type, id);
-            setValue[type](state => state.filter(x => x._id !== id))
-            navigate(`/shop/${type}`)
+            navigate(`/shop/${type}`);
         } catch (error) {
             dispatch({
                 type: 'ERROR',
                 message: error,
             });
-        }
+        };
     };
 
     const onCreateProduct = async (data) => {
         const type = data.type
         try {
-            const newProduct = await productsService.create(type, data);
-            setValue[type](state => [...state, newProduct]);
-            navigate(`/shop/${type}`)
+            await productsService.create(type, data);
+            navigate(`/shop/${type}`);
         } catch (error) {
             dispatch({
                 type: 'ERROR',
@@ -164,15 +120,14 @@ export const ProductProvider = ({
         const type = data.type;
         const id = data._id;
         try {
-            const result = await productsService.edit(type, id, data);
-            setValue[type](state => state.map(x => x._id === data._id ? result : x))
-            navigate(`/shop/${type}/${id}`)
+            await productsService.edit(type, id, data);
+            navigate(`/shop/${type}/${id}`);
         } catch (error) {
             dispatch({
                 type: 'ERROR',
                 message: error,
             });
-        }
+        };
     };
 
 
@@ -180,7 +135,6 @@ export const ProductProvider = ({
         try {
             const result = await productsService.addFavorite(type, id, { userId });
             setFavoriteProducts(state => [...state, result]);
-            setValue[type](state => state.map(x => x._id === id ? result : x));
             dispatch({
                 type: 'SUCCESS',
                 message: `You successfully add ${result.title} to Favorites.`,
@@ -197,7 +151,6 @@ export const ProductProvider = ({
         try {
             const result = await productsService.removeFavorite(type, id, { userId });
             setFavoriteProducts(state => state.filter(x => x._id !== id));
-            setValue[type](state => state.map(x => x._id === id ? result : x));
             dispatch({
                 type: 'REMOVE',
                 message: `You successfully remove ${result.title}.`,
@@ -215,7 +168,6 @@ export const ProductProvider = ({
         try {
             const result = await productsService.addBuy(type, id, { userId });
             setBuysProducts(state => [...state, result]);
-            setValue[type](state => state.map(x => x._id === id ? result : x));
             dispatch({
                 type: 'SUCCESS',
                 message: `You successfully add ${result.title} to Yours Buys.`,
@@ -232,7 +184,6 @@ export const ProductProvider = ({
         try {
             const result = await productsService.removeBuy(type, id, { userId });
             setBuysProducts(state => state.filter(x => x._id !== id));
-            setValue[type](state => state.map(x => x._id === id ? result : x));
             dispatch({
                 type: 'REMOVE',
                 message: `You successfully remove ${result.title}.`,
@@ -245,24 +196,38 @@ export const ProductProvider = ({
         };
     };
 
+    const changeQty = (id, value) => {
+        const foundProduct = buysProducts.find((item) => item._id === id);
+       
+        
+        if (value === 'inc') {
+           
+            foundProduct.quantity += 1;
+            setTotalprice(x=>x+foundProduct.price)
+           
+        } else if (value === 'dec')
+            if (foundProduct.quantity - 1 > 0){
+                foundProduct.quantity -= 1;
+                setTotalprice(x=>x-foundProduct.price)
+            }
+         
+           
+            setBuysProducts(state => state.map(x => x._id === id ? foundProduct : x))
+    }
+
     const value = {
-        waterpomps,
-        irigationSystems,
-        parts,
-        powerMachines,
-        pipes,
-        tools,
-        product,
         // search,
         favoriteProducts,
         buysProducts,
+        totalPrice,
         onDeleteProduct,
         onCreateProduct,
         onEditProduct,
         onAddFavorite,
         onRemoveFavorite,
         onBuyProduct,
-        onRemoveBuy
+        onRemoveBuy,
+        changeQty
     }
     return (
         <ProductContext.Provider value={value}>

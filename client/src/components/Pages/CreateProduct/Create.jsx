@@ -5,7 +5,7 @@ import { useProductContext } from '../../../context/ProductContext'
 import { initialValuesCreate, initialFocusCreate } from '../../../config/constants/create'
 import { inputValidtion, errorMessage } from '../../../config/constants/constants'
 
-export const Create = () => {
+const Create = () => {
     const { onCreateProduct } = useProductContext()
 
     const {
@@ -124,3 +124,5 @@ export const Create = () => {
 
     )
 }
+
+export default Create

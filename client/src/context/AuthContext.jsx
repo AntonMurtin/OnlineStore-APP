@@ -1,18 +1,16 @@
-import { createContext, useContext} from "react"
-
-import { authServiceFactoty } from "../sevices/authService";
+import { createContext, useContext} from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useNotification } from "./NotificationContext";
+import { authServiceFactoty } from "../sevices/authService";
 import { admin } from "../config/constants/constants";
 import {useLocalStorage} from '../hooks/useLocalStorage'
-import { useNotification } from "./NotificationContext";
-
 
 export const AuthContext = createContext();
 
  export const AuthProvider = ({
     children
 }) => {
-    
  const [auth, setAuth] = useLocalStorage('auth', {});
 
     const authService = authServiceFactoty(auth.accessToken);
@@ -20,21 +18,15 @@ export const AuthContext = createContext();
     const dispatch=useNotification();
 
     const onLogin = async (data) => {
-
         try {
-            
             const user = await authService.login(data);
             setAuth(user);
-            // setEroor(false)
-            
         } catch (error) {
             dispatch({
                 type: 'ERROR',
                 message: error
-
-            })
-            
-        }
+            });
+        };
     };
 
     const onRegister=async(data)=>{
@@ -42,27 +34,24 @@ export const AuthContext = createContext();
             const user=await authService.register(data);
             setAuth(user);
             navigate('/');
-            
         } catch (error) {
             error.message.map(x => {
                 dispatch({
                     type: 'ERROR',
                     message: x,
-                })
-            })
-               
-            
+                });
+            });
             navigate('/register');
-        }
-    }
-    const onLogout = async () => {
+        };
+    };
 
+    const onLogout = async () => {
         setAuth({});
         navigate('/');
         dispatch({
             type:'SUCCESS',
             message:'You succsessful leve'
-        })
+        });
     };
 
 
@@ -76,18 +65,17 @@ export const AuthContext = createContext();
         userEmail: auth.email,
         isAuthenticated: !!auth.accessToken,
         isAdmin: admin === auth.email,
-        
     }
 
     return(
         <AuthContext.Provider value={contextValues}>
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};
 
 export const  useAuthContext=()=>{
     const context=useContext(AuthContext);
 
     return context;
-}
+};
