@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { LoginModal } from '../Pages/LoginModal/LoginModal';
 import { useAuthContext } from '../../context/AuthContext';
 import { useProductContext } from '../../context/ProductContext';
+import { useForm } from '../../hooks/useForm';
+import { initialValuesSearch, initialFocusSearch } from '../../config/constants/search';
 
 
 
@@ -14,18 +16,26 @@ const Header = () => {
     const [openLogin, setOpenLogin] = useState(false);
 
     const { onLogout, isAuthenticated, isAdmin } = useAuthContext();
-    const { favoriteProducts, buysProducts } = useProductContext()
+    const { favoriteProducts, buysProducts, onSearch } = useProductContext()
 
+    const initialValues = initialValuesSearch;
+    const initialFocs = initialFocusSearch;
 
     const onClose = () => {
         setOpenLogin(false)
     }
 
-    const onSubmit = () => {
-        console.log('yes');
 
-    }
-
+    const {
+        values,
+        focus,
+        changeHandler,
+        onSubmit,
+        changeFocus
+    } = useForm(
+        initialValues,
+        initialFocs,
+        onSearch)
     return (
         <>
             <div className='nav_app'>
@@ -39,38 +49,37 @@ const Header = () => {
                     <div className="searchbar">
                         <form method='POST' onSubmit={onSubmit}>
                             <input
+                                required
+                                onBlur={changeFocus}
+                                focused={focus.searchName.toString()}
+                                // pattern={inputValidtion.name}
                                 type="text"
-                                name="searchName"
+                                name='searchName'
                                 placeholder="Serch..."
-                            // value={values.searchName}
-                            // onChange={changeHandler}
-
+                                value={values.searchName}
+                                onChange={changeHandler}
                             />
                             <button className="search"></button>
                         </form>
                     </div>
-                    {/* <Link to="/search" className="search" type="submit" value="Submit" ><i className="fa-solid fa-magnifying-glass"></i></Link> */}
+                    <Link to="/search" className="search" type="submit" value="Submit" ><i className="fa-solid fa-magnifying-glass"></i></Link>
 
                     <Link to="/shop" className='a_Link'><i className="fa-solid fa-shop "></i></Link>
+                    
                     {!isAuthenticated && (
-                        <>
-                            <Link onClick={() => { setOpenLogin(true) }} className='a_Link login__a'><i className="fa-solid fa-user"></i></Link>
-                            {/* <Link to="/register" className='a_Link register__a'>Register</Link> */}
-                        </>
+                            <span onClick={() => { setOpenLogin(true) }} className='a_Link login__a'><i className="fa-solid fa-user"></i></span>
+                            
                     )}
                     {isAdmin && (
-                        <>
                             <Link to="/create" className='a_Link'><i className="fa-solid fa-square-plus  "></i></Link>
-                            {/* <Link to="/" onClick={onLogout} className='a_Link'><i className="fa-solid fa-person-walking-dashed-line-arrow-right "></i></Link> */}
-
-                        </>
+                      
                     )}
-                    {isAuthenticated  && (
+                    {isAuthenticated && (
                         <>
                             <Link to="/favorite" className='a_Link favorit-icon'><i className="fa-solid fa-heart "><i className='non-empty'>{favoriteProducts.length}</i></i></Link>
                             <Link to="/buy" className='a_Link cart-icon'><i className="fa-solid fa-cart-shopping "><i className='non-empty'>{buysProducts.length}</i></i></Link>
 
-                            <Link to="/" onClick={onLogout} className='a_Link'><i className="fa-solid fa-person-walking-dashed-line-arrow-right"></i></Link>
+                            <span onClick={onLogout} className='a_Link'><i className="fa-solid fa-person-walking-dashed-line-arrow-right"></i></span>
                         </>
                     )}
                 </div>

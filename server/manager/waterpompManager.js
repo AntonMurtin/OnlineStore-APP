@@ -16,3 +16,5 @@ exports.searchFavorite = (userId) => Waterpomp.find({favorite:{$elemMatch:{_id:u
 
 exports.searchBuy = (userId) => Waterpomp.find({buy:{$elemMatch:{_id:userId}}});
 
+exports.searchLastSeen = (userId) => Waterpomp.find({lastSeen:{$elemMatch:{_id:userId}}});
+

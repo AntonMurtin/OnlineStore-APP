@@ -15,3 +15,6 @@ exports.searchName = (searchName) => Machines.find({title:{$regex: searchName, $
 exports.searchFavorite = (userId) => Machines.find({favorite:{$elemMatch:{_id:userId}}});
 
 exports.searchBuy = (userId) => Machines.find({buy:{$elemMatch:{_id:userId}}});
+
+exports.searchLastSeen = (userId) => Machines.find({lastSeen:{$elemMatch:{_id:userId}}});
+

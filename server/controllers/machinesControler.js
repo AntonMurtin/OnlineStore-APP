@@ -198,5 +198,38 @@ router.put('/:cardId/removeBuy', async (req, res) => {
     }
 
 });
+router.put('/:cardId/addLastSeen', async (req, res) => {
+    const cardId = req.params.cardId;
+    const userId = req.body.userId;
+    try {
+        const card = await machinesManager.getById(cardId);
 
+        const isSeen = card.lastSeen.filter(x => x._id == userId);
+
+        if (isSeen.length === 0) {
+            card.lastSeen.unshift(userId);
+            card.save();
+            res.json(card);
+        }
+    } catch (error) {
+        res.status(400).json({
+            message: errorMessages(error)
+        });
+    }
+
+});
+
+router.get('/:userId/getLastSeen', async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        const card = await machinesManager.searchLastSeen(userId);
+
+        res.json(card);
+    } catch (error) {
+        res.status(400).json({
+            message: errorMessages(error)
+        });
+    }
+});
 module.exports = router;

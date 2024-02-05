@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
+import { useProductContext } from '../../../context/ProductContext'
+import { useAuthContext } from '../../../context/AuthContext'
+
 import { productServiceFactory } from '../../../sevices/productService'
 import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
 import { Slider } from '../../SwiperComponents/Slider/Slider'
@@ -10,10 +13,12 @@ const Details = () => {
     const { pathname } = useLocation();
     const { productType, productId } = useParams()
     const productService = productServiceFactory();
+    const { lastSeenProducts, onAddSeenProduct } = useProductContext();
+    const { userId } = useAuthContext()
 
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
-    
+
     const allProducts = products.filter(x => x._id !== productId);
 
     useEffect(() => {
@@ -33,18 +38,33 @@ const Details = () => {
         })
     }, [productId])
 
+    useEffect(() => {
+        if (userId) {
+            onAddSeenProduct(productType, productId, userId)
+        }
+    }, [productId])
+
     return (
         <section className='page'>
 
             <DetailsCard key={product._id}
-               {...product}
-                 />
+                {...product}
+            />
 
             <div className='productContent'>
                 <h2>{productName[productType]}</h2>
                 {<Slider data={allProducts} />}
                 <Link className='goTo' to={`/shop/${product.type}`}>See all</Link>
             </div>
+            {lastSeenProducts.length > 0 && (
+                <>
+                    <div className='productContent'>
+                        <h2>Last Seen</h2>
+                        {<Slider data={lastSeenProducts} />}
+                        <Link className='goTo' to="/lastSeen">See all</Link>
+                    </div>
+                </>
+            )}
         </section>
 
     );

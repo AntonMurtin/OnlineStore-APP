@@ -9,6 +9,7 @@ const CONSTANTS = {
         missmatch:'Password missmatch!',
         buy:'You already add the product to Shopping Bag',
         favorite:'You already add the product to Favorite',
+        
     }
 
 }

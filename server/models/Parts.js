@@ -46,6 +46,12 @@ const PartsShema = new mongoose.Schema({
             ref: 'User'
         },
     }],
+    lastSeen: [{
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        },
+    }],
 });
 
 const Parts = mongoose.model('Parts', PartsShema);

@@ -45,6 +45,12 @@ const WaterpompShema = new mongoose.Schema({
             ref: 'User'
         },
     }],
+    lastSeen: [{
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        },
+    }],
 });
 
 const Waterpomp = mongoose.model('Waterpomp', WaterpompShema);

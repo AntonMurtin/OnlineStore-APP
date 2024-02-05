@@ -15,3 +15,6 @@ exports.searchName = (searchName) => IrrigationSystems.find({title:{$regex: sear
 exports.searchFavorite = (userId) => IrrigationSystems.find({favorite:{$elemMatch:{_id:userId}}});
 
 exports.searchBuy = (userId) => IrrigationSystems.find({buy:{$elemMatch:{_id:userId}}});
+
+exports.searchLastSeen = (userId) => IrrigationSystems.find({lastSeen:{$elemMatch:{_id:userId}}});
+

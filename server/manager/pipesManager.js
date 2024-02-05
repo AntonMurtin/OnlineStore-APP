@@ -15,3 +15,6 @@ exports.searchName = (searchName) => Pipes.find({title:{$regex: searchName, $opt
 exports.searchFavorite = (userId) => Pipes.find({favorite:{$elemMatch:{_id:userId}}});
 
 exports.searchBuy = (userId) => Pipes.find({buy:{$elemMatch:{_id:userId}}});
+
+exports.searchLastSeen = (userId) => Pipes.find({lastSeen:{$elemMatch:{_id:userId}}});
+

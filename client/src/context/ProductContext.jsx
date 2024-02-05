@@ -20,7 +20,9 @@ export const ProductProvider = ({
 
     const [favoriteProducts, setFavoriteProducts] = useState([]);
     const [buysProducts, setBuysProducts] = useState([]);
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
     const [totalPrice, setTotalprice] = useState(0.0);
+    const [search, setSearch] = useState(null);
 
 
     useEffect(() => {
@@ -80,16 +82,45 @@ export const ProductProvider = ({
             });
         };
     }, [userId]);
-    
-    useEffect(()=>{
-        if(buysProducts.length>0){
-           let total=0
-           buysProducts.forEach(x=>{
-            total+=Number(x.quantity)*Number(x.price)
-           })
+
+    useEffect(() => {
+        if (userId) {
+            Promise.all([
+                productsService.getLastSeen(productType.waterpomps, userId),
+                productsService.getLastSeen(productType.irigationSystems, userId),
+                productsService.getLastSeen(productType.parts, userId),
+                productsService.getLastSeen(productType.powerMachines, userId),
+                productsService.getLastSeen(productType.pipes, userId),
+                productsService.getLastSeen(productType.tools, userId),
+            ]).then(([
+                waterpompsgetSeen,
+                irigationSystemsgetSeen,
+                partsgetSeen,
+                powerMachinesgetSeen,
+                pipesgetSeen,
+                toolsgetSeen,
+            ]) => {
+                setLastSeenProducts([
+                    ...waterpompsgetSeen,
+                    ...irigationSystemsgetSeen,
+                    ...partsgetSeen,
+                    ...powerMachinesgetSeen,
+                    ...pipesgetSeen,
+                    ...toolsgetSeen,
+                ]);
+            });
+        };
+    }, [userId]);
+
+    useEffect(() => {
+        if (buysProducts.length > 0) {
+            let total = 0
+            buysProducts.forEach(x => {
+                total += Number(x.quantity) * Number(x.price)
+            })
             setTotalprice(total)
         }
-    },[buysProducts])
+    }, [buysProducts])
 
     const onDeleteProduct = async (type, id) => {
         try {
@@ -104,7 +135,8 @@ export const ProductProvider = ({
     };
 
     const onCreateProduct = async (data) => {
-        const type = data.type
+        const type = data.type;
+        data.quantity = 1;
         try {
             await productsService.create(type, data);
             navigate(`/shop/${type}`);
@@ -129,7 +161,10 @@ export const ProductProvider = ({
             });
         };
     };
-
+    const onSearch = (value) => {
+        setSearch(value);
+        navigate(`/search`);
+    }
 
     const onAddFavorite = async (type, id, userId) => {
         try {
@@ -196,38 +231,50 @@ export const ProductProvider = ({
         };
     };
 
+    const onAddSeenProduct = async (type, id, userId) => {
+        try {
+            const result = await productsService.addLastSeen(type, id, { userId });
+            setLastSeenProducts(state => [...state, result]);
+           
+        } catch (error) {
+            dispatch({
+                type: 'ERROR',
+                message: error,
+            });
+        };
+    };
+
     const changeQty = (id, value) => {
         const foundProduct = buysProducts.find((item) => item._id === id);
        
-        
         if (value === 'inc') {
-           
             foundProduct.quantity += 1;
-            setTotalprice(x=>x+foundProduct.price)
-           
+            setTotalprice(x => x + foundProduct.price)
+       
         } else if (value === 'dec')
-            if (foundProduct.quantity - 1 > 0){
+            if (foundProduct.quantity - 1 > 0) {
                 foundProduct.quantity -= 1;
-                setTotalprice(x=>x-foundProduct.price)
+                setTotalprice(x => x - foundProduct.price)
             }
-         
-           
-            setBuysProducts(state => state.map(x => x._id === id ? foundProduct : x))
+        setBuysProducts(state => state.map(x => x._id === id ? foundProduct : x))
     }
 
     const value = {
-        // search,
+        search,
         favoriteProducts,
         buysProducts,
         totalPrice,
+        lastSeenProducts,
         onDeleteProduct,
         onCreateProduct,
         onEditProduct,
+        onSearch,
         onAddFavorite,
         onRemoveFavorite,
         onBuyProduct,
         onRemoveBuy,
-        changeQty
+        changeQty,
+        onAddSeenProduct,
     }
     return (
         <ProductContext.Provider value={value}>

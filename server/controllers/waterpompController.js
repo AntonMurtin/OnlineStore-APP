@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { error } = require('../config/constants');
 const waterpompManager = require('../manager/waterpompManager');
-const {errorMessages} =require('../utils/errorHelper')
+const { errorMessages } = require('../utils/errorHelper')
 
 router.get('/', async (req, res) => {
 
@@ -28,14 +28,15 @@ router.post('/create', async (req, res) => {
     }
 });
 
-router.put('/search', async(req,res)=>{
-    const searchName=req.body.searchName;
-    
+router.put('/search', async (req, res) => {
+    const searchName = req.body.searchName;
+
+
     try {
-        if(searchName!=''){
-            const card=await waterpompManager.searchName(searchName);
+        if (searchName != '') {
+            const card = await waterpompManager.searchName(searchName);
             res.json(card);
-        }else{
+        } else {
             const cards = await waterpompManager.getAll();
             res.json(cards);
         }
@@ -147,7 +148,7 @@ router.put('/:cardId/removeFavorite', async (req, res) => {
 });
 
 router.put('/:cardId/buyProduct', async (req, res) => {
-    
+
     const cardId = req.params.cardId;
     const userId = req.body.userId;
     try {
@@ -199,5 +200,41 @@ router.put('/:cardId/removeBuy', async (req, res) => {
     }
 
 });
+
+router.put('/:cardId/addLastSeen', async (req, res) => {
+    const cardId = req.params.cardId;
+    const userId = req.body.userId;
+    try {
+        const card = await waterpompManager.getById(cardId);
+
+        const isSeen = card.lastSeen.filter(x => x._id == userId);
+
+        if (isSeen.length === 0) {
+            card.lastSeen.unshift(userId);
+            card.save();
+            res.json(card);
+        }
+    } catch (error) {
+        res.status(400).json({
+            message: errorMessages(error)
+        });
+    }
+
+});
+
+router.get('/:userId/getLastSeen', async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        const card = await waterpompManager.searchLastSeen(userId);
+
+        res.json(card);
+    } catch (error) {
+        res.status(400).json({
+            message: errorMessages(error)
+        });
+    }
+});
+
 
 module.exports = router;

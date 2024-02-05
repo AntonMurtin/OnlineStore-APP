@@ -22,6 +22,8 @@ import  Register  from './components/Pages/Register/Register'
 import EditProduct from './components/Pages/EditProduct/EditProduct'
 import Favorite from './components/Pages/FavoritePage/Favorite'
 import BuyProducts from './components/Pages/BuyProducts/BuyProducts'
+import Search from './components/Pages/SearchPage/Search'
+import LastSeen from './components/Pages/Shop/LastSeen/LastSeen'
 
 
 function App() {
@@ -38,7 +40,9 @@ function App() {
                 <Route path='/register' element={<Register />} />
                 <Route path='/create' element={<Create />} />
                 <Route path='/favorite' element={<Favorite />} />
+                <Route path='/search' element={<Search />} />
                 <Route path='/buy' element={<BuyProducts />} />
+                <Route path='/lastSeen' element={<LastSeen />} />
                 <Route path='/shop' element={<Shop />} />
                 <Route path='/shop/waterpomps' element={<Waterpomp />} />
                 <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />

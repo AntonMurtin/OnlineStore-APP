@@ -46,6 +46,12 @@ const IrrigationSystemsShema = new mongoose.Schema({
             ref: 'User'
         },
     }],
+    lastSeen: [{
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        },
+    }],
 });
 
 const IrrigationSystems = mongoose.model('IrrigationSystems', IrrigationSystemsShema);

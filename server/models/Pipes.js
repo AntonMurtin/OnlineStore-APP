@@ -45,6 +45,12 @@ const PipesShema = new mongoose.Schema({
             ref: 'User'
         },
     }],
+    lastSeen: [{
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        },
+    }],
 });
 
 const Pipes = mongoose.model('Pipes', PipesShema);

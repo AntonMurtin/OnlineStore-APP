@@ -65,6 +65,14 @@ export const productServiceFactory = () => {
 
         return products;
     };
+    const addLastSeen = (type, id, data) => request.put(`${url}/${type}/${id}/addLastSeen`, data)
+   
+
+    const getLastSeen=async (type, userId) => {
+        const result = await request.get(`${url}/${type}/${userId}/getLastSeen`);
+        const products = Object.values(result);
+        return products;
+    };
 
 
     return {
@@ -79,6 +87,8 @@ export const productServiceFactory = () => {
         removeFavorite,
         addBuy,
         getBuy,
-        removeBuy
+        removeBuy,
+        addLastSeen,
+        getLastSeen,
     }
 }

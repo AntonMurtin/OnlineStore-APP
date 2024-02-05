@@ -15,3 +15,6 @@ exports.searchName = (searchName) => Tools.find({title:{$regex: searchName, $opt
 exports.searchFavorite = (userId) => Tools.find({favorite:{$elemMatch:{_id:userId}}});
 
 exports.searchBuy = (userId) => Tools.find({buy:{$elemMatch:{_id:userId}}});
+
+exports.searchLastSeen = (userId) => Tools.find({lastSeen:{$elemMatch:{_id:userId}}});
+

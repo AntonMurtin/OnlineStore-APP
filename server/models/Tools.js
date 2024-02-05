@@ -46,6 +46,12 @@ const ToolsShema = new mongoose.Schema({
             ref: 'User'
         },
     }],
+    lastSeen: [{
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        },
+    }],
 });
 
 const Tools = mongoose.model('Tools', ToolsShema);
