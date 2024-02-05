@@ -11,24 +11,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './Slider.css'
-// import { productServiceFactory } from '../../../sevices/productService';
 
-export const Slider = ({
-    data
-}) => {
-//     const productService=productServiceFactory()
-//     const [products, setProducts] = useState([]);
 
-// useEffect(()=>{
-//         productService.getAll(type)
-//         .then(typeData=>setProducts(typeData))
-// },[type]);
-
-// useEffect(()=>{
-    
-//         setProducts(state=>state.filter(x => x._id !== id))
-    
-// },[id])    
+export const Slider = ({data}) => {
 
     return (
         <Swiper

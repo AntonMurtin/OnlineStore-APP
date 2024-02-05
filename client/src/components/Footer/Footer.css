@@ -1,0 +1,98 @@
+.footer{
+    padding: 40px 0;
+    background-color: #24262b;
+}
+
+.footContainer{
+
+margin: auto;
+}
+
+.footRow{
+    display: flex;
+    flex-wrap:wrap ;
+}
+.footCol{
+    width: 25%;
+    padding: 0 7% ;
+
+}
+.footCol>h4{
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+.footCol>h4::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 60px;
+}
+
+.footCol>ul{
+    list-style: none;
+}
+
+.footCol>ul>li:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.footCol>ul>li>a{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footCol>ul>li>a:hover{
+    color: #ffffff;
+    padding-left: 8%;
+}
+
+
+.socialLinks>a{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.socialLinks>a:hover{
+    color: #24262b;
+    background-color: #ffffff;
+
+}
+
+@media (max-width:1850px) {
+    .footCol{
+        width: 25%;
+        padding: 0 5% ;
+    
+    }
+    
+}
+
+@media (max-width:470px) {
+    .footCol{
+width: 50%;
+
+    }
+    
+}

@@ -56,7 +56,7 @@ const Details = () => {
                 {<Slider data={allProducts} />}
                 <Link className='goTo' to={`/shop/${product.type}`}>See all</Link>
             </div>
-            {lastSeenProducts.length > 0 && (
+            {lastSeenProducts.length > 2 && (
                 <>
                     <div className='productContent'>
                         <h2>Last Seen</h2>
