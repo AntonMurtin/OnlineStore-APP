@@ -1,6 +1,6 @@
 .carousel {
   display: flex;
-  height: 500px;
+  height: 550px;
   width: 80%;
   margin: auto;
   padding: 10px;
@@ -22,8 +22,8 @@
   height: 100%;
   overflow: hidden;
   border-radius: 20px;
-  -webkit-box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.15);
+  /* -webkit-box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.15); */
   opacity: 0;
   pointer-events: none;
   transform: scale(0.8);
@@ -40,7 +40,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-  
+  border-radius: 20px;
 }
 
 .carouselOverlay {
@@ -57,15 +57,15 @@
 .carouselTitle {
   position: absolute;
   left: 3%;
-  bottom: 0;
+  bottom: 3%;
   color: #ffffff;
-  font-size: 60px;
+  font-size: 50px;
   text-transform: capitalize;
   cursor: pointer;
   
 }
 .carouselTitle:hover{
-  text-decoration: underline;
+  color: rgb(245, 40, 40);
 }
 
 .carousel_arrow_left,
@@ -95,7 +95,7 @@
 
 .carouselPagination {
   position: absolute;
-  bottom: 5px;
+  bottom: -15%;
   left: 50%;
   transform: translate(-50%, 0);
 }
@@ -103,7 +103,7 @@
 .pagination_dot {
   height: 10px;
   width: 10px;
-  background-color: #f5f5f5;
+  background-color: #d6d0d0;
   border-radius: 50%;
   display: inline-block;
   margin-left: 10px;
@@ -118,48 +118,78 @@
   background-color: steelblue;
 }
 
-@media (max-width:1200px) {
+@media (max-width:1405px) {
+  .carousel {
+    height: 450px;
+  }
+  
+}
+@media (max-width:1270px) {
   .carouselTitle {
-    font-size: 65px;
-   
+    font-size: 45px;
+  }
+  .carousel {
+    height: 420px;
+  }
+}
+@media (max-width:1100px) {
+  .carouselTitle {
+    font-size: 35px;
+  }
+  .carousel {
+    height: 350px;
+  }
+}
+@media (max-width:1000px) {
+  .carouselTitle {
+    font-size: 30px;
+  }
+  .carousel {
+    height: 320px;
   }
 }
 
 @media (max-width:800px) {
   .carouselTitle {
-    font-size: 45px;
+    font-size: 25px;
   }
   .carousel {
-    height: 400px;
+    height: 280px;
  
   }
 }
 
 @media (max-width:700px) {
   .carouselTitle {
-    font-size: 35px;
+    font-size: 20px;
   }
   .carousel {
-    height: 300px;
+    height: 230px;
     width: 90%;
   }
 }
+@media (max-width:600px) {
+  .carousel {
+    height: 190px;
+}
+.carouselTitle {
+  font-size: 18px;
+}
+}
 @media (max-width:500px) {
   .carouselTitle {
-    font-size: 25px;
+    font-size: 16px;
   }
   .carousel {
-    height: 200px;
+    height: 170px;
     width: 100%;
   }
 }
-@media (max-width:350px) {
+@media (max-width:440px) {
   .carouselTitle {
-    margin-top: 20px;
-    font-size: 8px;
+    font-size: 13px;
   }
   .carousel {
-    height: 120px;
-   
+    height: 130px;
   }
 }

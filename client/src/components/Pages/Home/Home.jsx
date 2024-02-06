@@ -16,7 +16,7 @@ const Home = () => {
     const productService = productServiceFactory();
     const { lastSeenProducts } = useProductContext();
 
-    const [waterpomps, setWaterpomps] = useState([]);
+    const [waterpumps, setWaterpumps] = useState([]);
     const [irigationSystems, setIrigationSystems] = useState([]);
     const [parts, setParts] = useState([]);
     const [powerMachines, setPowerMachines] = useState([]);
@@ -31,7 +31,7 @@ const Home = () => {
 
     useEffect(() => {
         Promise.all([
-            productService.getAll(productType.waterpomps),
+            productService.getAll(productType.waterpumps),
             productService.getAll(productType.irigationSystems),
             productService.getAll(productType.parts),
             productService.getAll(productType.powerMachines),
@@ -39,14 +39,14 @@ const Home = () => {
             productService.getAll(productType.tools),
 
         ]).then(([
-            waterpompsProducts,
+            waterpumpsProducts,
             irigationSystemsProducts,
             partsProducts,
             powerMachinesProducts,
             pipesProducts,
             toolsProducts,
         ]) => {
-            setWaterpomps(waterpompsProducts);
+            setWaterpumps(waterpumpsProducts);
             setIrigationSystems(irigationSystemsProducts);
             setParts(partsProducts);
             setPowerMachines(powerMachinesProducts);
@@ -65,9 +65,9 @@ const Home = () => {
 
 
             <div className='productContent'>
-                <h2>{productName.waterpomps}</h2>
-                {<Slider data={waterpomps} />}
-                <Link className='goTo' to="/shop/waterpomps">See all</Link>
+                <h2>{productName.waterpumps}</h2>
+                {<Slider data={waterpumps} />}
+                <Link className='goTo' to="/shop/waterpumps">See all</Link>
             </div>
 
             <div className='productContent'>

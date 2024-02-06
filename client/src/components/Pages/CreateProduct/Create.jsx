@@ -38,7 +38,7 @@ const Create = () => {
 
                         onChange={changeHandler}>
                         <option value=""  >Select your type</option>
-                        <option value="waterpomps">WATERPOMPS</option>
+                        <option value="waterpumps">WATERPUMPS</option>
                         <option value="systems">IRRIGATION SYSTEMS</option>
                         <option value="parts">PARTS</option>
                         <option value="machines">POWER MACHINES</option>

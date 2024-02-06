@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const WaterpompShema = new mongoose.Schema({
+const WaterpumpShema = new mongoose.Schema({
     type: {
         type: String,
         required: [true, 'Type is required!'],
@@ -53,6 +53,6 @@ const WaterpompShema = new mongoose.Schema({
     }],
 });
 
-const Waterpomp = mongoose.model('Waterpomp', WaterpompShema);
+const Waterpump = mongoose.model('Waterpump', WaterpumpShema);
 
-module.exports = Waterpomp;
+module.exports = Waterpump;

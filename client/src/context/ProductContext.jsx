@@ -28,14 +28,14 @@ export const ProductProvider = ({
     useEffect(() => {
         if (userId) {
             Promise.all([
-                productsService.getFavorite(productType.waterpomps, userId),
+                productsService.getFavorite(productType.waterpumps, userId),
                 productsService.getFavorite(productType.irigationSystems, userId),
                 productsService.getFavorite(productType.parts, userId),
                 productsService.getFavorite(productType.powerMachines, userId),
                 productsService.getFavorite(productType.pipes, userId),
                 productsService.getFavorite(productType.tools, userId),
             ]).then(([
-                waterpompsFavorite,
+                waterpumpsFavorite,
                 irigationSystemsFavorite,
                 partsFavorite,
                 powerMachinesFavorite,
@@ -43,7 +43,7 @@ export const ProductProvider = ({
                 toolsFavorite,
             ]) => {
                 setFavoriteProducts([
-                    ...waterpompsFavorite,
+                    ...waterpumpsFavorite,
                     ...irigationSystemsFavorite,
                     ...partsFavorite,
                     ...powerMachinesFavorite,
@@ -57,14 +57,14 @@ export const ProductProvider = ({
     useEffect(() => {
         if (userId) {
             Promise.all([
-                productsService.getBuy(productType.waterpomps, userId),
+                productsService.getBuy(productType.waterpumps, userId),
                 productsService.getBuy(productType.irigationSystems, userId),
                 productsService.getBuy(productType.parts, userId),
                 productsService.getBuy(productType.powerMachines, userId),
                 productsService.getBuy(productType.pipes, userId),
                 productsService.getBuy(productType.tools, userId),
             ]).then(([
-                waterpompsgetBuy,
+                waterpumpsgetBuy,
                 irigationSystemsgetBuy,
                 partsgetBuy,
                 powerMachinesgetBuy,
@@ -72,7 +72,7 @@ export const ProductProvider = ({
                 toolsgetBuy,
             ]) => {
                 setBuysProducts([
-                    ...waterpompsgetBuy,
+                    ...waterpumpsgetBuy,
                     ...irigationSystemsgetBuy,
                     ...partsgetBuy,
                     ...powerMachinesgetBuy,
@@ -86,14 +86,14 @@ export const ProductProvider = ({
     useEffect(() => {
         if (userId) {
             Promise.all([
-                productsService.getLastSeen(productType.waterpomps, userId),
+                productsService.getLastSeen(productType.waterpumps, userId),
                 productsService.getLastSeen(productType.irigationSystems, userId),
                 productsService.getLastSeen(productType.parts, userId),
                 productsService.getLastSeen(productType.powerMachines, userId),
                 productsService.getLastSeen(productType.pipes, userId),
                 productsService.getLastSeen(productType.tools, userId),
             ]).then(([
-                waterpompsgetSeen,
+                waterpumpsgetSeen,
                 irigationSystemsgetSeen,
                 partsgetSeen,
                 powerMachinesgetSeen,
@@ -101,7 +101,7 @@ export const ProductProvider = ({
                 toolsgetSeen,
             ]) => {
                 setLastSeenProducts([
-                    ...waterpompsgetSeen,
+                    ...waterpumpsgetSeen,
                     ...irigationSystemsgetSeen,
                     ...partsgetSeen,
                     ...powerMachinesgetSeen,

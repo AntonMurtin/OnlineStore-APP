@@ -20,31 +20,33 @@ const Search = () => {
     }, [pathname]);
 
     useEffect(() => {
-        Promise.all([
-            productService.search(productType.waterpomps, search),
-            productService.search(productType.irigationSystems, search),
-            productService.search(productType.parts, search),
-            productService.search(productType.powerMachines, search),
-            productService.search(productType.pipes, search),
-            productService.search(productType.tools, search),
-
-        ]).then(([
-            waterpompsData,
-            systemsData,
-            partsData,
-            machinesData,
-            pipesData,
-            toolsData,
-        ]) => {
-            setProducts([
-                ...waterpompsData,
-                ...systemsData,
-                ...partsData,
-                ...machinesData,
-                ...pipesData,
-                ...toolsData,
-            ]);
-        })
+        if(search){
+            Promise.all([
+                productService.search(productType.waterpumps, search),
+                productService.search(productType.irigationSystems, search),
+                productService.search(productType.parts, search),
+                productService.search(productType.powerMachines, search),
+                productService.search(productType.pipes, search),
+                productService.search(productType.tools, search),
+    
+            ]).then(([
+                waterpumpsData,
+                systemsData,
+                partsData,
+                machinesData,
+                pipesData,
+                toolsData,
+            ]) => {
+                setProducts([
+                    ...waterpumpsData,
+                    ...systemsData,
+                    ...partsData,
+                    ...machinesData,
+                    ...pipesData,
+                    ...toolsData,
+                ]);
+            })
+        }
     }, [search]);
 
     return (

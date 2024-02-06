@@ -1,7 +1,7 @@
 export const admin = 'antonmurtin@gmail.com';
 
 export const productName = {
-    waterpomps: 'Water Pomp',
+    waterpumps: 'Water Pump',
     irigationSystems: 'Irigation Systems',
     parts: 'Parts',
     powerMachines: 'Power Mashines',
@@ -10,7 +10,7 @@ export const productName = {
 }
 
 export const productType = {
-    waterpomps: 'waterpomps',
+    waterpumps: 'waterpumps',
     irigationSystems: 'irigationSystems',
     parts: 'parts',
     powerMachines: 'powerMachines',
@@ -40,7 +40,7 @@ export const inputValidtion = {
     password: '^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,15}$',
     phone: '^([0]{1}[8]{1}[7-9]{1}[7-9]{1}[0-9]{6})TOOL-3/16" HEX HEAD',
     name: '^(?=.{3,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$',
-    type: '/(?:^|(?<= ))(waterpomps|systems|parts|machines|pipes|tools [1-7]\d*$)(?:(?= )|$)/',
+    type: '/(?:^|(?<= ))(waterpumps|systems|parts|machines|pipes|tools [1-7]\d*$)(?:(?= )|$)/',
     town: '^([0-9]*[a-zA-Z]){3,}[0-9]*$',
     street: '^([0-9]*[a-zA-Z]){3,}[0-9]*$',
     description: '^([0-9]*[a-zA-Z]){3,}[0-9]*$',

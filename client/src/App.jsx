@@ -10,7 +10,7 @@ import { ProductProvider } from './context/ProductContext'
 import Header from './components/Header/Header'
 import Home from './components/Pages/Home/Home'
 import Shop from './components/Pages/Shop/Shop'
-import Waterpomp from './components/Pages/Shop/Waterpomp/Waterpomp'
+import Waterpump from './components/Pages/Shop/Waterpump/Waterpump'
 import IrrigationSystems from './components/Pages/Shop/IrrigationSystems/IrrigationSystems'
 import Parts from './components/Pages/Shop/Parts/Parts'
 import PowerMachines from './components/Pages/Shop/PowerMachines/PowerMachines'
@@ -25,6 +25,8 @@ import BuyProducts from './components/Pages/BuyProducts/BuyProducts'
 import Search from './components/Pages/SearchPage/Search'
 import LastSeen from './components/Pages/Shop/LastSeen/LastSeen'
 import Footer from './components/Footer/Footer'
+import Services from './components/Services/Services'
+
 
 
 function App() {
@@ -44,8 +46,9 @@ function App() {
               <Route path='/search' element={<Search />} />
               <Route path='/buy' element={<BuyProducts />} />
               <Route path='/lastSeen' element={<LastSeen />} />
+              <Route path='/services/:type' element={<Services />} />
               <Route path='/shop' element={<Shop />} />
-              <Route path='/shop/waterpomps' element={<Waterpomp />} />
+              <Route path='/shop/waterpumps' element={<Waterpump />} />
               <Route path='/shop/irigationSystems' element={<IrrigationSystems />} />
               <Route path='/shop/parts' element={<Parts />} />
               <Route path='/shop/powerMachines' element={<PowerMachines />} />

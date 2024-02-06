@@ -10,10 +10,10 @@ import { useProductContext } from '../../../../context/ProductContext';
 
 
 
-const Waterpomp = () => {
+const Waterpump = () => {
     const productservice = productServiceFactory();
     const {lastSeenProducts}=useProductContext();
-    const [waterpomps, setWaterpomps] = useState([]);
+    const [waterpumps, setWaterpumps] = useState([]);
 
      const {pathname}=useLocation();
 
@@ -22,18 +22,18 @@ const Waterpomp = () => {
      },[pathname]);
 
      useEffect(()=>{
-        productservice.getAll(productType.waterpomps)
-        .then(data=>setWaterpomps(data))
+        productservice.getAll(productType.waterpumps)
+        .then(data=>setWaterpumps(data))
      },[pathname]);
    
     return (
        <div className="page">
             <div className="productPage">
-                {waterpomps && waterpomps.map(x =>
+                {waterpumps && waterpumps.map(x =>
                     <ProductCard key={x._id} {...x} />
                 )}
             </div>
-            {waterpomps.length === 0 && (
+            {waterpumps.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>
             )}
             {lastSeenProducts.length > 2 && (
@@ -51,4 +51,4 @@ const Waterpomp = () => {
     );
 };
 
-export default Waterpomp;
+export default Waterpump;

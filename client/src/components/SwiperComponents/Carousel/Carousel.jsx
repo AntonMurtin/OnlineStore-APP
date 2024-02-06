@@ -1,9 +1,9 @@
 import './Carousel.css'
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
+import { Link } from 'react-router-dom';
 
-
-export const Carousel=({ data })=> {
+export const Carousel = ({ data }) => {
     const [current, setCurrent] = useState(0);
     const [autoPlay, setAutoPlay] = useState(true);
     let timeOut = null;
@@ -47,9 +47,11 @@ export const Carousel=({ data })=> {
                                     : "carouselCard"
                             }
                         >
-                            <img className="carouselImage" src={image.image} alt={image.title}/>
+                            <img className="carouselImage" src={image.image} alt={image.title} />
                             <div className="carouselOverlay">
-                                <h2 className="carouselTitle">{image.title}</h2>
+                                <Link to={`/services/${image.type}`}>
+                                    <h2 className="carouselTitle">{image.title}</h2>
+                                </Link>
                             </div>
                         </div>
                     );

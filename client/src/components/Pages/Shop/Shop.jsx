@@ -11,7 +11,7 @@ const Shop = () => {
             <div className="shopDiv">
                 <div className="shopCard shopCard--1">
                     <div className="shopCardImg"></div>
-                    <Link to="/shop/waterpomps" >
+                    <Link to="/shop/waterpumps" >
                         <div className="shopCardImg--hover"></div>
                     </Link>
                     <div className="shopCardInfo">
