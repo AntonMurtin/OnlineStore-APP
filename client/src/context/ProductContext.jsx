@@ -15,12 +15,11 @@ export const ProductProvider = ({
     const navigate = useNavigate();
     const dispatch = useNotification();
 
-    const productsService = productServiceFactory();
+    const productService = productServiceFactory();
     const { userId } = useAuthContext();
 
     const [favoriteProducts, setFavoriteProducts] = useState([]);
     const [buysProducts, setBuysProducts] = useState([]);
-    const [lastSeenProducts, setLastSeenProducts] = useState([]);
     const [totalPrice, setTotalprice] = useState(0.0);
     const [search, setSearch] = useState(null);
 
@@ -28,12 +27,12 @@ export const ProductProvider = ({
     useEffect(() => {
         if (userId) {
             Promise.all([
-                productsService.getFavorite(productType.waterpumps, userId),
-                productsService.getFavorite(productType.irigationSystems, userId),
-                productsService.getFavorite(productType.parts, userId),
-                productsService.getFavorite(productType.powerMachines, userId),
-                productsService.getFavorite(productType.pipes, userId),
-                productsService.getFavorite(productType.tools, userId),
+                productService.getFavorite(productType.waterpumps, userId),
+                productService.getFavorite(productType.irigationSystems, userId),
+                productService.getFavorite(productType.parts, userId),
+                productService.getFavorite(productType.powerMachines, userId),
+                productService.getFavorite(productType.pipes, userId),
+                productService.getFavorite(productType.tools, userId),
             ]).then(([
                 waterpumpsFavorite,
                 irigationSystemsFavorite,
@@ -57,12 +56,12 @@ export const ProductProvider = ({
     useEffect(() => {
         if (userId) {
             Promise.all([
-                productsService.getBuy(productType.waterpumps, userId),
-                productsService.getBuy(productType.irigationSystems, userId),
-                productsService.getBuy(productType.parts, userId),
-                productsService.getBuy(productType.powerMachines, userId),
-                productsService.getBuy(productType.pipes, userId),
-                productsService.getBuy(productType.tools, userId),
+                productService.getBuy(productType.waterpumps, userId),
+                productService.getBuy(productType.irigationSystems, userId),
+                productService.getBuy(productType.parts, userId),
+                productService.getBuy(productType.powerMachines, userId),
+                productService.getBuy(productType.pipes, userId),
+                productService.getBuy(productType.tools, userId),
             ]).then(([
                 waterpumpsgetBuy,
                 irigationSystemsgetBuy,
@@ -83,34 +82,34 @@ export const ProductProvider = ({
         };
     }, [userId]);
 
-    useEffect(() => {
-        if (userId) {
-            Promise.all([
-                productsService.getLastSeen(productType.waterpumps, userId),
-                productsService.getLastSeen(productType.irigationSystems, userId),
-                productsService.getLastSeen(productType.parts, userId),
-                productsService.getLastSeen(productType.powerMachines, userId),
-                productsService.getLastSeen(productType.pipes, userId),
-                productsService.getLastSeen(productType.tools, userId),
-            ]).then(([
-                waterpumpsgetSeen,
-                irigationSystemsgetSeen,
-                partsgetSeen,
-                powerMachinesgetSeen,
-                pipesgetSeen,
-                toolsgetSeen,
-            ]) => {
-                setLastSeenProducts([
-                    ...waterpumpsgetSeen,
-                    ...irigationSystemsgetSeen,
-                    ...partsgetSeen,
-                    ...powerMachinesgetSeen,
-                    ...pipesgetSeen,
-                    ...toolsgetSeen,
-                ]);
-            });
-        };
-    }, [userId]);
+    // useEffect(() => {
+    //     if (userId) {
+    //         Promise.all([
+    //             productService.getLastSeen(productType.waterpumps, userId),
+    //             productService.getLastSeen(productType.irigationSystems, userId),
+    //             productService.getLastSeen(productType.parts, userId),
+    //             productService.getLastSeen(productType.powerMachines, userId),
+    //             productService.getLastSeen(productType.pipes, userId),
+    //             productService.getLastSeen(productType.tools, userId),
+    //         ]).then(([
+    //             waterpumpsgetSeen,
+    //             irigationSystemsgetSeen,
+    //             partsgetSeen,
+    //             powerMachinesgetSeen,
+    //             pipesgetSeen,
+    //             toolsgetSeen,
+    //         ]) => {
+    //             setLastSeenProducts([
+    //                 ...waterpumpsgetSeen,
+    //                 ...irigationSystemsgetSeen,
+    //                 ...partsgetSeen,
+    //                 ...powerMachinesgetSeen,
+    //                 ...pipesgetSeen,
+    //                 ...toolsgetSeen,
+    //             ]);
+    //         });
+    //     };
+    // }, [userId]);
 
     useEffect(() => {
         if (buysProducts.length > 0) {
@@ -124,7 +123,7 @@ export const ProductProvider = ({
 
     const onDeleteProduct = async (type, id) => {
         try {
-            await productsService.del(type, id);
+            await productService.del(type, id);
             navigate(`/shop/${type}`);
         } catch (error) {
             dispatch({
@@ -138,7 +137,7 @@ export const ProductProvider = ({
         const type = data.type;
         data.quantity = 1;
         try {
-            await productsService.create(type, data);
+            await productService.create(type, data);
             navigate(`/shop/${type}`);
         } catch (error) {
             dispatch({
@@ -152,7 +151,7 @@ export const ProductProvider = ({
         const type = data.type;
         const id = data._id;
         try {
-            await productsService.edit(type, id, data);
+            await productService.edit(type, id, data);
             navigate(`/shop/${type}/${id}`);
         } catch (error) {
             dispatch({
@@ -168,7 +167,7 @@ export const ProductProvider = ({
 
     const onAddFavorite = async (type, id, userId) => {
         try {
-            const result = await productsService.addFavorite(type, id, { userId });
+            const result = await productService.addFavorite(type, id, { userId });
             setFavoriteProducts(state => [...state, result]);
             dispatch({
                 type: 'SUCCESS',
@@ -184,7 +183,7 @@ export const ProductProvider = ({
 
     const onRemoveFavorite = async (type, id, userId) => {
         try {
-            const result = await productsService.removeFavorite(type, id, { userId });
+            const result = await productService.removeFavorite(type, id, { userId });
             setFavoriteProducts(state => state.filter(x => x._id !== id));
             dispatch({
                 type: 'REMOVE',
@@ -201,7 +200,7 @@ export const ProductProvider = ({
 
     const onBuyProduct = async (type, id, userId) => {
         try {
-            const result = await productsService.addBuy(type, id, { userId });
+            const result = await productService.addBuy(type, id, { userId });
             setBuysProducts(state => [...state, result]);
             dispatch({
                 type: 'SUCCESS',
@@ -217,7 +216,7 @@ export const ProductProvider = ({
 
     const onRemoveBuy = async (type, id, userId) => {
         try {
-            const result = await productsService.removeBuy(type, id, { userId });
+            const result = await productService.removeBuy(type, id, { userId });
             setBuysProducts(state => state.filter(x => x._id !== id));
             dispatch({
                 type: 'REMOVE',
@@ -231,18 +230,18 @@ export const ProductProvider = ({
         };
     };
 
-    const onAddSeenProduct = async (type, id, userId) => {
-        try {
-            const result = await productsService.addLastSeen(type, id, { userId });
-            setLastSeenProducts(state => [...state, result]);
+    // const onAddSeenProduct = async (type, id, userId) => {
+    //     try {
+    //         const result = await productsService.addLastSeen(type, id, { userId });
+    //         // setLastSeenProducts(state => [...state, result]);
            
-        } catch (error) {
-            dispatch({
-                type: 'ERROR',
-                message: error,
-            });
-        };
-    };
+    //     } catch (error) {
+    //         dispatch({
+    //             type: 'ERROR',
+    //             message: error,
+    //         });
+    //     };
+    // };
 
     const changeQty = (id, value) => {
         const foundProduct = buysProducts.find((item) => item._id === id);
@@ -264,7 +263,6 @@ export const ProductProvider = ({
         favoriteProducts,
         buysProducts,
         totalPrice,
-        lastSeenProducts,
         onDeleteProduct,
         onCreateProduct,
         onEditProduct,
@@ -274,7 +272,7 @@ export const ProductProvider = ({
         onBuyProduct,
         onRemoveBuy,
         changeQty,
-        onAddSeenProduct,
+        // onAddSeenProduct,
     }
     return (
         <ProductContext.Provider value={value}>

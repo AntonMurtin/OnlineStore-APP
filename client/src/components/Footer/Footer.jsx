@@ -12,11 +12,11 @@ const Footer = () => {
                     <div className="footCol">
                         <h4>get help</h4>
                         <ul>
-                            <li><Link to='#'>shipping</Link></li>
-                            <li><Link to='#'>returns</Link></li>
-                            <li><Link to='#'>order status</Link></li>
-                            <li><Link to='#'>warranty</Link></li>
-                            <li><Link to='#'>peyment options</Link></li>
+                            <li><Link to='/comingSoon'>shipping</Link></li>
+                            <li><Link to='/comingSoon'>returns</Link></li>
+                            <li><Link to='/comingSoon'>order status</Link></li>
+                            <li><Link to='/comingSoon'>warranty</Link></li>
+                            <li><Link to='/comingSoon'>peyment options</Link></li>
                         </ul>
                     </div>
 
@@ -36,7 +36,7 @@ const Footer = () => {
                         <ul>
                             <li><Link to='/shop/waterpumps'>waterpomps</Link></li>
                             <li><Link to='/shop/irigationSystems'>irrigation systems</Link></li>
-                            <li><Link to='/shop/part'>parts</Link></li>
+                            <li><Link to='/shop/parts'>parts</Link></li>
                             <li><Link to='/shop/powerMachines'>power mashines</Link></li>
                             <li><Link to='/shop/pipes'>pipes</Link></li>
                             <li><Link to='/shop/tools'>tools</Link></li>

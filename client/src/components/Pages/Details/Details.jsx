@@ -4,22 +4,28 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import { useProductContext } from '../../../context/ProductContext'
 import { useAuthContext } from '../../../context/AuthContext'
 
-import { productServiceFactory } from '../../../sevices/productService'
-import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
-import { Slider } from '../../SwiperComponents/Slider/Slider'
-import { productName } from '../../../config/constants/constants'
+import { productServiceFactory } from '../../../sevices/productService';
+import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard';
+import { Slider } from '../../SwiperComponents/Slider/Slider';
+import { productName } from '../../../config/constants/constants';
+import { useNotification } from '../../../context/NotificationContext';
+import { productType } from '../../../config/constants/constants';
 
 const Details = () => {
     const { pathname } = useLocation();
-    const { productType, productId } = useParams()
-    const productService = productServiceFactory();
-    const { lastSeenProducts, onAddSeenProduct } = useProductContext();
-    const { userId } = useAuthContext()
+    const { type, id } = useParams();
 
+    const productService = productServiceFactory();
+    const dispatch = useNotification();
+
+    const { userId } = useAuthContext();
+    
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
-    const allProducts = products.filter(x => x._id !== productId);
+
+    const allProducts = products.filter(x => x._id !== id);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -27,8 +33,8 @@ const Details = () => {
 
     useEffect(() => {
         Promise.all([
-            productService.getById(productType, productId),
-            productService.getAll(productType),
+            productService.getById(type,id),
+            productService.getAll(type),
         ]).then(([
             productData,
             productsData,
@@ -36,13 +42,52 @@ const Details = () => {
             setProduct(productData)
             setProducts(productsData)
         })
-    }, [productId])
+    }, [id]);
 
     useEffect(() => {
         if (userId) {
-            onAddSeenProduct(productType, productId, userId)
+            Promise.all([
+                productService.getLastSeen(productType.waterpumps, userId),
+                productService.getLastSeen(productType.irigationSystems, userId),
+                productService.getLastSeen(productType.parts, userId),
+                productService.getLastSeen(productType.powerMachines, userId),
+                productService.getLastSeen(productType.pipes, userId),
+                productService.getLastSeen(productType.tools, userId),
+            ]).then(([
+                waterpumpsgetSeen,
+                irigationSystemsgetSeen,
+                partsgetSeen,
+                powerMachinesgetSeen,
+                pipesgetSeen,
+                toolsgetSeen,
+            ]) => {
+                setLastSeenProducts([
+                    ...waterpumpsgetSeen,
+                    ...irigationSystemsgetSeen,
+                    ...partsgetSeen,
+                    ...powerMachinesgetSeen,
+                    ...pipesgetSeen,
+                    ...toolsgetSeen,
+                ]);
+            });
+        };
+    }, [id]);
+
+    useEffect(() => {
+        if (userId){
+            
+            try {
+                productService.addLastSeen(type, id, { userId });
+            } catch (error) {
+                console.log(error);
+                // dispatch({
+                //     type: 'ERROR',
+                //     message: error,
+                // });
         }
-    }, [productId])
+        };
+    }, [id]);
+
 
     return (
         <section className='page'>

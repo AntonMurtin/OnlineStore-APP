@@ -1,0 +1,26 @@
+.comingSoon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    margin: auto;
+    margin-top: 8%;
+    margin-bottom: 5%;
+    box-shadow: 0 15px 30px 1px grey;
+    background: white;
+    text-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+    height: max-content;
+    width: 50%;
+}
+
+.comingSoonDiv{
+    padding: auto;
+    object-fit: cover;
+    text-align: center;
+}
+.comingSoonDiv>img{
+    width: 70%;
+    
+}

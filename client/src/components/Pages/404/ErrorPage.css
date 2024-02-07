@@ -1,0 +1,56 @@
+.errorPage{
+	box-shadow: 0 15px 30px 1px grey;
+	background: white;
+	text-align: center;
+	border-radius: 30px;
+	margin: 8em  auto;
+	height: max-content;
+	width: 80%;
+}
+.errorDiv{
+    display: inline;
+    position: relative;
+}
+   
+
+.errorTitle{
+	color: black;
+    padding: 3% 10Px;
+	text-align: center;
+    font-size:300%;
+    font-weight:500;
+
+}
+
+
+.errorPage>img{
+    width: 30%;
+}
+
+@media (max-width:1300px) {
+    .errorTitle{
+        font-size:250%;
+        font-weight:500;
+    }
+}
+@media (max-width:1150px) {
+    .errorTitle{
+        font-size:200%;
+        font-weight:300;
+    }
+}
+@media (max-width:850px) {
+    .errorTitle{
+        font-size:150%;
+    }
+}
+@media (max-width:700px) {
+.errorTitle{
+    padding: 12% 10Px;
+}  
+}
+@media (max-width:500px) {
+    .errorTitle{
+        font-size:100%;
+    }  
+}

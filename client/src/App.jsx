@@ -25,7 +25,10 @@ import BuyProducts from './components/Pages/BuyProducts/BuyProducts'
 import Search from './components/Pages/SearchPage/Search'
 import LastSeen from './components/Pages/Shop/LastSeen/LastSeen'
 import Footer from './components/Footer/Footer'
-import Services from './components/Services/Services'
+import Services from './components/Pages/Services/Services'
+
+import ErrorPage from './components/Pages/404/ErrorPage'
+import Comingsoon from './components/Pages/ComingSoon/Comingsoon'
 
 
 
@@ -54,8 +57,10 @@ function App() {
               <Route path='/shop/powerMachines' element={<PowerMachines />} />
               <Route path='/shop/pipes' element={<Pipes />} />
               <Route path='/shop/tools' element={<Tools />} />
-              <Route path='/shop/:productType/:productId' element={<Details />} />
+              <Route path='/shop/:type/:id' element={<Details />} />
               <Route path='/shop/:productType/:productId/edit' element={<EditProduct />} />
+              <Route path='/comingSoon' element={<Comingsoon />} />
+              <Route path='/*' element={<ErrorPage />} />
             </Routes>
           </div>
           <Footer/>

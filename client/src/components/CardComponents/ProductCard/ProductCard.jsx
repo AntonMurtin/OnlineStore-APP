@@ -23,17 +23,11 @@ export const ProductCard = (data) => {
       if (data.favorite.length > 0) {
         const result = data.favorite.filter(x => x._id === userId);
         if (result.length > 0) {
-          setIsFavorit(true);
           setAddClass('fa-solid')
+          setIsFavorit(true);
         }
       }
-      // if (data.buy.length > 0) {
-      //   const result = data.buy.filter(x => x._id === userId);
-      //   if (result.length > 0) {
-      //     setIsBuy('disabledBuyBtn');
-         
-      //   }
-      // }
+
     }
   }, [userId]);
 
@@ -56,11 +50,11 @@ export const ProductCard = (data) => {
     }
   }
   const onBuy = () => {
-    if(userId){
+    if (userId) {
 
       onBuyProduct(data.type, data._id, userId);
       setIsBuy('disabledBuyBtn')
-    }else {
+    } else {
       dispatch({
         type: 'ERROR',
         message: 'You must first login!',
@@ -75,8 +69,7 @@ export const ProductCard = (data) => {
         onClick={onChange}
         className="productFavorite">
         <i
-          className={`fa-heart fa-2x
-      ${addClass} `}></i></span>
+          className={`fa-heart fa-2x ${addClass}`}></i></span>
 
       <div className="cardImages">
 

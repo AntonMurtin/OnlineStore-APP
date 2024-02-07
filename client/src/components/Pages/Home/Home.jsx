@@ -9,12 +9,14 @@ import { Slider } from '../../SwiperComponents/Slider/Slider';
 import homeData from '../../../config/data/homeData';
 import { productName, productType } from '../../../config/constants/constants';
 import { productServiceFactory } from '../../../sevices/productService';
-import { useProductContext } from '../../../context/ProductContext';
+
+import { useAuthContext } from '../../../context/AuthContext';
 
 
 const Home = () => {
     const productService = productServiceFactory();
-    const { lastSeenProducts } = useProductContext();
+    
+    const {userId}=useAuthContext()
 
     const [waterpumps, setWaterpumps] = useState([]);
     const [irigationSystems, setIrigationSystems] = useState([]);
@@ -22,14 +24,17 @@ const Home = () => {
     const [powerMachines, setPowerMachines] = useState([]);
     const [pipes, setPipes] = useState([]);
     const [tools, setTools] = useState([]);
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
-    const { pathname } = useLocation()
-
+    const { pathname } = useLocation();
+    
     useEffect(() => {
+        
         window.scrollTo(0, 0);
     }, [pathname]);
 
     useEffect(() => {
+        
         Promise.all([
             productService.getAll(productType.waterpumps),
             productService.getAll(productType.irigationSystems),
@@ -53,6 +58,35 @@ const Home = () => {
             setPipes(pipesProducts);
             setTools(toolsProducts);
         })
+    }, [pathname]);
+
+    useEffect(() => {
+        if (userId) {
+            Promise.all([
+                productService.getLastSeen(productType.waterpumps, userId),
+                productService.getLastSeen(productType.irigationSystems, userId),
+                productService.getLastSeen(productType.parts, userId),
+                productService.getLastSeen(productType.powerMachines, userId),
+                productService.getLastSeen(productType.pipes, userId),
+                productService.getLastSeen(productType.tools, userId),
+            ]).then(([
+                waterpumpsgetSeen,
+                irigationSystemsgetSeen,
+                partsgetSeen,
+                powerMachinesgetSeen,
+                pipesgetSeen,
+                toolsgetSeen,
+            ]) => {
+                setLastSeenProducts([
+                    ...waterpumpsgetSeen,
+                    ...irigationSystemsgetSeen,
+                    ...partsgetSeen,
+                    ...powerMachinesgetSeen,
+                    ...pipesgetSeen,
+                    ...toolsgetSeen,
+                ]);
+            });
+        };
     }, [pathname]);
 
     return (

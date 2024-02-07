@@ -37,4 +37,4 @@ const BuyProducts = () => {
   )
 }
 
-export default BuyProducts
+export default BuyProducts;

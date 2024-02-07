@@ -6,14 +6,19 @@ import { productType } from '../../../../config/constants/constants';
 import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
 import { productServiceFactory } from '../../../../sevices/productService';
 import { Slider } from '../../../SwiperComponents/Slider/Slider';
-import { useProductContext } from '../../../../context/ProductContext';
+import { useAuthContext } from '../../../../context/AuthContext';
 
 
 
 const Waterpump = () => {
-    const productservice = productServiceFactory();
-    const {lastSeenProducts}=useProductContext();
+    const productService = productServiceFactory();
+    const {userId}=useAuthContext();
+
+
     const [waterpumps, setWaterpumps] = useState([]);
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
+  
+
 
      const {pathname}=useLocation();
 
@@ -22,9 +27,38 @@ const Waterpump = () => {
      },[pathname]);
 
      useEffect(()=>{
-        productservice.getAll(productType.waterpumps)
+        productService.getAll(productType.waterpumps)
         .then(data=>setWaterpumps(data))
      },[pathname]);
+
+     useEffect(() => {
+        if (userId) {
+            Promise.all([
+                productService.getLastSeen(productType.waterpumps, userId),
+                productService.getLastSeen(productType.irigationSystems, userId),
+                productService.getLastSeen(productType.parts, userId),
+                productService.getLastSeen(productType.powerMachines, userId),
+                productService.getLastSeen(productType.pipes, userId),
+                productService.getLastSeen(productType.tools, userId),
+            ]).then(([
+                waterpumpsgetSeen,
+                irigationSystemsgetSeen,
+                partsgetSeen,
+                powerMachinesgetSeen,
+                pipesgetSeen,
+                toolsgetSeen,
+            ]) => {
+                setLastSeenProducts([
+                    ...waterpumpsgetSeen,
+                    ...irigationSystemsgetSeen,
+                    ...partsgetSeen,
+                    ...powerMachinesgetSeen,
+                    ...pipesgetSeen,
+                    ...toolsgetSeen,
+                ]);
+            });
+        };
+    }, [pathname]);
    
     return (
        <div className="page">

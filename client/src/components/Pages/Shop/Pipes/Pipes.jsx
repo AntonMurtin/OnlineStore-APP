@@ -5,12 +5,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { productServiceFactory } from '../../../../sevices/productService';
 import { productType } from '../../../../config/constants/constants';
 import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
-import { useProductContext } from '../../../../context/ProductContext';
 import { Slider } from '../../../SwiperComponents/Slider/Slider';
+import { useAuthContext } from '../../../../context/AuthContext';
 
 const Pipes = () => {
-    const productservice = productServiceFactory();
-    const {lastSeenProducts}=useProductContext();
+    const productService = productServiceFactory();
+    const { userId } = useAuthContext();
+
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
     const [pipes, setPipes] = useState([]);
 
     const { pathname } = useLocation();
@@ -20,9 +22,39 @@ const Pipes = () => {
     }, [pathname]);
 
     useEffect(() => {
-        productservice.getAll(productType.pipes)
+        productService.getAll(productType.pipes)
             .then(data => setPipes(data))
-    }, [pathname])
+    }, [pathname]);
+
+    useEffect(() => {
+        if (userId) {
+            Promise.all([
+                productService.getLastSeen(productType.waterpumps, userId),
+                productService.getLastSeen(productType.irigationSystems, userId),
+                productService.getLastSeen(productType.parts, userId),
+                productService.getLastSeen(productType.powerMachines, userId),
+                productService.getLastSeen(productType.pipes, userId),
+                productService.getLastSeen(productType.tools, userId),
+            ]).then(([
+                waterpumpsgetSeen,
+                irigationSystemsgetSeen,
+                partsgetSeen,
+                powerMachinesgetSeen,
+                pipesgetSeen,
+                toolsgetSeen,
+            ]) => {
+                setLastSeenProducts([
+                    ...waterpumpsgetSeen,
+                    ...irigationSystemsgetSeen,
+                    ...partsgetSeen,
+                    ...powerMachinesgetSeen,
+                    ...pipesgetSeen,
+                    ...toolsgetSeen,
+                ]);
+            });
+        };
+    }, [pathname]);
+
 
     return (
         <div className="page">

@@ -2,15 +2,19 @@ import '../Product.css';
 import React, { useEffect, useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
+
 import { productType } from '../../../../config/constants/constants';
 import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
 import { productServiceFactory } from '../../../../sevices/productService';
-import { useProductContext } from '../../../../context/ProductContext';
 import { Slider } from '../../../SwiperComponents/Slider/Slider';
+import { useAuthContext } from '../../../../context/AuthContext';
+
 const Tools = () => {
-    const productservice = productServiceFactory();
-    const {lastSeenProducts}=useProductContext();
+    const productService = productServiceFactory();
+
     const [tools, setTools] = useState([]);
+    const { userId } = useAuthContext();
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
     const { pathname } = useLocation();
 
@@ -19,8 +23,38 @@ const Tools = () => {
     }, [pathname]);
 
     useEffect(() => {
-        productservice.getAll(productType.tools)
+        productService.getAll(productType.tools)
             .then(data => setTools(data))
+    }, [pathname]);
+
+
+    useEffect(() => {
+        if (userId) {
+            Promise.all([
+                productService.getLastSeen(productType.waterpumps, userId),
+                productService.getLastSeen(productType.irigationSystems, userId),
+                productService.getLastSeen(productType.parts, userId),
+                productService.getLastSeen(productType.powerMachines, userId),
+                productService.getLastSeen(productType.pipes, userId),
+                productService.getLastSeen(productType.tools, userId),
+            ]).then(([
+                waterpumpsgetSeen,
+                irigationSystemsgetSeen,
+                partsgetSeen,
+                powerMachinesgetSeen,
+                pipesgetSeen,
+                toolsgetSeen,
+            ]) => {
+                setLastSeenProducts([
+                    ...waterpumpsgetSeen,
+                    ...irigationSystemsgetSeen,
+                    ...partsgetSeen,
+                    ...powerMachinesgetSeen,
+                    ...pipesgetSeen,
+                    ...toolsgetSeen,
+                ]);
+            });
+        };
     }, [pathname]);
     return (
         <div className="page">
@@ -30,7 +64,7 @@ const Tools = () => {
                 {tools && tools.map(x =>
                     <ProductCard key={x._id} {...x} />
                 )}
-              
+
             </div>
             {tools.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>

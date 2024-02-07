@@ -4,7 +4,6 @@ import './DetailsCard.css';
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useAuthContext } from '../../../context/AuthContext';
-// import { useFavoriteContext } from '../../../context/FavoriteContext';
 import { useNotification } from '../../../context/NotificationContext';
 import { useProductContext } from '../../../context/ProductContext';
 
@@ -44,12 +43,10 @@ export const DetailsCard = (product) => {
     const onChange = () => {
         if (userId) {
             if (isFavorit) {
-                console.log(isFavorit);
                 onRemoveFavorite(product.type, product._id, userId);
                 setIsFavorit(false);
                 setAddClass('fa-regular')
             } else if (!isFavorit) {
-                console.log(isFavorit);
                 onAddFavorite(product.type, product._id, userId);
                 setIsFavorit(true);
                 setAddClass('fa-solid')
