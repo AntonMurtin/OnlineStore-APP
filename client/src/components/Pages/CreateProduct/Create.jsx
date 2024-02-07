@@ -1,12 +1,15 @@
 import '../Register/Forms.css';
-import React from 'react'
-import { useForm } from '../../../hooks/useForm'
-import { useProductContext } from '../../../context/ProductContext'
-import { initialValuesCreate, initialFocusCreate } from '../../../config/constants/create'
-import { inputValidtion, errorMessage } from '../../../config/constants/constants'
+
+import React from 'react';
+
+import { useForm } from '../../../hooks/useForm';
+import { useProductContext } from '../../../context/ProductContext';
+
+import { initialValuesCreate, initialFocusCreate } from '../../../config/constants/create';
+import { inputValidtion, errorMessage } from '../../../config/constants/constants';
 
 const Create = () => {
-    const { onCreateProduct } = useProductContext()
+    const { onCreateProduct } = useProductContext();
 
     const {
         values,
@@ -122,7 +125,7 @@ const Create = () => {
             </form>
         </div>
 
-    )
-}
+    );
+};
 
-export default Create
+export default Create;

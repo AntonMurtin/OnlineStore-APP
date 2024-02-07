@@ -1,17 +1,19 @@
 import './Forms.css';
-import React, { useEffect } from 'react'
 
-import { useForm } from '../../../hooks/useForm'
-import { useAuthContext } from '../../../context/AuthContext';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { useForm } from '../../../hooks/useForm';
+import { useAuthContext } from '../../../context/AuthContext';
+
 import { errorMessage, inputValidtion } from '../../../config/constants/constants';
-import {initialFocusregister,initialValuesRegister,} from '../../../config/constants/register'
+import { initialFocusregister, initialValuesRegister, } from '../../../config/constants/register'
 
 const Register = () => {
 
     const initialValues = initialValuesRegister;
     const initialFocs = initialFocusregister;
-    
+
     const { onRegister } = useAuthContext();
     const { pathname } = useLocation();
 
@@ -151,7 +153,7 @@ const Register = () => {
                 <button className='btn-log-reg'>Create</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default Register;

@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { useProductContext } from '../../../context/ProductContext'
-import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Slider } from '../../SwiperComponents/Slider/Slider';
+
 import { productServiceFactory } from '../../../sevices/productService';
+import { useProductContext } from '../../../context/ProductContext';
 import { useAuthContext } from '../../../context/AuthContext';
-import { productType } from '../../../config/constants/constants';
+
+import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
+import { Slider } from '../../SwiperComponents/Slider/Slider';
+
+import { productName, productType } from '../../../config/constants/constants';
 
 const Favorite = () => {
     const productService = productServiceFactory();
-    
-    const {userId}=useAuthContext()
 
- const [lastSeenProducts, setLastSeenProducts] = useState([]);
-
+    const { userId } = useAuthContext();
     const { favoriteProducts } = useProductContext();
+
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
+
     const { pathname } = useLocation();
 
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
-    
+
     useEffect(() => {
         if (userId) {
             Promise.all([
@@ -61,15 +64,15 @@ const Favorite = () => {
             )}
             {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productContent'>
-                        <h2>Last Seen</h2>
+                    <div className='productTop'>
+                        <h2>{productName.lastSeen}</h2>
                         {<Slider data={lastSeenProducts} />}
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>
             )}
         </section>
-    )
-}
+    );
+};
 
 export default Favorite;

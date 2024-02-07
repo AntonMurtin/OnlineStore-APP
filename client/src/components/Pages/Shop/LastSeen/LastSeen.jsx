@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard';
 import { productServiceFactory } from '../../../../sevices/productService';
 import { useAuthContext } from '../../../../context/AuthContext';
-import { productType } from '../../../../config/constants/constants';
+import { productName, productType } from '../../../../config/constants/constants';
 
 const LastSeen = () => {
     const {pathname}=useLocation();
@@ -46,6 +46,9 @@ const LastSeen = () => {
     }, [pathname]);
 return (
       <div className="page">
+         <div className="productTop">
+            <h2>{productName.lastSeen}</h2>
+        </div>
            <div className="productPage">
                {lastSeenProducts && lastSeenProducts.map(x =>
                    <ProductCard key={x._id} {...x} />

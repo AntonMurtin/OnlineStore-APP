@@ -1,16 +1,20 @@
 import './LoginModal.css'
 
 import { Link, } from 'react-router-dom';
+
 import { useForm } from '../../../hooks/useForm';
 import { useAuthContext } from '../../../context/AuthContext';
+
 import { errorMessage, inputValidtion } from '../../../config/constants/constants';
-import {initialFocusLogin,initialValuesLogin,} from '../../../config/constants/login'
+import {initialFocusLogin,initialValuesLogin,} from '../../../config/constants/login';
+
 export const LoginModal = ({
     onOpen,
     onClose,
 }) => {
     if (!onOpen) return null;
-    const { onLogin } = useAuthContext()
+    const { onLogin } = useAuthContext();
+
     const onLoginSubmit = (values) => {
         onClose();
         onLogin(values);
@@ -23,7 +27,6 @@ export const LoginModal = ({
         initialValues,
         initialFocs,
         onLoginSubmit)
-
 
     return (
         <div className='login__Modal'>
@@ -71,6 +74,6 @@ export const LoginModal = ({
 
             </form>
         </div>
-    )
-}
+    );
+};
 

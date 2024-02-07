@@ -16,11 +16,40 @@
 }
 
 .comingSoonDiv{
-    padding: auto;
+    /* padding: auto; */
     object-fit: cover;
     text-align: center;
 }
 .comingSoonDiv>img{
-    width: 70%;
+    width: 100%;
     
+}
+
+@media (max-width:1200px) {
+    .comingSoon{
+        margin-top: 12%;
+    }
+}
+@media (max-width:820px) {
+    .comingSoon{
+        margin-top: 15%;
+    }
+}
+@media (max-width:820px) {
+    .comingSoon{
+        margin-top: 20%;
+        margin-bottom: 8%;
+    }
+}
+@media (max-width:650px) {
+    .comingSoon{
+        margin-top: 20%;
+        margin-bottom: 11%;
+    }
+}
+@media (max-width:450px) {
+    .comingSoon{
+        margin-top: 25%;
+        margin-bottom: 11%;
+    }
 }

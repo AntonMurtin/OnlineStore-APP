@@ -1,22 +1,24 @@
-import { useLocation } from 'react-router-dom';
 import './ComingSoon.css'
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Comingsoon = () => {
-    const {pathname}=useLocation();
+  const { pathname } = useLocation();
 
-    useEffect(()=>{
-       window.scrollTo(0,0);
-    },[pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
-    <div className="comingSoon">
+    <section >
+      <div className="comingSoon">
         <div className="comingSoonDiv">
-            
-               <img src="public/comingSoon_img/comingSoon.jpg" alt="" />
-        </div>
-    </div>
 
+          <img src="public/img/coming.jpg" a />
+        </div>
+      </div>
+    </section >
+   
   )
 }
 

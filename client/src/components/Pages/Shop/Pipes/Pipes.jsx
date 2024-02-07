@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 import { productServiceFactory } from '../../../../sevices/productService';
-import { productType } from '../../../../config/constants/constants';
+import { productName, productType } from '../../../../config/constants/constants';
 import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
 import { Slider } from '../../../SwiperComponents/Slider/Slider';
 import { useAuthContext } from '../../../../context/AuthContext';
@@ -58,7 +58,9 @@ const Pipes = () => {
 
     return (
         <div className="page">
-
+ <div className="productTop">
+            <h2>{productName.pipes}</h2>
+        </div>
             <div className="productPage">
 
                 {pipes && pipes.map(x =>
@@ -71,8 +73,8 @@ const Pipes = () => {
             )}
              {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productContent'>
-                        <h2>Last Seen</h2>
+                    <div className='productTop'>
+                        <h2>{productName.lastSeen}</h2>
                         {<Slider data={lastSeenProducts} />}
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>

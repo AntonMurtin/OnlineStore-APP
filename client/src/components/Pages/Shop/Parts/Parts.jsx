@@ -2,8 +2,8 @@ import '../Product.css';
 import React, { useEffect, useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
-import { productType } from '../../../../config/constants/constants';
-import {ProductCard} from '../../../CardComponents/ProductCard/ProductCard'
+import { productName, productType } from '../../../../config/constants/constants';
+import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
 import { productServiceFactory } from '../../../../sevices/productService';
 
 import { Slider } from '../../../SwiperComponents/Slider/Slider';
@@ -14,19 +14,19 @@ const Parts = () => {
     const { userId } = useAuthContext();
 
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
-     const [parts,setParts]=useState([]);
-     const {pathname}=useLocation();
+    const [parts, setParts] = useState([]);
+    const { pathname } = useLocation();
 
-     useEffect(()=>{
-        window.scrollTo(0,0);
-     },[pathname]);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
-     useEffect(()=>{
+    useEffect(() => {
         productService.getAll(productType.parts)
-        .then(data=>setParts(data))
-     },[pathname]);
+            .then(data => setParts(data))
+    }, [pathname]);
 
-     useEffect(() => {
+    useEffect(() => {
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -54,30 +54,32 @@ const Parts = () => {
             });
         };
     }, [pathname]);
-   
-    return (
-       <div className="page">
 
+    return (
+        <div className="page">
+            <div className="productTop">
+                <h2>{productName.parts}</h2>
+            </div>
             <div className="productPage">
 
                 {parts && parts.map(x =>
                     <ProductCard key={x._id} {...x} />
                 )}
-            
+
             </div>
             {parts.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>
             )}
-             {lastSeenProducts.length > 2 && (
+            {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productContent'>
-                        <h2>Last Seen</h2>
+                    <div className='productTop'>
+                        <h2>{productName.lastSeen}</h2>
                         {<Slider data={lastSeenProducts} />}
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>
             )}
-       </div>
+        </div>
     );
 };
 

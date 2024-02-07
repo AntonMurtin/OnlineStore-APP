@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
-import { useProductContext } from '../../../context/ProductContext'
-import { useAuthContext } from '../../../context/AuthContext'
-
 import { productServiceFactory } from '../../../sevices/productService';
+import { useAuthContext } from '../../../context/AuthContext'
+import { useNotification } from '../../../context/NotificationContext';
+
 import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard';
 import { Slider } from '../../SwiperComponents/Slider/Slider';
-import { productName } from '../../../config/constants/constants';
-import { useNotification } from '../../../context/NotificationContext';
-import { productType } from '../../../config/constants/constants';
+
+import { productName, productType } from '../../../config/constants/constants';
+
 
 const Details = () => {
     const { pathname } = useLocation();
@@ -19,7 +19,7 @@ const Details = () => {
     const dispatch = useNotification();
 
     const { userId } = useAuthContext();
-    
+
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
@@ -33,7 +33,7 @@ const Details = () => {
 
     useEffect(() => {
         Promise.all([
-            productService.getById(type,id),
+            productService.getById(type, id),
             productService.getAll(type),
         ]).then(([
             productData,
@@ -74,28 +74,23 @@ const Details = () => {
     }, [id]);
 
     useEffect(() => {
-        if (userId){
-            
+        if (userId) {
             try {
                 productService.addLastSeen(type, id, { userId });
             } catch (error) {
-                console.log(error);
-                // dispatch({
-                //     type: 'ERROR',
-                //     message: error,
-                // });
-        }
+                dispatch({
+                    type: 'ERROR',
+                    message: error,
+                });
+            }
         };
     }, [id]);
-
 
     return (
         <section className='page'>
 
-            <DetailsCard key={product._id}
-                {...product}
-            />
-
+            <DetailsCard key={product._id} {...product}/>
+            
             <div className='productContent'>
                 <h2>{productName[productType]}</h2>
                 {<Slider data={allProducts} />}
@@ -103,16 +98,15 @@ const Details = () => {
             </div>
             {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productContent'>
-                        <h2>Last Seen</h2>
+                    <div className='productTop'>
+                        <h2>{productName.lastSeen}</h2>
                         {<Slider data={lastSeenProducts} />}
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>
             )}
         </section>
-
     );
 };
 
-export default Details
+export default Details;

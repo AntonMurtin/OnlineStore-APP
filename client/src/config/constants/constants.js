@@ -7,6 +7,7 @@ export const productName = {
     powerMachines: 'Power Mashines',
     pipes: 'Pipes',
     tools: 'Tools',
+    lastSeen:'Last Seen',
 }
 
 export const productType = {

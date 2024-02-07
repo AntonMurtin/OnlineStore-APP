@@ -3,20 +3,21 @@ import './Home.css';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { useAuthContext } from '../../../context/AuthContext';
+import { productServiceFactory } from '../../../sevices/productService';
+
 import { Carousel } from '../../SwiperComponents/Carousel/Carousel';
 import { Slider } from '../../SwiperComponents/Slider/Slider';
 
-import homeData from '../../../config/data/homeData';
 import { productName, productType } from '../../../config/constants/constants';
-import { productServiceFactory } from '../../../sevices/productService';
+import homeData from '../../../config/data/homeData';
 
-import { useAuthContext } from '../../../context/AuthContext';
 
 
 const Home = () => {
     const productService = productServiceFactory();
-    
-    const {userId}=useAuthContext()
+
+    const { userId } = useAuthContext();
 
     const [waterpumps, setWaterpumps] = useState([]);
     const [irigationSystems, setIrigationSystems] = useState([]);
@@ -27,14 +28,14 @@ const Home = () => {
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
     const { pathname } = useLocation();
-    
+
     useEffect(() => {
-        
+
         window.scrollTo(0, 0);
     }, [pathname]);
 
     useEffect(() => {
-        
+
         Promise.all([
             productService.getAll(productType.waterpumps),
             productService.getAll(productType.irigationSystems),
@@ -93,7 +94,7 @@ const Home = () => {
         <div className="home_page">
             <div className="topContent">
                 <h2>Products & Services from Rain Systems</h2>
-               
+
                 {<Carousel data={homeData} />}
             </div>
 
@@ -136,7 +137,7 @@ const Home = () => {
             {lastSeenProducts.length > 2 && (
                 <>
                     <div className='productContent'>
-                        <h2>Last Seen</h2>
+                        <h2>{productName.lastSeen}</h2>
                         {<Slider data={lastSeenProducts} />}
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>

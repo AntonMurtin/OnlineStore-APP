@@ -1,6 +1,6 @@
 import '../Register/Forms.css';
 
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useForm } from '../../../hooks/useForm';
@@ -8,11 +8,11 @@ import { useForm } from '../../../hooks/useForm';
 import { useProductContext } from '../../../context/ProductContext';
 import { productServiceFactory } from '../../../sevices/productService';
 
-import { initialValuesCreate, initialFocusCreate } from '../../../config/constants/create'
-import { inputValidtion, errorMessage } from '../../../config/constants/constants'
+import { initialValuesCreate, initialFocusCreate } from '../../../config/constants/create';
+import { inputValidtion, errorMessage } from '../../../config/constants/constants';
 
 const EditProduct = () => {
-const {productType,productId}=useParams();
+const {type,id}=useParams();
 const {onEditProduct}=useProductContext();
 
 const productService=productServiceFactory();
@@ -30,11 +30,12 @@ const productService=productServiceFactory();
     );
 
     useEffect(() => {
-        productService.getById(productType, productId)
+        productService.getById(type, id)
             .then(result => {
                 changeValues(result)
             })
-    }, [productId])
+    }, [id]);
+
   return (
     <div className='createPage'>
             <form method='POST' className="createForm" onSubmit={onSubmit}>
