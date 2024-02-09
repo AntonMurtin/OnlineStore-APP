@@ -4,18 +4,22 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useForm } from '../../../hooks/useForm';
-
 import { useProductContext } from '../../../context/ProductContext';
 import { productServiceFactory } from '../../../sevices/productService';
 
 import { initialValuesCreate, initialFocusCreate } from '../../../config/constants/create';
-import { inputValidtion, errorMessage } from '../../../config/constants/constants';
+import { 
+    inputValidtion, 
+    errorMessage,
+    productType, 
+    productName 
+} from '../../../config/constants/constants';
 
 const EditProduct = () => {
-const {type,id}=useParams();
-const {onEditProduct}=useProductContext();
+    const { type, id } = useParams();
+    const { onEditProduct } = useProductContext();
 
-const productService=productServiceFactory();
+    const productService = productServiceFactory();
     const {
         values,
         focus,
@@ -23,7 +27,7 @@ const productService=productServiceFactory();
         onSubmit,
         changeFocus,
         changeValues
-    }=useForm(
+    } = useForm(
         initialValuesCreate,
         initialFocusCreate,
         onEditProduct
@@ -36,8 +40,8 @@ const productService=productServiceFactory();
             })
     }, [id]);
 
-  return (
-    <div className='createPage'>
+    return (
+        <div className='createPage'>
             <form method='POST' className="createForm" onSubmit={onSubmit}>
                 <h3 className='createTop'> Edit Product</h3>
 
@@ -50,15 +54,20 @@ const productService=productServiceFactory();
                         pattern={inputValidtion.type}
                         name="type"
                         value={values.type}
-
                         onChange={changeHandler}>
                         <option value=""  >Select your type</option>
-                        <option value="waterpomps">WATERPOMPS</option>
-                        <option value="systems">IRRIGATION SYSTEMS</option>
-                        <option value="parts">PARTS</option>
-                        <option value="machines">POWER MACHINES</option>
-                        <option value="pipes">PIPES</option>
-                        <option value="tools">TOOLS</option>
+                        <option value={productType.waterpumps}
+                        >{productName.waterpumps}</option>
+                        <option value={productType.irigationSystems}
+                        >{productName.irigationSystems}</option>
+                        <option value={productType.parts}
+                        >{productName.parts}</option>
+                        <option value={productType.powerMachines}
+                        >{productName.powerMachines}</option>
+                        <option value={productType.pipes}
+                        >{productName.pipes}</option>
+                        <option value={productType.tools}
+                        >{productName.tools}</option>
                     </select>
 
                     <span>{errorMessage.type}</span>
@@ -135,7 +144,7 @@ const productService=productServiceFactory();
                 <button className='btn-log-reg'>Create</button>
             </form>
         </div>
-  );
+    );
 };
 
 export default EditProduct;

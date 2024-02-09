@@ -150,6 +150,7 @@ export const ProductProvider = ({
     const onEditProduct = async (data) => {
         const type = data.type;
         const id = data._id;
+        console.log(data);
         try {
             await productService.edit(type, id, data);
             navigate(`/shop/${type}/${id}`);
