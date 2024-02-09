@@ -1,23 +1,22 @@
 import './Home.css';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { useAuthContext } from '../../../context/AuthContext';
 import { productServiceFactory } from '../../../sevices/productService';
 
-import { Carousel } from '../../SwiperComponents/Carousel/Carousel';
-import { Slider } from '../../SwiperComponents/Slider/Slider';
-
 import { productName, productType } from '../../../config/constants/constants';
 import homeData from '../../../config/data/homeData';
 
-
+const Carousel = lazy(()=> import('../../SwiperComponents/Carousel/Carousel')) ;
+const Slider = lazy(() => import('../../SwiperComponents/Slider/Slider'));
 
 const Home = () => {
     const productService = productServiceFactory();
 
     const { userId } = useAuthContext();
+
 
     const [waterpumps, setWaterpumps] = useState([]);
     const [irigationSystems, setIrigationSystems] = useState([]);
@@ -94,51 +93,66 @@ const Home = () => {
         <div className="home_page">
             <div className="topContent">
                 <h2>Products & Services from Rain Systems</h2>
-
-                {<Carousel data={homeData} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Carousel data={homeData} />}
+                </Suspense>
             </div>
 
 
             <div className='productContent'>
                 <h2>{productName.waterpumps}</h2>
-                {<Slider data={waterpumps} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Slider data={waterpumps} />}
+                </Suspense>
                 <Link className='goTo' to="/shop/waterpumps">See all</Link>
             </div>
 
             <div className='productContent'>
                 <h2>{productName.irigationSystems}</h2>
-                {<Slider data={irigationSystems} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Slider data={irigationSystems} />}
+                </Suspense>
                 <Link className='goTo' to="/shop/irigationSystems">See all</Link>
             </div>
 
             <div className='productContent'>
                 <h2>{productName.parts}</h2>
-                {<Slider data={parts} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Slider data={parts} />}
+                </Suspense>
                 <Link className='goTo' to="/shop/parts">See all</Link>
             </div>
 
             <div className='productContent'>
                 <h2>{productName.powerMachines}</h2>
-                {<Slider data={powerMachines} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Slider data={powerMachines} />}
+                </Suspense>
                 <Link className='goTo' to="/shop/powerMachines">See all</Link>
             </div>
 
             <div className='productContent'>
                 <h2>{productName.pipes}</h2>
-                {<Slider data={pipes} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Slider data={pipes} />}
+                </Suspense>
                 <Link className='goTo' to="/shop/pipes">See all</Link>
             </div>
 
             <div className='productContent'>
                 <h2>{productName.tools}</h2>
-                {<Slider data={tools} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Slider data={tools} />}
+                </Suspense>
                 <Link className='goTo' to="/shop/tools">See all</Link>
             </div>
             {lastSeenProducts.length > 2 && (
                 <>
                     <div className='productContent'>
                         <h2>{productName.lastSeen}</h2>
-                        {<Slider data={lastSeenProducts} />}
+                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                            {<Slider data={lastSeenProducts} />}
+                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>

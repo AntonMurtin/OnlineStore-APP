@@ -88,5 +88,7 @@ export const ProductCard = (data) => {
         <i className="fas fa-info-circle"></i>
       </Link>
     </div>
-  )
-}
+  );
+};
+
+export default ProductCard;

@@ -6,6 +6,9 @@ import { NotificationProvider } from './context/NotificationContext';
 import { AuthProvider } from './context/AuthContext';
 import { ProductProvider } from './context/ProductContext';
 
+import { UserGuard } from './components/RouteGuards/UserGuard';
+import { AdmiGuard } from './components/RouteGuards/AdmiGuard';
+import { AuthenticatedGuard } from './components/RouteGuards/AuthenticatedGuard';
 
 import Header from './components/Header/Header';
 import Home from './components/Pages/Home/Home';
@@ -30,7 +33,6 @@ import Comingsoon from './components/Pages/ComingSoon/Comingsoon';
 import Footer from './components/Footer/Footer';
 
 
-
 function App() {
 
   return (
@@ -41,12 +43,19 @@ function App() {
           <div className="App">
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/register' element={<Register />} />
-              <Route path='/create' element={<Create />} />
-              <Route path='/search' element={<Search />} />
-              <Route path='/favorite' element={<Favorite />} />
-              <Route path='/buy' element={<BuyProducts />} />
-              <Route path='/lastSeen' element={<LastSeen />} />
+              <Route element={<UserGuard />}>
+                <Route path='/register' element={<Register />} />
+              </Route>
+              <Route element={<AdmiGuard />}>
+                <Route path='/create' element={<Create />} />
+                <Route path='/shop/:type/:id/edit' element={<EditProduct />} />
+              </Route>
+              <Route element={<AuthenticatedGuard />}>
+                <Route path='/favorite' element={<Favorite />} />
+                <Route path='/buy' element={<BuyProducts />} />
+                <Route path='/lastSeen' element={<LastSeen />} />
+              </Route>
+              <Route path='/search/:searchName' element={<Search />} />
               <Route path='/services/:type' element={<Services />} />
               <Route path='/shop' element={<Shop />} />
               <Route path='/shop/waterpumps' element={<Waterpump />} />
@@ -56,12 +65,11 @@ function App() {
               <Route path='/shop/pipes' element={<Pipes />} />
               <Route path='/shop/tools' element={<Tools />} />
               <Route path='/shop/:type/:id' element={<Details />} />
-              <Route path='/shop/:type/:id/edit' element={<EditProduct />} />
               <Route path='/comingSoon' element={<Comingsoon />} />
               <Route path='/*' element={<ErrorPage />} />
             </Routes>
           </div>
-          <Footer/>
+          <Footer />
         </ProductProvider>
       </AuthProvider>
     </NotificationProvider>

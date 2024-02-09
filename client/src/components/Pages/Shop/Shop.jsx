@@ -1,6 +1,6 @@
 import './Shop.css'
 
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 
@@ -98,6 +98,6 @@ const Shop = () => {
 
         </div>
 
-    )
-}
+    );
+};
 export default Shop;

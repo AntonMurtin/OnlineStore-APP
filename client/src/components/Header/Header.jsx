@@ -1,28 +1,28 @@
 import './Header.css'
-import { Link } from 'react-router-dom'
-
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
+
 import { LoginModal } from '../Pages/LoginModal/LoginModal';
+
 import { useAuthContext } from '../../context/AuthContext';
 import { useProductContext } from '../../context/ProductContext';
 import { useForm } from '../../hooks/useForm';
+
 import { initialValuesSearch, initialFocusSearch } from '../../config/constants/search';
-
-
 
 
 const Header = () => {
     const [openLogin, setOpenLogin] = useState(false);
 
     const { onLogout, isAuthenticated, isAdmin } = useAuthContext();
-    const { favoriteProducts, buysProducts, onSearch } = useProductContext()
+    const { favoriteProducts, buysProducts, onSearch } = useProductContext();
 
     const initialValues = initialValuesSearch;
     const initialFocs = initialFocusSearch;
 
     const onClose = () => {
-        setOpenLogin(false)
+        setOpenLogin(false);
     }
 
 
@@ -35,7 +35,8 @@ const Header = () => {
     } = useForm(
         initialValues,
         initialFocs,
-        onSearch)
+        onSearch);
+
     return (
         <>
             <div className='nav_app'>
@@ -92,6 +93,6 @@ const Header = () => {
             />
         </>
     );
-}
+};
 
 export default Header;

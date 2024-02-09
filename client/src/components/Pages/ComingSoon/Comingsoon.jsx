@@ -14,7 +14,7 @@ const Comingsoon = () => {
       <div className="comingSoon">
         <div className="comingSoonDiv">
 
-          <img src="public/img/coming.jpg" a />
+          <img src="public/img/coming.jpg"/>
         </div>
       </div>
     </section >

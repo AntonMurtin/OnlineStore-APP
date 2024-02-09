@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import '../Shop/Product.css';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { productServiceFactory } from '../../../sevices/productService';
-import { useProductContext } from '../../../context/ProductContext';
 import { useAuthContext } from '../../../context/AuthContext';
-
-import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard'
-import { Slider } from '../../SwiperComponents/Slider/Slider';
+import { useProductContext } from '../../../context/ProductContext';
 
 import { productName, productType } from '../../../config/constants/constants';
+
+const  DetailsCard= lazy(() => import('../../CardComponents/DetailsCard/DetailsCard'));
+const Slider = lazy(() => import('../../SwiperComponents/Slider/Slider'));
+
 
 const Favorite = () => {
     const productService = productServiceFactory();
@@ -55,10 +57,11 @@ const Favorite = () => {
     }, [pathname]);
     return (
         <section className='page'>
-
-            {favoriteProducts && favoriteProducts.map(x =>
-                <DetailsCard key={x._id} {...x} />
-            )}
+            <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                {favoriteProducts && favoriteProducts.map(x =>
+                    <DetailsCard key={x._id} {...x} />
+                )}
+            </Suspense>
             {favoriteProducts.length === 0 && (
                 <p className="noProduct">There are no Favorite yet!</p>
             )}
@@ -66,7 +69,9 @@ const Favorite = () => {
                 <>
                     <div className='productTop'>
                         <h2>{productName.lastSeen}</h2>
-                        {<Slider data={lastSeenProducts} />}
+                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                            {<Slider data={lastSeenProducts} />}
+                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>

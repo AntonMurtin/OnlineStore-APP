@@ -1,7 +1,5 @@
 import '../Register/Forms.css';
 
-import React from 'react';
-
 import { useForm } from '../../../hooks/useForm';
 import { useProductContext } from '../../../context/ProductContext';
 
@@ -59,7 +57,6 @@ const Create = () => {
                         required
                         onBlur={changeFocus}
                         focused={focus.title.toString()}
-                        // pattern={inputValidtion.name}
                         type="text"
                         name='title'
                         placeholder="Title"

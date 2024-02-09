@@ -8,7 +8,7 @@ import { useNotification } from '../../../context/NotificationContext';
 import { useProductContext } from '../../../context/ProductContext';
 
 
-export const DetailsCard = (product) => {
+const DetailsCard = (product) => {
 
     const dispatch = useNotification();
 
@@ -143,3 +143,6 @@ export const DetailsCard = (product) => {
         </div>
     );
 };
+
+
+export default DetailsCard

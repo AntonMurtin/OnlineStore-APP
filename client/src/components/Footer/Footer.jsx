@@ -1,8 +1,9 @@
+import './Footer.css'
+
 import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import './Footer.css'
 const Footer = () => {
     return (
         <div className="footer">
@@ -46,19 +47,16 @@ const Footer = () => {
                     <div className="footCol">
                         <h4>company</h4>
                         <div className="socialLinks">
-
-                        {/* <Link to="/abalt" ><i className="fa-solid fa-circle-info "></i></Link> */}
-                        {/* <Link to="https://rainsystems.eu/?fbclid=IwAR2BpFsMu5czvR8LLnkYrqjwHZwBSmv5CR_a7oWzOXZkK82OqBitf9ekfoU" ><i className="fa-solid fa-globe "></i></Link> */}
-                        <Link to="https://www.facebook.com/rainsystems" ><i className="fa-brands fa-facebook "></i></Link>
-                        <Link to="#" ><i className="fa-solid fa-phone "></i></Link>
-                        <Link to="#" ><i className="fa-solid fa-envelope-open-text "></i></Link>
+                            <Link to="https://www.facebook.com/rainsystems" ><i className="fa-brands fa-facebook "></i></Link>
+                            <Link to="#" ><i className="fa-solid fa-phone "></i></Link>
+                            <Link to="#" ><i className="fa-solid fa-envelope-open-text "></i></Link>
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;

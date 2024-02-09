@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import '../Shop/Product.css';
+import { useEffect, useState, lazy, Suspense } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import { productServiceFactory } from '../../../sevices/productService';
-import { useAuthContext } from '../../../context/AuthContext'
+import { useAuthContext } from '../../../context/AuthContext';
 import { useNotification } from '../../../context/NotificationContext';
 
-import { DetailsCard } from '../../CardComponents/DetailsCard/DetailsCard';
-import { Slider } from '../../SwiperComponents/Slider/Slider';
-
 import { productName, productType } from '../../../config/constants/constants';
+
+const  DetailsCard= lazy(() => import('../../CardComponents/DetailsCard/DetailsCard'));
+const Slider = lazy(() => import('../../SwiperComponents/Slider/Slider'));
 
 
 const Details = () => {
@@ -88,19 +89,24 @@ const Details = () => {
 
     return (
         <section className='page'>
+            <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                <DetailsCard key={product._id} {...product} />
+            </Suspense>
 
-            <DetailsCard key={product._id} {...product}/>
-            
             <div className='productContent'>
                 <h2>{productName[productType]}</h2>
-                {<Slider data={allProducts} />}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {<Slider data={allProducts} />}
+                </Suspense>
                 <Link className='goTo' to={`/shop/${product.type}`}>See all</Link>
             </div>
             {lastSeenProducts.length > 2 && (
                 <>
                     <div className='productTop'>
                         <h2>{productName.lastSeen}</h2>
-                        {<Slider data={lastSeenProducts} />}
+                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                            {<Slider data={lastSeenProducts} />}
+                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>

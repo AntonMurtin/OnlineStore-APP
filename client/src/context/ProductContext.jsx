@@ -21,7 +21,7 @@ export const ProductProvider = ({
     const [favoriteProducts, setFavoriteProducts] = useState([]);
     const [buysProducts, setBuysProducts] = useState([]);
     const [totalPrice, setTotalprice] = useState(0.0);
-    const [search, setSearch] = useState(null);
+    // const [search, setSearch] = useState(null);
 
 
     useEffect(() => {
@@ -161,8 +161,9 @@ export const ProductProvider = ({
         };
     };
     const onSearch = (value) => {
-        setSearch(value);
-        navigate(`/search`);
+        const searchName=value.searchName
+      
+        navigate(`/search/${searchName}`);
     }
 
     const onAddFavorite = async (type, id, userId) => {
@@ -230,18 +231,7 @@ export const ProductProvider = ({
         };
     };
 
-    // const onAddSeenProduct = async (type, id, userId) => {
-    //     try {
-    //         const result = await productsService.addLastSeen(type, id, { userId });
-    //         // setLastSeenProducts(state => [...state, result]);
-           
-    //     } catch (error) {
-    //         dispatch({
-    //             type: 'ERROR',
-    //             message: error,
-    //         });
-    //     };
-    // };
+
 
     const changeQty = (id, value) => {
         const foundProduct = buysProducts.find((item) => item._id === id);
@@ -259,7 +249,7 @@ export const ProductProvider = ({
     }
 
     const value = {
-        search,
+        // search,
         favoriteProducts,
         buysProducts,
         totalPrice,

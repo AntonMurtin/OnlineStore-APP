@@ -13,7 +13,7 @@ import 'swiper/css/pagination';
 import './Slider.css'
 
 
-export const Slider = ({data}) => {
+ const Slider = ({data}) => {
 
     return (
         <Swiper
@@ -44,4 +44,6 @@ export const Slider = ({data}) => {
         </Swiper>
 
     );
-}
+};
+
+export default Slider;

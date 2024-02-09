@@ -53,6 +53,11 @@
   }
 
 }
+.productContent>h1 {
+text-align: center;
+
+
+}
 
 .goTo {
   display: flex;

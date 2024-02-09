@@ -1,12 +1,14 @@
 import '../Product.css';
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
 import { productServiceFactory } from '../../../../sevices/productService';
-import { productName, productType } from '../../../../config/constants/constants';
-import { ProductCard } from '../../../CardComponents/ProductCard/ProductCard'
-import { Slider } from '../../../SwiperComponents/Slider/Slider';
 import { useAuthContext } from '../../../../context/AuthContext';
+
+import { productName, productType } from '../../../../config/constants/constants';
+
+const ProductCard = lazy(() => import('../../../CardComponents/ProductCard/ProductCard'));
+const Slider = lazy(() => import('../../../SwiperComponents/Slider/Slider'));
 
 const Pipes = () => {
     const productService = productServiceFactory();
@@ -58,24 +60,27 @@ const Pipes = () => {
 
     return (
         <div className="page">
- <div className="productTop">
-            <h2>{productName.pipes}</h2>
-        </div>
-            <div className="productPage">
-
-                {pipes && pipes.map(x =>
-                    <ProductCard key={x._id} {...x} />
-                )}
-                
+            <div className="productTop">
+                <h2>{productName.pipes}</h2>
             </div>
-            {pipes.length === 0 && (
+            <div className="productPage">
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {pipes && pipes.map(x =>
+                        <ProductCard key={x._id} {...x} />
+                    )}
+                </Suspense>
+
+            </div>
+            {/* {pipes.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>
-            )}
-             {lastSeenProducts.length > 2 && (
+            )} */}
+            {lastSeenProducts.length > 2 && (
                 <>
                     <div className='productTop'>
                         <h2>{productName.lastSeen}</h2>
-                        {<Slider data={lastSeenProducts} />}
+                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                            {<Slider data={lastSeenProducts} />}
+                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>

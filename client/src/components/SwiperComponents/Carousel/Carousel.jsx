@@ -3,7 +3,7 @@ import './Carousel.css'
 import React, { useEffect, useState, } from 'react';
 import { Link } from 'react-router-dom';
 
-export const Carousel = ({ data }) => {
+const Carousel = ({ data }) => {
     const [current, setCurrent] = useState(0);
     const [autoPlay, setAutoPlay] = useState(true);
     let timeOut = null;
@@ -80,4 +80,6 @@ export const Carousel = ({ data }) => {
             </div>
         </div>
     );
-}
+};
+
+export default Carousel;

@@ -4,7 +4,7 @@ import React from 'react'
 import { useProductContext } from '../../../context/ProductContext'
 import { useAuthContext } from '../../../context/AuthContext';
 
-export const BuyCard = (product) => {
+const BuyCard = (product) => {
 
     const { onRemoveBuy ,changeQty} = useProductContext();
     const {userId}=useAuthContext()
@@ -38,5 +38,7 @@ export const BuyCard = (product) => {
                 <div className='removeBuy' onClick={() => onRemoveBuy(product.type, product._id, userId)} ><i className="fas fa-window-close"></i></div>
             </div>
         </div>
-    )
-}
+    );
+};
+
+export default BuyCard;

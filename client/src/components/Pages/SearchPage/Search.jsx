@@ -1,34 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { ProductCard } from '../../CardComponents/ProductCard/ProductCard';
-import { productType } from '../../../config/constants/constants';
+import '../Shop/Product.css';
+import { useEffect, useState, lazy, Suspense } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
+
 import { productServiceFactory } from '../../../sevices/productService';
-import { useProductContext } from '../../../context/ProductContext';
-import { Slider } from '../../SwiperComponents/Slider/Slider';
-import { Link, useLocation } from 'react-router-dom';
+import { useAuthContext } from '../../../context/AuthContext';
+
+import { productName, productType } from '../../../config/constants/constants';
+
+const ProductCard = lazy(() => import('../../CardComponents/ProductCard/ProductCard'));
+const Slider = lazy(() => import('../../SwiperComponents/Slider/Slider'));
+
 
 
 const Search = () => {
     const productService = productServiceFactory();
-    const { search, lastSeenProducts } = useProductContext();
-    const { pathname } = useLocation()
-  
-    const [products, setProducts] = useState([]);
+    const { userId } = useAuthContext();
 
+    const { searchName } = useParams()
+    const { pathname } = useLocation();
+
+    const [products, setProducts] = useState([]);
+    const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
     useEffect(() => {
-        if(search){
+        if (searchName) {
             Promise.all([
-                productService.search(productType.waterpumps, search),
-                productService.search(productType.irigationSystems, search),
-                productService.search(productType.parts, search),
-                productService.search(productType.powerMachines, search),
-                productService.search(productType.pipes, search),
-                productService.search(productType.tools, search),
-    
+                productService.search(productType.waterpumps, { searchName }),
+                productService.search(productType.irigationSystems, { searchName }),
+                productService.search(productType.parts, { searchName }),
+                productService.search(productType.powerMachines, { searchName }),
+                productService.search(productType.pipes, { searchName }),
+                productService.search(productType.tools, { searchName }),
+
             ]).then(([
                 waterpumpsData,
                 systemsData,
@@ -47,23 +54,56 @@ const Search = () => {
                 ]);
             })
         }
-    }, [search]);
+    }, [searchName]);
+
+    useEffect(() => {
+        if (userId) {
+            Promise.all([
+                productService.getLastSeen(productType.waterpumps, userId),
+                productService.getLastSeen(productType.irigationSystems, userId),
+                productService.getLastSeen(productType.parts, userId),
+                productService.getLastSeen(productType.powerMachines, userId),
+                productService.getLastSeen(productType.pipes, userId),
+                productService.getLastSeen(productType.tools, userId),
+            ]).then(([
+                waterpumpsgetSeen,
+                irigationSystemsgetSeen,
+                partsgetSeen,
+                powerMachinesgetSeen,
+                pipesgetSeen,
+                toolsgetSeen,
+            ]) => {
+                setLastSeenProducts([
+                    ...waterpumpsgetSeen,
+                    ...irigationSystemsgetSeen,
+                    ...partsgetSeen,
+                    ...powerMachinesgetSeen,
+                    ...pipesgetSeen,
+                    ...toolsgetSeen,
+                ]);
+            });
+        };
+    }, [products]);
 
     return (
         <div className="page">
             <div className="productPage">
-                {products && products.map(x =>
-                    <ProductCard key={x._id} {...x} />
-                )}
+                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    {products && products.map(x =>
+                        <ProductCard key={x._id} {...x} />
+                    )}
+                </Suspense>
             </div>
             {products.length === 0 && (
                 <p className="noProduct">There are no Products !</p>
             )}
-             {lastSeenProducts.length > 2 && (
+            {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productContent'>
-                        <h2>Last Seen</h2>
-                        {<Slider data={lastSeenProducts} />}
+                    <div className='productTop'>
+                        <h2>{productName.lastSeen}</h2>
+                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                            {<Slider data={lastSeenProducts} />}
+                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
                     </div>
                 </>
@@ -72,4 +112,4 @@ const Search = () => {
     )
 }
 
-export default Search
+export default Search;
