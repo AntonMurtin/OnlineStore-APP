@@ -1,4 +1,4 @@
-import '../Shop/Product.css';
+import '../Shop/product.css';
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
@@ -7,9 +7,10 @@ import { useAuthContext } from '../../../context/AuthContext';
 import { useNotification } from '../../../context/NotificationContext';
 
 import { productName, productType } from '../../../config/constants/constants';
+import { Loading } from '../../cardComponents/loading/Loading';
 
-const  DetailsCard= lazy(() => import('../../CardComponents/DetailsCard/DetailsCard'));
-const Slider = lazy(() => import('../../SwiperComponents/Slider/Slider'));
+const  DetailsCard= lazy(() => import('../../cardComponents/detailsCard/DetailsCard'));
+const Slider = lazy(() => import('../../swiperComponents/slider/Slider'));
 
 
 const Details = () => {
@@ -89,25 +90,25 @@ const Details = () => {
 
     return (
         <section className='page'>
-            <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+            <Suspense fallback={<Loading />}>
                 <DetailsCard key={product._id} {...product} />
             </Suspense>
 
             <div className='productContent'>
                 <h2>{productName[productType]}</h2>
-                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                <Suspense fallback={<Loading />}>
                     {<Slider data={allProducts} />}
-                </Suspense>
                 <Link className='goTo' to={`/shop/${product.type}`}>See all</Link>
+                </Suspense>
             </div>
             {lastSeenProducts.length > 2 && (
                 <>
                     <div className='productTop'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                        <Suspense fallback={<Loading />}>
                             {<Slider data={lastSeenProducts} />}
-                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
+                        </Suspense>
                     </div>
                 </>
             )}

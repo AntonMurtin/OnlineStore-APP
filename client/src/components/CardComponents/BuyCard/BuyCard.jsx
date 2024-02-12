@@ -1,5 +1,4 @@
-import './BuyCard.css'
-import React from 'react'
+import './buyCard.css'
 
 import { useProductContext } from '../../../context/ProductContext'
 import { useAuthContext } from '../../../context/AuthContext';

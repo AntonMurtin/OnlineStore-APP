@@ -17,13 +17,11 @@ router.get('/', async (req, res) => {
 
 router.post('/create', async (req, res) => {
 
-
     try {
         const card = await toolsManager.create(req.body);
 
         res.json(card)
     } catch (error) {
-        console.log(error.message);
         res.json({
             message: errorMessages(error)
         });

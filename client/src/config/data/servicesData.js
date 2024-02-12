@@ -99,3 +99,11 @@ export const chooseUs={
     ]
 }
 
+export const errorImage={
+    error:'../../img/404.jpg',
+    comingSoon:'../../img/coming.jpg'
+}
+
+export const loadingSpiner={
+    loading:'../../loading_gif/Spinner-1s-200px.GIF'
+}

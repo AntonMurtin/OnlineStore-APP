@@ -1,4 +1,4 @@
-import './Shop.css'
+import './shop.css'
 
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'

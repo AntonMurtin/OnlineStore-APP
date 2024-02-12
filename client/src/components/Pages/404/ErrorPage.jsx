@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import './errorPage.css'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
-import './ErrorPage.css'
+
+import { errorImage } from '../../../config/data/servicesData';
 
 const ErrorPage = () => {
     const { pathname } = useLocation();
@@ -15,9 +17,10 @@ const ErrorPage = () => {
                 <div className="errorDiv">
                     <h1 className="errorTitle">Sorry, this page is not available! </h1>
                 </div>
-                <img src='public/img/404.jpg' />
-                <img src='public/img/404.jpg' />
-                <img src='public/img/404.jpg' />
+                <img src={errorImage.error} />
+                <img src={errorImage.error} />
+                <img src={errorImage.error} />
+                
             </div>
 
         </section >

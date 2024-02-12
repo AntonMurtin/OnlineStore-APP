@@ -19,10 +19,8 @@ router.post('/create', async (req, res) => {
 
     try {
         const card = await systemsManager.create(req.body);
-
         res.json(card)
     } catch (error) {
-        console.log(error.message);
         res.json({
            message: errorMessages(error)
         });
@@ -162,7 +160,6 @@ router.put('/:cardId/buyProduct', async (req, res) => {
         card.save();
         res.json(card);
     } catch (error) {
-        console.log(error);
         res.status(400).json({
            message: errorMessages(error)
         });

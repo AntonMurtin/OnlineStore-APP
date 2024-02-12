@@ -1,4 +1,4 @@
-import '../Register/Forms.css';
+import '../register/forms.css';
 
 import { useForm } from '../../../hooks/useForm';
 import { useProductContext } from '../../../context/ProductContext';

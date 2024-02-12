@@ -1,12 +1,13 @@
-import './Services.css';
+import './services.css';
 import { useEffect, lazy, Suspense } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { v4 } from 'uuid';
 
 import { servicesData, chooseUs } from '../../../config/data/servicesData';
+import { Loading } from '../../cardComponents/loading/Loading';
 
-const Carousel = lazy(() => import('../../SwiperComponents/Carousel/Carousel'));
+const Carousel = lazy(() => import('../../swiperComponents/carousel/Carousel'));
 
 const Services = () => {
     const data = servicesData;
@@ -24,7 +25,7 @@ const Services = () => {
 
             <div className="services servicesFlex">
                 <div className="servicesLeft">
-                    <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                    <Suspense fallback={<Loading />}>
                         {<Carousel data={data[type].image} />}
                     </Suspense>
                 </div>

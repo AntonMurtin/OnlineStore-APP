@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
-import './DetailsCard.css';
+import './detailsCard.css';
 
+import { useEffect,useState} from 'react';
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
+
+
 import { useAuthContext } from '../../../context/AuthContext';
 import { useNotification } from '../../../context/NotificationContext';
 import { useProductContext } from '../../../context/ProductContext';

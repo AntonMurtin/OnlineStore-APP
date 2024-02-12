@@ -1,10 +1,11 @@
-import './BuyProducts.css'
+import './buyProducts.css'
 import { lazy, Suspense, useEffect } from 'react';
 
 import { useProductContext } from '../../../context/ProductContext';
 import { useLocation } from 'react-router-dom';
+import { Loading } from '../../cardComponents/loading/Loading';
 
-const BuyCard = lazy(() => import('../../CardComponents/BuyCard/BuyCard'));
+const BuyCard = lazy(() => import('../../cardComponents/buyCard/BuyCard'));
 
 const BuyProducts = () => {
   const { buysProducts, totalPrice } = useProductContext();
@@ -25,7 +26,7 @@ const BuyProducts = () => {
           <h2 className='buyTitle'>Shoping Bag</h2>
           <div className="buyProducts">
             <div className='buySize'>
-              <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+              <Suspense fallback={<Loading />}>
                 {buysProducts.map(x => <BuyCard key={x._id} {...x} />)}
               </Suspense>
             </div>

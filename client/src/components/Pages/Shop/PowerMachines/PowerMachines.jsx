@@ -1,4 +1,4 @@
-import '../Product.css';
+import '../product.css';
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -6,9 +6,10 @@ import { productServiceFactory } from '../../../../sevices/productService';
 import { useAuthContext } from '../../../../context/AuthContext';
 
 import { productName, productType } from '../../../../config/constants/constants';
+import { Loading } from '../../../cardComponents/loading/Loading';
 
-const ProductCard = lazy(() => import('../../../CardComponents/ProductCard/ProductCard'));
-const Slider = lazy(() => import('../../../SwiperComponents/Slider/Slider'));
+const ProductCard = lazy(() => import('../../../cardComponents/productCard/ProductCard'));
+const Slider = lazy(() => import('../../../swiperComponents/slider/Slider'));
 
 const PowerMachines = () => {
     const productService = productServiceFactory();
@@ -64,7 +65,7 @@ const PowerMachines = () => {
                 <h2>{productName.powerMachines}</h2>
             </div>
             <div className="productPage">
-                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                <Suspense fallback={<Loading />}>
                     {powerMachines && powerMachines.map(x =>
                         <ProductCard key={x._id} {...x} />
                     )}
@@ -78,10 +79,10 @@ const PowerMachines = () => {
                 <>
                     <div className='productTop'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                        <Suspense fallback={<Loading />}>
                             {<Slider data={lastSeenProducts} />}
-                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
+                        </Suspense>
                     </div>
                 </>
             )}

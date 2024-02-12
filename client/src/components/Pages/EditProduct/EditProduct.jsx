@@ -1,4 +1,4 @@
-import '../Register/Forms.css';
+import '../register/forms.css';
 
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';

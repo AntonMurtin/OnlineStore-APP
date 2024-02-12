@@ -1,9 +1,9 @@
-import './Header.css'
+import './header.css'
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 
-import { LoginModal } from '../Pages/LoginModal/LoginModal';
+import { LoginModal } from '../pages/loginModal/LoginModal';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { useProductContext } from '../../context/ProductContext';

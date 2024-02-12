@@ -1,4 +1,4 @@
-import './Notification.css';
+import './notification.css';
 
 import { useEffect, useState } from "react";
 

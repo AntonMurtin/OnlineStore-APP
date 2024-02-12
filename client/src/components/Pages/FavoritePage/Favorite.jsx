@@ -1,4 +1,4 @@
-import '../Shop/Product.css';
+import '../Shop/product.css';
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -7,9 +7,10 @@ import { useAuthContext } from '../../../context/AuthContext';
 import { useProductContext } from '../../../context/ProductContext';
 
 import { productName, productType } from '../../../config/constants/constants';
+import { Loading } from '../../cardComponents/loading/Loading';
 
-const  DetailsCard= lazy(() => import('../../CardComponents/DetailsCard/DetailsCard'));
-const Slider = lazy(() => import('../../SwiperComponents/Slider/Slider'));
+const  DetailsCard= lazy(() => import('../../cardComponents/detailsCard/DetailsCard'));
+const Slider = lazy(() => import('../../swiperComponents/slider/Slider'));
 
 
 const Favorite = () => {
@@ -57,7 +58,7 @@ const Favorite = () => {
     }, [pathname]);
     return (
         <section className='page'>
-            <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+            <Suspense fallback={<Loading />}>
                 {favoriteProducts && favoriteProducts.map(x =>
                     <DetailsCard key={x._id} {...x} />
                 )}
@@ -69,10 +70,10 @@ const Favorite = () => {
                 <>
                     <div className='productTop'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                        <Suspense fallback={<Loading />}>
                             {<Slider data={lastSeenProducts} />}
-                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
+                        </Suspense>
                     </div>
                 </>
             )}

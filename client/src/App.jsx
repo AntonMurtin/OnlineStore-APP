@@ -10,27 +10,27 @@ import { UserGuard } from './components/RouteGuards/UserGuard';
 import { AdmiGuard } from './components/RouteGuards/AdmiGuard';
 import { AuthenticatedGuard } from './components/RouteGuards/AuthenticatedGuard';
 
-import Header from './components/Header/Header';
-import Home from './components/Pages/Home/Home';
-import Register from './components/Pages/Register/Register';
-import Create from './components/Pages/CreateProduct/Create';
-import Search from './components/Pages/SearchPage/Search';
-import Favorite from './components/Pages/FavoritePage/Favorite';
-import BuyProducts from './components/Pages/BuyProducts/BuyProducts';
-import LastSeen from './components/Pages/Shop/LastSeen/LastSeen';
-import Services from './components/Pages/Services/Services';
-import Shop from './components/Pages/Shop/Shop';
-import Waterpump from './components/Pages/Shop/Waterpump/Waterpump';
-import IrrigationSystems from './components/Pages/Shop/IrrigationSystems/IrrigationSystems';
-import Parts from './components/Pages/Shop/Parts/Parts';
-import PowerMachines from './components/Pages/Shop/PowerMachines/PowerMachines';
-import Pipes from './components/Pages/Shop/Pipes/Pipes';
-import Tools from './components/Pages/Shop/Tools/Tools';
-import Details from './components/Pages/Details/Details';
-import EditProduct from './components/Pages/EditProduct/EditProduct';
-import ErrorPage from './components/Pages/404/ErrorPage';
-import Comingsoon from './components/Pages/ComingSoon/Comingsoon';
-import Footer from './components/Footer/Footer';
+import Header from './components/header/Header';
+import Home from './components/pages/home/Home';
+import Register from './components/pages/register/Register';
+import Create from './components/pages/createProduct/Create';
+import Search from './components/pages/searchPage/Search';
+import Favorite from './components/pages/favoritePage/Favorite';
+import BuyProducts from './components/pages/buyProducts/BuyProducts';
+import LastSeen from './components/pages/Shop/lastSeen/LastSeen';
+import Services from './components/pages/services/Services';
+import Shop from './components/pages/shop/Shop';
+import Waterpump from './components/pages/Shop/waterpump/Waterpump';
+import IrrigationSystems from './components/pages/Shop/irrigationSystems/IrrigationSystems';
+import Parts from './components/pages/Shop/parts/Parts';
+import PowerMachines from './components/pages/Shop/powerMachines/PowerMachines';
+import Pipes from './components/pages/Shop/pipes/Pipes';
+import Tools from './components/pages/Shop/tools/Tools';
+import Details from './components/pages/details/Details';
+import EditProduct from './components/pages/editProduct/EditProduct';
+import ErrorPage from './components/pages/404/ErrorPage';
+import Comingsoon from './components/pages/comingSoon/Comingsoon';
+import Footer from './components/footer/Footer';
 
 
 function App() {

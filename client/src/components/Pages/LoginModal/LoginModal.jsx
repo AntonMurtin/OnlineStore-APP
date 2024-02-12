@@ -1,4 +1,4 @@
-import './LoginModal.css'
+import './loginModal.css'
 
 import { Link, } from 'react-router-dom';
 

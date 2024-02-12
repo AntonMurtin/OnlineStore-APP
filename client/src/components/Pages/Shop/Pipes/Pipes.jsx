@@ -1,4 +1,4 @@
-import '../Product.css';
+import '../product.css';
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -7,8 +7,8 @@ import { useAuthContext } from '../../../../context/AuthContext';
 
 import { productName, productType } from '../../../../config/constants/constants';
 
-const ProductCard = lazy(() => import('../../../CardComponents/ProductCard/ProductCard'));
-const Slider = lazy(() => import('../../../SwiperComponents/Slider/Slider'));
+const ProductCard = lazy(() => import('../../../cardComponents/productCard/ProductCard'));
+const Slider = lazy(() => import('../../../swiperComponents/slider/Slider'));
 
 const Pipes = () => {
     const productService = productServiceFactory();
@@ -80,8 +80,8 @@ const Pipes = () => {
                         <h2>{productName.lastSeen}</h2>
                         <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
                             {<Slider data={lastSeenProducts} />}
-                        </Suspense>
                         <Link className='goTo' to="/lastSeen">See all</Link>
+                        </Suspense>
                     </div>
                 </>
             )}
