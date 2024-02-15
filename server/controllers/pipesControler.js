@@ -22,6 +22,7 @@ router.post('/create', async (req, res) => {
 
         res.json(card)
     } catch (error) {
+        console.log(error.message);
         res.json({
            message: errorMessages(error)
         });

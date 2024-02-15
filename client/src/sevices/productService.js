@@ -1,12 +1,15 @@
 import { requestFactory } from "../lib/requester";
 
 
-const url = 'http://localhost:3030/products';
+// const url = 'http://localhost:3030/products';
+// const url = `${import.meta.env.VITE_APP_TITLE}/products`;
+const url = `https://difficult-colt-attire.cyclic.app/products`;
 
 export const productServiceFactory = () => {
     const request = requestFactory();
 
     const getAll = async (type) => {
+
         const result = await request.get(`${url}/${type}/`);
         const products = Object.values(result);
         return products;

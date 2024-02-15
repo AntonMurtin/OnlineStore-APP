@@ -82,34 +82,7 @@ export const ProductProvider = ({
         };
     }, [userId]);
 
-    // useEffect(() => {
-    //     if (userId) {
-    //         Promise.all([
-    //             productService.getLastSeen(productType.waterpumps, userId),
-    //             productService.getLastSeen(productType.irigationSystems, userId),
-    //             productService.getLastSeen(productType.parts, userId),
-    //             productService.getLastSeen(productType.powerMachines, userId),
-    //             productService.getLastSeen(productType.pipes, userId),
-    //             productService.getLastSeen(productType.tools, userId),
-    //         ]).then(([
-    //             waterpumpsgetSeen,
-    //             irigationSystemsgetSeen,
-    //             partsgetSeen,
-    //             powerMachinesgetSeen,
-    //             pipesgetSeen,
-    //             toolsgetSeen,
-    //         ]) => {
-    //             setLastSeenProducts([
-    //                 ...waterpumpsgetSeen,
-    //                 ...irigationSystemsgetSeen,
-    //                 ...partsgetSeen,
-    //                 ...powerMachinesgetSeen,
-    //                 ...pipesgetSeen,
-    //                 ...toolsgetSeen,
-    //             ]);
-    //         });
-    //     };
-    // }, [userId]);
+  
 
     useEffect(() => {
         if (buysProducts.length > 0) {
