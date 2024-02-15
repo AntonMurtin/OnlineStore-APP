@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const { conectionStr, dataBase } = require('./constants');
 
-
 async function dbConnect() {
-    await mongoose.connect(`${conectionStr}/${dataBase}`);
+    // console.log(process.env.PORT);
+    await mongoose.connect(`${conectionStr}`);
 }
 
 module.exports = dbConnect;
