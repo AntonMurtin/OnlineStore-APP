@@ -1,5 +1,5 @@
 const jwt = require('../lib/jwt');
-const { Secret } = require('../config/constants');
+
 
 exports.generateToken = async (user) => {
 
@@ -8,7 +8,7 @@ exports.generateToken = async (user) => {
         username: `${user.name} ${user.lastname}`,
         email: user.email,
     };
-    const token = await jwt.sing(payload, Secret, { expiresIn: '2d' });
+    const token = await jwt.sing(payload, process.env.SECRET, { expiresIn: '2d' });
     
     return token;
 }

@@ -1,5 +1,4 @@
 const jwt=require('../lib/jwt');
-const {Secret}=require('../config/constants')
 
 
 exports.auth=(req,res,next)=>{
@@ -7,7 +6,7 @@ exports.auth=(req,res,next)=>{
 
     if(token){
         try {
-            const decodetToken=jwt.verify(token, Secret);
+            const decodetToken=jwt.verify(token, process.env.SECRET);
             req.user=decodetToken;
             next()
         } catch (error) {
