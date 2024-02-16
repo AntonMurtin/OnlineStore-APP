@@ -111,6 +111,7 @@ color: rgb(87, 90, 94);
 
     @media (max-width: 840px) {
         margin-left: -10px;
+        margin-top: 0px;
 
     }
 }
