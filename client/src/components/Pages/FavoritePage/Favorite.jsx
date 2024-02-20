@@ -1,5 +1,5 @@
 import '../Shop/product.css';
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { productServiceFactory } from '../../../sevices/productService';
@@ -9,8 +9,8 @@ import { useProductContext } from '../../../context/ProductContext';
 import { productName, productType } from '../../../config/constants/constants';
 import { Loading } from '../../cardComponents/loading/Loading';
 
-const  DetailsCard= lazy(() => import('../../cardComponents/detailsCard/DetailsCard'));
-const Slider = lazy(() => import('../../swiperComponents/slider/Slider'));
+import  DetailsCard from'../../cardComponents/detailsCard/DetailsCard';
+import Slider from'../../swiperComponents/slider/Slider';
 
 
 const Favorite = () => {
@@ -20,6 +20,7 @@ const Favorite = () => {
     const { favoriteProducts } = useProductContext();
 
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
+    const [productLoading, setProductLoading] = useState(true);
 
     const { pathname } = useLocation();
 
@@ -29,6 +30,7 @@ const Favorite = () => {
     }, [pathname]);
 
     useEffect(() => {
+        setProductLoading(true);
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -55,25 +57,29 @@ const Favorite = () => {
                 ]);
             });
         };
+        setProductLoading(false);
     }, [pathname]);
     return (
         <section className='page'>
-            <Suspense fallback={<Loading />}>
-                {favoriteProducts && favoriteProducts.map(x =>
+            {productLoading && (<Loading />)}
+                {!productLoading && favoriteProducts.length > 0 && favoriteProducts.map(x =>
                     <DetailsCard key={x._id} {...x} />
                 )}
-            </Suspense>
-            {favoriteProducts.length === 0 && (
+            
+            {!productLoading && favoriteProducts.length === 0 && (
                 <p className="noProduct">There are no Favorite yet!</p>
             )}
             {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productTop'>
+                    <div className='productContent'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<Loading />}>
+                        {productLoading && (<Loading />)}
+                        {!productLoading && (
+                            <>
                             {<Slider data={lastSeenProducts} />}
-                        <Link className='goTo' to="/lastSeen">See all</Link>
-                        </Suspense>
+                            <Link className='goTo' to="/lastSeen">See all</Link>
+                            </>
+                        )}
                     </div>
                 </>
             )}

@@ -1,5 +1,5 @@
 import '../product.css';
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 
@@ -9,8 +9,8 @@ import { useAuthContext } from '../../../../context/AuthContext';
 import { productName, productType } from '../../../../config/constants/constants';
 import { Loading } from '../../../cardComponents/loading/Loading';
 
-const ProductCard = lazy(() => import('../../../cardComponents/productCard/ProductCard'));
-const Slider = lazy(() => import('../../../swiperComponents/slider/Slider'));
+import ProductCard from'../../../cardComponents/productCard/ProductCard';
+import Slider from'../../../swiperComponents/slider/Slider';
 
 const Tools = () => {
     const productService = productServiceFactory();
@@ -19,6 +19,9 @@ const Tools = () => {
     const { userId } = useAuthContext();
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
+    const [productLoading, setProductLoading] = useState(true);
+    const [seenloading, setSeenloading] = useState(false);
+
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -26,12 +29,15 @@ const Tools = () => {
     }, [pathname]);
 
     useEffect(() => {
+        setProductLoading(true);
         productService.getAll(productType.tools)
-            .then(data => setTools(data))
+            .then(data => setTools(data));
+            setProductLoading(false);
     }, [pathname]);
 
 
     useEffect(() => {
+        setSeenloading(true);
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -58,6 +64,7 @@ const Tools = () => {
                 ]);
             });
         };
+        setSeenloading(false);
     }, [pathname]);
     return (
         <div className="page">
@@ -65,24 +72,25 @@ const Tools = () => {
                 <h2>{productName.tools}</h2>
             </div>
             <div className="productPage">
-                <Suspense fallback={<Loading/>}>
-                    {tools && tools.map(x =>
+            {productLoading && (<Loading />)}
+            {!productLoading && tools.length > 0 && tools.map(x =>
                         <ProductCard key={x._id} {...x} />
                     )}
-                </Suspense>
-
             </div>
             {/* {tools.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>
             )} */}
             {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productTop'>
+                    <div className='productContent'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<Loading/>}>
+                        {seenloading && (<Loading />)}
+                        {!seenloading && (
+                            <>
                             {<Slider data={lastSeenProducts} />}
-                        <Link className='goTo' to="/lastSeen">See all</Link>
-                        </Suspense>
+                            <Link className='goTo' to="/lastSeen">See all</Link>
+                            </>
+                        )}
                     </div>
                 </>
             )}

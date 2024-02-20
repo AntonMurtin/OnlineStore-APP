@@ -13,38 +13,30 @@ const BuyProducts = () => {
   const { pathname } = useLocation();
 
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
 
     <section className='buyProductPage'>
 
-      {buysProducts.length > 0 && (
-        <>
-          <h2 className='buyTitle'>Shoping Bag</h2>
-          <div className="buyProducts">
-            <div className='buySize'>
-              <Suspense fallback={<Loading />}>
-                {buysProducts.map(x => <BuyCard key={x._id} {...x} />)}
-              </Suspense>
-            </div>
+      <h2 className='buyTitle'>Shoping Bag</h2>
+      <div className="buyProducts">
+        <div className='buySize'>
+          <Suspense fallback={<Loading />}>
+            {buysProducts.map(x => <BuyCard key={x._id} {...x} />)}
+          </Suspense>
+        </div>
 
-            <div className='subtotal'>{`Subtotal: ${totalPrice} $`}</div>
-            <div className='buyBtnDiv' >
-              <button id='buybtn'>BUY</button>
-            </div>
-          </div>
-        </>
-      )}
+        <div className='subtotal'>{`Subtotal: ${buysProducts.length > 0 ? totalPrice : 0} $`}</div>
+        <div className='buyBtnDiv' >
+          <button id='buybtn'>BUY</button>
+        </div>
+      </div>
 
 
-      {buysProducts.length === 0 && (
 
-        <p className="noProduct">There are no Products yet!</p>
-
-      )}
 
     </section>
   )

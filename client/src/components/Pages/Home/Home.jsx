@@ -11,7 +11,8 @@ import { productName, productType } from '../../../config/constants/constants';
 import homeData from '../../../config/data/homeData';
 
 const Carousel = lazy(() => import('../../swiperComponents/carousel/Carousel'));
-const Slider = lazy(() => import('../../swiperComponents/slider/Slider'));
+
+import Slider from '../../swiperComponents/slider/Slider';
 
 const Home = () => {
     const productService = productServiceFactory();
@@ -27,8 +28,10 @@ const Home = () => {
     const [tools, setTools] = useState([]);
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
+    const [productLoading, setProductLoading] = useState(true);
+    const [seenloading, setSeenloading] = useState(false);
+
     const { pathname } = useLocation();
-    const kkk=[]
 
     useEffect(() => {
 
@@ -36,7 +39,7 @@ const Home = () => {
     }, [pathname]);
 
     useEffect(() => {
-
+        setProductLoading(true);
         Promise.all([
             productService.getAll(productType.waterpumps),
             productService.getAll(productType.irigationSystems),
@@ -60,9 +63,11 @@ const Home = () => {
             setPipes(pipesProducts);
             setTools(toolsProducts);
         })
+        setProductLoading(false);
     }, [pathname]);
 
     useEffect(() => {
+        setSeenloading(true);
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -89,6 +94,7 @@ const Home = () => {
                 ]);
             });
         };
+        setSeenloading(false);
     }, [pathname]);
 
     return (
@@ -103,59 +109,80 @@ const Home = () => {
 
             <div className='productContent'>
                 <h2>{productName.waterpumps}</h2>
-                <Suspense fallback={<Loading />}>
-                    {<Slider data={waterpumps} />}
-                    <Link className='goTo' to="/shop/waterpumps">See all</Link>
-                </Suspense>
+                {productLoading && (<Loading />)}
+                {!productLoading && waterpumps.length > 0 && (
+                    <>
+                        {<Slider data={waterpumps} />}
+                        <Link className='goTo' to="/shop/waterpumps">See all</Link>
+                    </>
+                )}
             </div>
 
             <div className='productContent'>
                 <h2>{productName.irigationSystems}</h2>
-                <Suspense fallback={<Loading />}>
-                    {<Slider data={irigationSystems} />}
-                    <Link className='goTo' to="/shop/irigationSystems">See all</Link>
-                </Suspense>
+                {productLoading && (<Loading />)}
+                {!productLoading && irigationSystems.length > 0 && (
+                    <>
+                        {<Slider data={irigationSystems} />}
+                        <Link className='goTo' to="/shop/irigationSystems">See all</Link>
+                    </>
+                )}
             </div>
 
             <div className='productContent'>
                 <h2>{productName.parts}</h2>
-                <Suspense fallback={<Loading />}>
+                {productLoading && (<Loading />)}
+                {!productLoading && parts.length > 0 &&(
+                    <>
                     {<Slider data={parts} />}
                     <Link className='goTo' to="/shop/parts">See all</Link>
-                </Suspense>
+                    </>
+                )}
             </div>
 
             <div className='productContent'>
                 <h2>{productName.powerMachines}</h2>
-                <Suspense fallback={<Loading />}>
+                {productLoading && (<Loading />)}
+                {!productLoading && powerMachines.length > 0 &&(
+                    <>
                     {<Slider data={powerMachines} />}
                     <Link className='goTo' to="/shop/powerMachines">See all</Link>
-                </Suspense>
+                    </>
+                )}
             </div>
 
             <div className='productContent'>
                 <h2>{productName.pipes}</h2>
-                <Suspense fallback={<Loading />}>
+                {productLoading && (<Loading />)}
+                {!productLoading && pipes.length > 0 &&(
+                    <>
                     {<Slider data={pipes} />}
                     <Link className='goTo' to="/shop/pipes">See all</Link>
-                </Suspense>
+                    </>
+                )}
             </div>
 
             <div className='productContent'>
                 <h2>{productName.tools}</h2>
-                <Suspense fallback={<Loading />}>
+                {productLoading && (<Loading />)}
+                {!productLoading && tools.length > 0 &&(
+                    <>
                     {<Slider data={tools} />}
                     <Link className='goTo' to="/shop/tools">See all</Link>
-                </Suspense>
+                    </>
+                )}
             </div>
             {lastSeenProducts.length > 2 && (
                 <>
                     <div className='productContent'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<Loading />}>
+                        {seenloading && (<Loading />)}
+                        {!seenloading && (
+                            <>
                             {<Slider data={lastSeenProducts} />}
                             <Link className='goTo' to="/lastSeen">See all</Link>
-                        </Suspense>
+                            </>
+                        )}
                     </div>
                 </>
             )}

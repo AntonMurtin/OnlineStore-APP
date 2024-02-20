@@ -1,6 +1,6 @@
 import '../product.css';
 
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState, } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { productServiceFactory } from '../../../../sevices/productService';
@@ -9,7 +9,7 @@ import { useAuthContext } from '../../../../context/AuthContext';
 import { productName, productType } from '../../../../config/constants/constants';
 import { Loading } from '../../../cardComponents/loading/Loading';
 
-const ProductCard = lazy(() => import('../../../cardComponents/productCard/ProductCard'));
+import ProductCard from '../../../cardComponents/productCard/ProductCard';
 
 const LastSeen = () => {
     const { pathname } = useLocation();
@@ -17,12 +17,14 @@ const LastSeen = () => {
     const { userId } = useAuthContext();
 
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
+    const [seenloading, setSeenloading] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
     useEffect(() => {
+        setSeenloading(true);
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -49,25 +51,24 @@ const LastSeen = () => {
                 ]);
             });
         };
+        setSeenloading(false);
     }, [pathname]);
+
     return (
         <div className="page">
             <div className="productTop">
                 <h2>{productName.lastSeen}</h2>
             </div>
             <div className="productPage">
-                <Suspense fallback={<Loading />}>
-                    {lastSeenProducts && lastSeenProducts.map(x =>
-                        <ProductCard key={x._id} {...x} />
-                    )}
-                </Suspense>
+                {seenloading && (<Loading />)}
+                {!seenloading && lastSeenProducts.map(x =>
+                    <ProductCard key={x._id} {...x} />
+                )}
             </div>
             {/* {lastSeenProducts.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>
             )} */}
-
         </div>
-
     );
 };
 

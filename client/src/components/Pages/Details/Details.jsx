@@ -1,5 +1,5 @@
 import '../Shop/product.css';
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState} from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
 import { productServiceFactory } from '../../../sevices/productService';
@@ -9,8 +9,8 @@ import { useNotification } from '../../../context/NotificationContext';
 import { productName, productType } from '../../../config/constants/constants';
 import { Loading } from '../../cardComponents/loading/Loading';
 
-const  DetailsCard= lazy(() => import('../../cardComponents/detailsCard/DetailsCard'));
-const Slider = lazy(() => import('../../swiperComponents/slider/Slider'));
+import DetailsCard from '../../cardComponents/detailsCard/DetailsCard';
+import Slider from '../../swiperComponents/slider/Slider';
 
 
 const Details = () => {
@@ -26,6 +26,8 @@ const Details = () => {
     const [products, setProducts] = useState([]);
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
 
+    const [productLoading, setProductLoading] = useState(true);
+    const [seenloading, setSeenloading] = useState(false);
 
     const allProducts = products.filter(x => x._id !== id);
 
@@ -34,6 +36,7 @@ const Details = () => {
     }, [pathname]);
 
     useEffect(() => {
+        setProductLoading(true);
         Promise.all([
             productService.getById(type, id),
             productService.getAll(type),
@@ -44,9 +47,11 @@ const Details = () => {
             setProduct(productData)
             setProducts(productsData)
         })
+        setProductLoading(false);
     }, [id]);
 
     useEffect(() => {
+        setSeenloading(true);
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -73,6 +78,7 @@ const Details = () => {
                 ]);
             });
         };
+        setSeenloading(false);
     }, [id]);
 
     useEffect(() => {
@@ -90,25 +96,33 @@ const Details = () => {
 
     return (
         <section className='page'>
-            <Suspense fallback={<Loading />}>
+            {!productLoading && (
                 <DetailsCard key={product._id} {...product} />
-            </Suspense>
+            )}
+            {productLoading && (<Loading />)}
 
             <div className='productContent'>
-                <h2>{productName[productType]}</h2>
-                <Suspense fallback={<Loading />}>
-                    {<Slider data={allProducts} />}
-                <Link className='goTo' to={`/shop/${product.type}`}>See all</Link>
-                </Suspense>
+                <h2>{productName[type]}</h2>
+                {!productLoading && allProducts.length > 0 && (
+                    <>
+                        {<Slider data={allProducts} />}
+                        <Link className='goTo' to={`/shop/${product.type}`}>See all</Link>
+                    </>
+                )}
+                {productLoading && (<Loading />)}
+
             </div>
             {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productTop'>
+                    <div className='productContent'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<Loading />}>
-                            {<Slider data={lastSeenProducts} />}
-                        <Link className='goTo' to="/lastSeen">See all</Link>
-                        </Suspense>
+                        {seenloading && (<Loading />)}
+                        {!seenloading && (
+                            <>
+                                {<Slider data={lastSeenProducts} />}
+                                <Link className='goTo' to="/lastSeen">See all</Link>
+                            </>
+                        )}
                     </div>
                 </>
             )}

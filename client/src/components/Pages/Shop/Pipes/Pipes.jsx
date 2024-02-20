@@ -1,14 +1,15 @@
 import '../product.css';
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { productServiceFactory } from '../../../../sevices/productService';
 import { useAuthContext } from '../../../../context/AuthContext';
 
 import { productName, productType } from '../../../../config/constants/constants';
+import { Loading } from '../../../cardComponents/loading/Loading';
 
-const ProductCard = lazy(() => import('../../../cardComponents/productCard/ProductCard'));
-const Slider = lazy(() => import('../../../swiperComponents/slider/Slider'));
+import ProductCard from '../../../cardComponents/productCard/ProductCard';
+import Slider from '../../../swiperComponents/slider/Slider';
 
 const Pipes = () => {
     const productService = productServiceFactory();
@@ -17,6 +18,9 @@ const Pipes = () => {
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
     const [pipes, setPipes] = useState([]);
 
+    const [productLoading, setProductLoading] = useState(true);
+    const [seenloading, setSeenloading] = useState(false);
+
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -24,11 +28,14 @@ const Pipes = () => {
     }, [pathname]);
 
     useEffect(() => {
+        setProductLoading(true);
         productService.getAll(productType.pipes)
-            .then(data => setPipes(data))
+            .then(data => setPipes(data));
+        setProductLoading(false);
     }, [pathname]);
 
     useEffect(() => {
+        setSeenloading(true);
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -55,6 +62,7 @@ const Pipes = () => {
                 ]);
             });
         };
+        setSeenloading(false);
     }, [pathname]);
 
 
@@ -64,24 +72,25 @@ const Pipes = () => {
                 <h2>{productName.pipes}</h2>
             </div>
             <div className="productPage">
-                <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
-                    {pipes && pipes.map(x =>
-                        <ProductCard key={x._id} {...x} />
-                    )}
-                </Suspense>
-
+                {productLoading && (<Loading />)}
+                {!productLoading && pipes.length > 0 && pipes.map(x =>
+                    <ProductCard key={x._id} {...x} />
+                )}
             </div>
             {/* {pipes.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>
             )} */}
             {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productTop'>
+                    <div className='productContent'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<h1 style={{ textAlign: 'center' }}>Loading...</h1>}>
+                        {seenloading && (<Loading />)}
+                        {!seenloading && (
+                            <>
                             {<Slider data={lastSeenProducts} />}
-                        <Link className='goTo' to="/lastSeen">See all</Link>
-                        </Suspense>
+                            <Link className='goTo' to="/lastSeen">See all</Link>
+                            </>
+                        )}
                     </div>
                 </>
             )}

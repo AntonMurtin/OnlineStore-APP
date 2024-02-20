@@ -1,5 +1,5 @@
 import '../product.css';
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { productServiceFactory } from '../../../../sevices/productService';
@@ -8,8 +8,8 @@ import { useAuthContext } from '../../../../context/AuthContext';
 import { productName, productType } from '../../../../config/constants/constants';
 import { Loading } from '../../../cardComponents/loading/Loading';
 
-const ProductCard = lazy(() => import('../../../cardComponents/productCard/ProductCard'));
-const Slider = lazy(() => import('../../../swiperComponents/slider/Slider'));
+import ProductCard from '../../../cardComponents/productCard/ProductCard';
+import Slider from'../../../swiperComponents/slider/Slider';
 
 const PowerMachines = () => {
     const productService = productServiceFactory();
@@ -18,6 +18,8 @@ const PowerMachines = () => {
     const [lastSeenProducts, setLastSeenProducts] = useState([]);
     const [powerMachines, setPowerMachines] = useState([]);
 
+    const [productLoading, setProductLoading] = useState(true);
+    const [seenloading, setSeenloading] = useState(false);
 
     const { pathname } = useLocation();
 
@@ -26,11 +28,14 @@ const PowerMachines = () => {
     }, [pathname]);
 
     useEffect(() => {
+        setProductLoading(true);
         productService.getAll(productType.powerMachines)
-            .then(data => setPowerMachines(data))
+            .then(data => setPowerMachines(data));
+        setProductLoading(false);
     }, [pathname]);
 
     useEffect(() => {
+        setSeenloading(true);
         if (userId) {
             Promise.all([
                 productService.getLastSeen(productType.waterpumps, userId),
@@ -57,6 +62,7 @@ const PowerMachines = () => {
                 ]);
             });
         };
+        setSeenloading(false);
     }, [pathname]);
 
     return (
@@ -65,24 +71,25 @@ const PowerMachines = () => {
                 <h2>{productName.powerMachines}</h2>
             </div>
             <div className="productPage">
-                <Suspense fallback={<Loading />}>
-                    {powerMachines && powerMachines.map(x =>
-                        <ProductCard key={x._id} {...x} />
-                    )}
-                </Suspense>
-
+                {productLoading && (<Loading />)}
+                {!productLoading && powerMachines.length > 0 && powerMachines.map(x =>
+                    <ProductCard key={x._id} {...x} />
+                )}
             </div>
             {/* {powerMachines.length === 0 && (
                 <p className="noProduct">There are no Products yet!</p>
             )} */}
             {lastSeenProducts.length > 2 && (
                 <>
-                    <div className='productTop'>
+                    <div className='productContent'>
                         <h2>{productName.lastSeen}</h2>
-                        <Suspense fallback={<Loading />}>
-                            {<Slider data={lastSeenProducts} />}
-                        <Link className='goTo' to="/lastSeen">See all</Link>
-                        </Suspense>
+                        {seenloading && (<Loading />)}
+                        {!seenloading && (
+                            <>
+                                {<Slider data={lastSeenProducts} />}
+                                <Link className='goTo' to="/lastSeen">See all</Link>
+                            </>
+                        )}
                     </div>
                 </>
             )}
