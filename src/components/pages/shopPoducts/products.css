@@ -1,0 +1,46 @@
+.page{
+    min-height: 715px;
+    margin-top: 120px;
+    margin-bottom: 30px;
+    overflow-x: hidden;
+    
+    
+    
+}
+.productPage{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-content: center;
+    align-items: center;
+    
+  }
+.noProduct{
+   
+    color: #837979;
+	font-family: 'Lobster', cursive;
+	font-size: 55px;
+	font-weight: normal;
+	text-align: center;
+	margin:0 0 0px;
+	margin-top: 6rem;
+	text-shadow: 1px 0 0 #181717;
+}
+.productTop>h2 {
+    margin-top: 30px;
+    margin-left: 25px;
+    margin-bottom: 50px;
+    font-size: 40px;
+    text-align: left;
+  
+    @media (max-width:1200px) {
+      font-size: 40px;
+      margin-top: 90px;
+      margin-bottom: 30px;
+    }
+  
+    @media (max-width:900px) {
+      font-size: 30px;
+      margin-top: 60px;
+      margin-bottom: 20px;
+    }
+}

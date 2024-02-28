@@ -30,6 +30,8 @@
 
  # Admin
  Only admin have crud operations.
+ georgi@gmail.com
+ Georgi123456!
 
  # Footer
  link whit Get Help  
